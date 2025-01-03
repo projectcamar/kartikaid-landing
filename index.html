@@ -1225,16 +1225,27 @@
         import { RIO_SYSTEM_CONTENT } from './rio-content.js';
         
         const API_URL = "https://api.openai.com/v1/chat/completions";
-        const API_KEY = "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";
+        const API_KEY = process.env.OPENAI_API_KEY;  // Load from environment variable
 
         async function query(userMessage) {
             try {
-                const response = await fetch('/.netlify/functions/chat', {
-                    method: 'POST',
+                const response = await fetch('/api/chat', {
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ message: userMessage })
+                    body: JSON.stringify({
+                        messages: [
+                            {
+                                role: "system",
+                                content: RIO_SYSTEM_CONTENT
+                            },
+                            {
+                                role: "user",
+                                content: userMessage
+                            }
+                        ]
+                    })
                 });
 
                 if (!response.ok) {
@@ -1242,7 +1253,7 @@
                 }
 
                 const result = await response.json();
-                return result.message;
+                return result.choices[0].message.content;
             } catch (error) {
                 console.error("API Error:", error);
                 throw error;
