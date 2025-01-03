@@ -1,5 +1,5 @@
-// Import from public directory
-const RIO_SYSTEM_CONTENT = require('../public/rio-content.js').RIO_SYSTEM_CONTENT;
+// Use require for Node.js compatibility
+const { RIO_SYSTEM_CONTENT } = require('../public/rio-content.js');
 
 export default async function handler(req, res) {
   // Add CORS headers
@@ -12,7 +12,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log('Attempting OpenAI request...'); // Debug log
+    console.log('System Content:', RIO_SYSTEM_CONTENT); // Debug log
+    console.log('Request Messages:', req.body.messages); // Debug log
     
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -21,7 +22,7 @@ export default async function handler(req, res) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "gpt-4-turbo-preview",
+        model: "gpt-4o-mini-2024-07-18",
         messages: [
           {
             role: "system",
@@ -29,7 +30,7 @@ export default async function handler(req, res) {
           },
           ...req.body.messages
         ],
-        temperature: 0.7, // Lowered temperature for more consistent responses
+        temperature: 0.7,
         max_tokens: 2048,
         top_p: 1,
         frequency_penalty: 0,
@@ -39,16 +40,16 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.error('OpenAI Error:', errorData); // Debug log
+      console.error('OpenAI Error:', errorData);
       throw new Error(`OpenAI API error: ${errorData.error?.message || 'Unknown error'}`);
     }
 
     const data = await response.json();
-    console.log('OpenAI Response:', data); // Debug log
+    console.log('OpenAI Response:', data);
     
     return res.status(200).json(data);
   } catch (error) {
-    console.error('Server Error:', error); // Debug log
+    console.error('Server Error:', error);
     return res.status(500).json({ 
       error: 'Failed to fetch from OpenAI',
       details: error.message 
