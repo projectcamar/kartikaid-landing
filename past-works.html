@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rio Anggara - Past Works</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pwc-orange: #D04A02;
+            --pwc-yellow: #FFB600;
+            --pwc-rose: #DB536A;
+            --pwc-tangerine: #EB8C00;
+            --pwc-grey-15: #DEDEDE;
+            --pwc-grey-55: #7D7D7D;
+            --pwc-grey-90: #2D2D2D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--pwc-grey-90);
+            background-color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header Styles - Identical to index.html */
+        header {
+            padding: 2rem 0;
+            position: relative;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 4rem;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'ITC Charter Black', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--pwc-grey-90);
+            position: relative;
+            padding-left: 15px;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background: var(--pwc-orange);
+            border-radius: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--pwc-grey-55);
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--pwc-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--pwc-grey-90);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--pwc-grey-90);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content Styles */
+        h1 {
+            font-family: 'ITC Charter Black', serif;
+            font-size: 3.5rem;
+            color: var(--pwc-grey-90);
+            margin-bottom: 3rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        h1::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15%;
+            height: 70%;
+            width: 6px;
+            background: var(--pwc-orange);
+            border-radius: 3px;
+        }
+
+        .section-title {
+            font-family: 'ITC Charter Black', serif;
+            font-size: 2rem;
+            color: var(--pwc-grey-90);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background: var(--pwc-orange);
+            border-radius: 2px;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .work-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .work-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12),
+                        0 0 0 1px var(--pwc-yellow),
+                        0 0 20px rgba(255, 182, 0, 0.2);
+            border-color: var(--pwc-yellow);
+        }
+
+        .work-item h3 {
+            font-family: 'ITC Charter Black', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--pwc-grey-90);
+            line-height: 1.3;
+        }
+
+        .work-item p {
+            color: var(--pwc-grey-55);
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .key-points {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .key-points::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--pwc-orange);
+        }
+
+        .achievement-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background-color: rgba(255, 182, 0, 0.1);
+            color: var(--pwc-grey-90);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 1.2rem;
+            border: 1px solid var(--pwc-yellow);
+            font-weight: 500;
+        }
+
+        .date {
+            display: block;
+            color: var(--pwc-grey-55);
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .more-works {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .more-works a {
+            color: var(--pwc-orange);
+            text-decoration: none;
+            font-family: 'ITC Charter Black', serif;
+            font-size: 2rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .more-works a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--pwc-orange);
+            transition: width 0.3s;
+        }
+
+        .more-works a:hover {
+            color: var(--pwc-tangerine);
+        }
+
+        .more-works a:hover::after {
+            width: 100%;
+        }
+
+        /* Background decorative elements */
+        section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+        }
+
+        section::before {
+            display: none;
+        }
+
+        section:nth-child(2n)::before {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .work-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Add specific styling for the Product Development section */
+        section:first-of-type {
+            /* Product Development - More visible grid */
+            background: 
+                linear-gradient(90deg, var(--pwc-grey-15) 1px, transparent 1px) 0 0,
+                linear-gradient(var(--pwc-grey-15) 1px, transparent 1px) 0 0;
+            background-size: 30px 30px;  /* Larger grid size */
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        section:nth-of-type(2) {
+            /* Business Competitions - Stronger diagonal pattern */
+            background: 
+                linear-gradient(45deg,
+                transparent 0%,
+                transparent 95%,
+                rgba(208, 74, 2, 0.15) 95%,  /* Increased opacity */
+                rgba(208, 74, 2, 0.15) 100%);
+            background-size: 15px 15px;  /* Smaller pattern for more visibility */
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        section:nth-of-type(3) {
+            /* Leadership - More prominent dots */
+            background: 
+                radial-gradient(circle at center,
+                rgba(255, 182, 0, 0.2) 1px,  /* Increased opacity */
+                transparent 1px);
+            background-size: 15px 15px;  /* Adjusted size */
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <a href="index.html" class="logo">RIO ANGGARA</a>
+            <div class="nav-links">
+                <a href="about-me.html">About Me</a>
+                <a href="past-works.html" class="active">Past Works</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Highlights of My Work</h1>
+
+        <section>
+            <h2 class="section-title">Product Development Projects</h2>
+            <div class="work-grid">
+                <div class="work-item">
+                    <h3>Learnitab Browser Extension</h3>
+                    <p>Full-stack Development & Product Strategy</p>
+                    <p class="key-points">Achieved 150+ downloads in first month</p>
+                    <p class="key-points">Developed comprehensive feature set</p>
+                    <p class="key-points">Built 50+ verified opportunity listings</p>
+                    <span class="date">2024</span>
+                </div>
+
+                <div class="work-item">
+                    <h3>Bank Jago Partnership Solutions</h3>
+                    <p>Product Development & Business Analysis</p>
+                    <p class="key-points">Cross-functional rotation program</p>
+                    <p class="key-points">Funding & lending product analysis</p>
+                    <p class="key-points">Process optimization initiatives</p>
+                    <span class="date">2024</span>
+                </div>
+
+                <div class="work-item">
+                    <h3>College Copilot Platform</h3>
+                    <p>Community Platform Development</p>
+                    <p class="key-points">270% community growth in 8 months</p>
+                    <p class="key-points">AI education bootcamp program</p>
+                    <p class="key-points">95% participant satisfaction rate</p>
+                    <span class="date">2023-2024</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Business Competition Achievements</h2>
+            <div class="work-grid">
+                <div class="work-item">
+                    <h3>ISMC 2024 Strategy</h3>
+                    <p>Clean Recycling Initiative Marketing Plan</p>
+                    <p class="key-points">Global marketing strategy</p>
+                    <p class="key-points">Community building focus</p>
+                    <p class="key-points">Guerrilla marketing tactics</p>
+                    <span class="achievement-tag">1st Place Winner</span>
+                    <span class="date">2024</span>
+                </div>
+
+                <div class="work-item">
+                    <h3>Wall Street Challenge</h3>
+                    <p>IDEOtics Go-to-Market Strategy</p>
+                    <p class="key-points">Retail data analytics</p>
+                    <p class="key-points">Market entry strategy</p>
+                    <p class="key-points">Cybersecurity compliance</p>
+                    <span class="achievement-tag">1st Place Winner</span>
+                    <span class="date">2024</span>
+                </div>
+
+                <div class="work-item">
+                    <h3>SEAA-Peregrine Case Competition</h3>
+                    <p>ESG Framework Implementation</p>
+                    <p class="key-points">GRI framework analysis</p>
+                    <p class="key-points">SASB implementation</p>
+                    <p class="key-points">Corporate sustainability strategy</p>
+                    <span class="achievement-tag">2nd Place Winner</span>
+                    <span class="date">2024</span>
+                </div>
+
+                <div class="work-item">
+                    <h3>Energy Case Competition</h3>
+                    <p>Indonesia-Kazakhstan Energy Plan</p>
+                    <p class="key-points">Geothermal solutions</p>
+                    <p class="key-points">Grid optimization strategy</p>
+                    <p class="key-points">SAIDI/SAIFI enhancement</p>
+                    <span class="achievement-tag">Global Semifinalist</span>
+                    <span class="date">2024</span>
+                </div>
+
+                <div class="work-item">
+                    <h3>YLI Product Innovation</h3>
+                    <p>Food Chain Innovation Strategy</p>
+                    <p class="key-points">Supply chain optimization</p>
+                    <p class="key-points">Product development</p>
+                    <p class="key-points">Market analysis</p>
+                    <span class="achievement-tag">Best Category Winner</span>
+                    <span class="date">2024</span>
+                </div>
+
+                <div class="work-item">
+                    <h3>Drishtikon 2k23</h3>
+                    <p>Domino's Pizza Marketing Strategy</p>
+                    <p class="key-points">Marketing mix analysis</p>
+                    <p class="key-points">Market positioning</p>
+                    <p class="key-points">Growth strategy</p>
+                    <span class="achievement-tag">1st Place Winner</span>
+                    <span class="date">2023</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Leadership Experience</h2>
+            <div class="work-grid">
+                <div class="work-item">
+                    <h3>College Copilot</h3>
+                    <p>Founder & Project Leader</p>
+                    <p class="key-points">Led AI community development</p>
+                    <p class="key-points">22.2k+ social media following</p>
+                    <p class="key-points">Educational partnerships</p>
+                    <span class="date">2023-2024</span>
+                </div>
+
+                <div class="work-item">
+                    <h3>StudentsCatalyst</h3>
+                    <p>Digital Transformation Strategy Manager</p>
+                    <p class="key-points">500% community growth</p>
+                    <p class="key-points">AI platform development</p>
+                    <p class="key-points">Talent acquisition strategy</p>
+                    <span class="date">2023-2024</span>
+                </div>
+
+                <div class="work-item">
+                    <h3>BEM Kema Unpad</h3>
+                    <p>Research and Data Bureau Team Leader</p>
+                    <p class="key-points">Led research initiatives</p>
+                    <p class="key-points">Data analysis improvement</p>
+                    <p class="key-points">Strategic planning</p>
+                    <span class="date">2022-2023</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="more-works">
+            <a href="https://bit.ly/PortofolioRio-2025" target="_blank">...and many more!</a>
+        </div>
+    </main>
+
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable F11 and developer tools
+        document.addEventListener('keydown', function(e) {
+            // Disable F11
+            if (e.keyCode == 122) {
+                e.preventDefault();
+            }
+            
+            // Disable Ctrl+U (view source)
+            if (e.ctrlKey && e.keyCode == 85) {
+                e.preventDefault();
+            }
+            
+            // Disable Ctrl+Shift+I and F12 (developer tools)
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                e.preventDefault();
+            }
+            if (e.keyCode == 123) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html> 

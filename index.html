@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rio Anggara - Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #D04A02;
+            --secondary-color: #FFB600;
+            --accent-color: #DB536A;
+            --dark-color: #000000;
+            --text-color: #333;
+            --bg-light: #fff;
+            --spacing: 2rem;
+            --pwc-orange: #D04A02;
+            --pwc-yellow: #FFB600;
+            --pwc-rose: #DB536A;
+            --pwc-tangerine: #EB8C00;
+            --pwc-grey-15: #DEDEDE;
+            --pwc-grey-55: #7D7D7D;
+            --pwc-grey-90: #2D2D2D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body:not(a):not(.experience-card):not(input):not(textarea) {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 2rem 0;
+            position: relative;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'ITC Charter Black', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--pwc-grey-90);
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background: var(--pwc-orange);
+            border-radius: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--pwc-grey-55);
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--pwc-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--pwc-grey-90);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 1.5rem 0;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            right: -5%;
+            top: -5%;
+            width: 200px;
+            height: 200px;
+            background: var(--pwc-yellow);
+            opacity: 0.1;
+            border-radius: 0 0 0 100%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            left: -2%;
+            bottom: -2%;
+            width: 150px;
+            height: 150px;
+            background: var(--pwc-rose);
+            opacity: 0.1;
+            border-radius: 0 100% 0 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--pwc-grey-90);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .hero-content h1::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15%;
+            height: 70%;
+            width: 6px;
+            background: var(--pwc-orange);
+            border-radius: 3px;
+        }
+
+        .hero-content p {
+            color: var(--pwc-grey-55);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--pwc-orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .btn:hover {
+            background-color: var(--pwc-tangerine);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(208, 74, 2, 0.2);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100%;
+            height: 100%;
+            background: var(--pwc-orange);
+            opacity: 0.1;
+            border-radius: 4px;
+            z-index: -1;
+        }
+
+        /* Add these styles for the overlapping squares */
+        .hero-image {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background: 
+                linear-gradient(45deg, var(--pwc-orange) 25%, transparent 25%) -20px 0,
+                linear-gradient(-45deg, var(--pwc-yellow) 25%, transparent 25%) 0 -20px,
+                linear-gradient(45deg, var(--pwc-rose) 25%, transparent 25%) -40px -20px;
+            background-size: 40px 40px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -30px;
+            width: 100px;
+            height: 100px;
+            background: 
+                linear-gradient(-45deg, var(--pwc-tangerine) 25%, transparent 25%) 0 0,
+                linear-gradient(45deg, var(--pwc-orange) 25%, transparent 25%) -20px -20px,
+                linear-gradient(-45deg, var(--pwc-yellow) 25%, transparent 25%) -40px 0;
+            background-size: 35px 35px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        /* Add additional decorative squares */
+        .hero-image .squares {
+            position: absolute;
+            top: 50%;
+            right: 80px;
+            width: 200px;
+            height: 200px;
+            z-index: -1;
+            transform: translateY(-50%);
+        }
+
+        /* Create multiple layered squares with different sizes */
+        .squares::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--pwc-orange);
+            opacity: 0.2;
+            top: 0;
+            left: 0;
+        }
+
+        .squares::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--pwc-yellow);
+            opacity: 0.2;
+            top: 15px;
+            left: 15px;
+        }
+
+        /* Add more squares with increasing sizes */
+        .squares .square-1 {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--pwc-rose);
+            opacity: 0.2;
+            top: 30px;
+            left: 30px;
+        }
+
+        .squares .square-2 {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--pwc-tangerine);
+            opacity: 0.2;
+            top: 45px;
+            left: 45px;
+        }
+
+        .squares .square-3 {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            background: var(--pwc-orange);
+            opacity: 0.15;
+            top: 60px;
+            left: 60px;
+        }
+
+        .squares .square-4 {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: var(--pwc-yellow);
+            opacity: 0.15;
+            top: 75px;
+            left: 75px;
+        }
+
+        .squares .square-5 {
+            position: absolute;
+            width: 85px;
+            height: 85px;
+            background: var(--pwc-rose);
+            opacity: 0.1;
+            top: 90px;
+            left: 90px;
+        }
+
+        .squares .square-6 {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: var(--pwc-tangerine);
+            opacity: 0.1;
+            top: 105px;
+            left: 105px;
+        }
+
+        /* Areas of Work */
+        .areas {
+            padding: 1.5rem 0;
+            background-color: var(--bg-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .areas::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 48%, var(--pwc-orange) 48%, var(--pwc-orange) 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, var(--pwc-yellow) 48%, var(--pwc-yellow) 52%, transparent 52%);
+            background-size: 100px 100px;
+            opacity: 0.05;
+            z-index: 1;
+        }
+
+        .areas .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            color: var(--pwc-grey-90);
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--pwc-orange);
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .experience-item {
+            min-height: 300px;
+            position: relative;
+            padding: 2rem;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            width: 40px;
+            height: 2px;
+            background: var(--pwc-orange);
+        }
+
+        .experience-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Education & Accolades */
+        .education-accolades {
+            padding: 1.5rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .education-item, .accolade-item {
+            margin-bottom: 3rem;
+        }
+
+        .education-item h3, .accolade-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 1.5rem 0;
+            background-color: #f9f9f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 47%, var(--pwc-rose) 47%, var(--pwc-rose) 53%, transparent 53%),
+                linear-gradient(0deg, transparent 47%, var(--pwc-orange) 47%, var(--pwc-orange) 53%, transparent 53%);
+            background-size: 60px 60px;
+            opacity: 0.04;
+            z-index: 1;
+        }
+
+        .experience .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .experience-item {
+            min-height: 300px;
+            position: relative;
+            padding: 2rem;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .experience-item::after {
+            content: '';
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            width: 40px;
+            height: 2px;
+            background: var(--pwc-orange);
+        }
+
+        .experience-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 1rem;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero, .experience-grid, .education-accolades, .experience-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .experience-item, .experience-item {
+                min-height: 250px;
+            }
+        }
+
+        /* Color block accents */
+        .experience-grid, .experience-grid {
+            position: relative;
+        }
+
+        .experience-grid::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            width: 100px;
+            height: 100px;
+            background: var(--pwc-yellow);
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .experience-grid::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: -20px;
+            width: 120px;
+            height: 120px;
+            background: var(--pwc-rose);
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        /* Chat Section Styles */
+        .chat-section {
+            padding: 2rem 0;
+            background: white;
+            border-radius: 8px;
+            color: var(--pwc-grey-90);
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .chat-title {
+            font-size: 2.5rem;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--pwc-grey-90);
+        }
+
+        #chatMessages {
+            min-height: 100px;
+            max-height: 400px;
+            margin-bottom: 1rem;
+            overflow-y: auto;
+            padding: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--pwc-orange) var(--pwc-grey-15);
+        }
+
+        #chatMessages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #chatMessages::-webkit-scrollbar-track {
+            background: var(--pwc-grey-15);
+            border-radius: 3px;
+        }
+
+        #chatMessages::-webkit-scrollbar-thumb {
+            background: var(--pwc-orange);
+            border-radius: 3px;
+        }
+
+        #chatMessages::-webkit-scrollbar-thumb:hover {
+            background: var(--pwc-tangerine);
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        .message:has(.user-message) {
+            justify-content: flex-end;
+        }
+
+        .user-message {
+            background: #f0f0f0;  /* Light gray background */
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 70%;
+            margin-left: auto;
+        }
+
+        .bot-message {
+            background: var(--pwc-orange);
+            color: white;
+            margin-right: auto;
+            max-width: 70%;
+            border-radius: 15px;
+            padding: 10px 15px;
+        }
+
+        .bot-profile-container {
+            width: 35px;
+            flex-shrink: 0;
+        }
+
+        .bot-profile-img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        .bot-message-content {
+            flex: 1;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--pwc-grey-15);
+            border-radius: 25px;
+            background: white;
+            color: var(--pwc-grey-90);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--pwc-orange);
+            box-shadow: 0 0 0 2px rgba(208, 74, 2, 0.1);
+        }
+
+        .input-group input::placeholder {
+            color: var(--pwc-grey-55);
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .quick-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .quick-btn {
+            background: transparent;
+            border: 1px solid var(--pwc-grey-15);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: var(--pwc-grey-55);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .quick-btn:hover {
+            border-color: var(--pwc-orange);
+            color: var(--pwc-orange);
+            background: rgba(208, 74, 2, 0.05);
+        }
+
+        .disclaimer {
+            text-align: center;
+            color: var(--pwc-grey-55);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chat-title {
+                font-size: 2rem;
+            }
+            
+            .quick-buttons {
+                gap: 0.5rem;
+            }
+            
+            .quick-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Add these new styles for the send button */
+        #sendButton {
+            background: var(--pwc-orange);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #sendButton:hover {
+            background: var(--pwc-tangerine);
+            transform: translateY(-2px);
+        }
+
+        #sendButton i {
+            font-size: 1.2rem;
+        }
+
+        /* Add smooth scroll behavior */
+        .chat-container {
+            scroll-behavior: smooth;
+        }
+
+        /* For short messages, make them fit content */
+        .message:empty,
+        .message:only-child {
+            width: fit-content;
+            min-width: 100px;
+        }
+
+        /* Animation for message appearance */
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message {
+            animation: messageAppear 0.3s ease-out;
+        }
+
+        @keyframes changePlaceholder {
+            0%, 20% { content: "Ask something here..."; }
+            20%, 40% { content: "What projects has Rio worked on?"; }
+            40%, 60% { content: "Tell me about Rio's achievements"; }
+            60%, 80% { content: "What is Rio's experience in product development?"; }
+            80%, 100% { content: "What competitions has Rio won?"; }
+        }
+
+        .input-group input::placeholder {
+            color: var(--pwc-grey-55);
+            opacity: 0;
+            animation: fadeInOut 20s infinite;
+        }
+
+        .input-group input {
+            position: relative;
+        }
+
+        .input-group input::before {
+            content: "Hi, what's your question?";
+            position: absolute;
+            color: var(--pwc-grey-55);
+            animation: changePlaceholder 20s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fadeInOut {
+            0%, 15% { opacity: 1; }
+            17%, 18% { opacity: 0; }
+            20%, 35% { opacity: 1; }
+            37%, 38% { opacity: 0; }
+            40%, 55% { opacity: 1; }
+            57%, 58% { opacity: 0; }
+            60%, 75% { opacity: 1; }
+            77%, 78% { opacity: 0; }
+            80%, 95% { opacity: 1; }
+            97%, 100% { opacity: 0; }
+        }
+
+        /* Explicitly set placeholder styles */
+        .input-group input::placeholder {
+            color: var(--pwc-grey-55) !important;
+            opacity: 1 !important;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* For Firefox */
+        .input-group input::-moz-placeholder {
+            color: var(--pwc-grey-55) !important;
+            opacity: 1 !important;
+        }
+
+        /* For Edge */
+        .input-group input:-ms-input-placeholder {
+            color: var(--pwc-grey-55) !important;
+            opacity: 1 !important;
+        }
+
+        /* For IE */
+        .input-group input::-ms-input-placeholder {
+            color: var(--pwc-grey-55) !important;
+            opacity: 1 !important;
+        }
+
+        /* Allow text selection in input fields */
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Update link styles in chat bubbles */
+        .bot-message a {
+            color: inherit;  /* Use the same color as the message text */
+            text-decoration: underline;
+            font-weight: bold;
+            transition: opacity 0.3s ease;
+        }
+
+        .bot-message a:hover {
+            opacity: 0.8;
+        }
+
+        .experience-card {
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border: 2px solid transparent;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        .experience-card:hover {
+            border-color: var(--pwc-yellow);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .experience-card h3 {
+            font-family: 'ITC Charter Black', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--pwc-grey-90);
+        }
+
+        .experience-card .company {
+            color: var(--pwc-grey-55);
+            margin-bottom: 1rem;
+        }
+
+        .experience-card p {
+            color: var(--pwc-grey-55);
+            line-height: 1.6;
+        }
+
+        /* Allow text selection for other interactive elements */
+        a, input, textarea, .hover-link {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .work-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .work-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12),
+                        0 0 0 1px var(--pwc-yellow),
+                        0 0 20px rgba(255, 182, 0, 0.2);
+            border-color: var(--pwc-yellow);
+        }
+
+        .work-item h3 {
+            font-family: 'ITC Charter Black', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--pwc-grey-90);
+            line-height: 1.3;
+        }
+
+        .work-item p {
+            color: var(--pwc-grey-55);
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Add these styles if not already present */
+        .hover-link {
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .hover-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--pwc-orange);
+            transition: width 0.3s ease;
+        }
+
+        .hover-link:hover::after {
+            width: 100%;
+        }
+
+        /* Allow text selection for links */
+        .hover-link {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* Add thinking status style */
+        .thinking-status {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <div class="logo">RIO ANGGARA</div>
+            <div class="nav-links">
+                <a href="about-me.html">About Me</a>
+                <a href="past-works.html">Past Works</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero container">
+        <div class="hero-content">
+            <h1>Rio Anggara</h1>
+            <p>I am an International Business student at Universitas Padjadjaran with a focus on product development and business strategy. I combine academic excellence with practical experience in fintech, banking, and technology sectors.</p>
+            <p>Based in Jakarta, Indonesia, I'm passionate about creating innovative solutions and driving business growth through strategic thinking and technology.</p>
+            <a href="#chat-section" class="btn">Get in touch & Ask Rio Anything</a>
+        </div>
+        <div class="hero-image">
+            <img src="assets/foto-akmal.jpeg" alt="Rio Anggara" />
+            <div class="squares">
+                <div class="square-1"></div>
+                <div class="square-2"></div>
+                <div class="square-3"></div>
+                <div class="square-4"></div>
+                <div class="square-5"></div>
+                <div class="square-6"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="areas">
+        <div class="container">
+            <h2 class="section-title">Areas of Work</h2>
+            <div class="experience-grid">
+                <div class="experience-item">
+                    <h3>Product Development</h3>
+                    <p>I develop and implement strategic solutions in fintech and technology, specializing in digital banking products and browser extensions. Currently leading Learnitab, an EdTech platform helping students in career preparation.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Business Strategy</h3>
+                    <p>I lead initiatives in business development and strategic planning, with proven success in international business competitions and consulting projects. Notable achievements include winning ISMC 2024 and Wall Street Business Challenge.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="education-accolades container">
+        <div class="education">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <h3><a href="https://www.unpad.ac.id/" class="hover-link">Universitas Padjadjaran</a></h3>
+                <p class="subtitle">BSc in International Business (2020-2025)</p>
+                <p>GPA: 3.72/4.00</p>
+            </div>
+            <div class="education-item">
+                <h3><a href="https://www.ajou.ac.kr/en/index.do" class="hover-link">Ajou University</a></h3>
+                <p class="subtitle">Exchange Program (2024)</p>
+                <p>GPA: 81.7/100</p>
+            </div>
+        </div>
+        <div class="accolades">
+            <h2 class="section-title">Recent Achievements</h2>
+            <div class="accolade-item">
+                <h3><a href="https://yli.or.id" class="hover-link">Young Leaders for Indonesia</a></h3>
+                <p>McKinsey & Company Leadership Program</p>
+            </div>
+            <div class="accolade-item">
+                <h3><a href="https://cleanrecyclinginitiative.com/competition/" class="hover-link">International Competition Winner</a></h3>
+                <p>ISMC 2024 & Wall Street Business Challenge</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="experience">
+        <div class="container">
+            <h2 class="section-title">Key Experiences</h2>
+            <div class="work-grid">
+                <div class="work-item" onclick="window.location.href='https://learnitab.com'">
+                    <h3>Founder & Product Owner</h3>
+                    <p>Learnitab | Jun 2024 - Present</p>
+                    <p class="key-points">Leading development of an EdTech browser extension platform, achieving 150+ downloads and 270% growth in user engagement.</p>
+                </div>
+
+                <div class="work-item" onclick="window.location.href='https://jago.com'">
+                    <h3>Product Intern</h3>
+                    <p>Bank Jago | Aug 2024 - Feb 2024</p>
+                    <p class="key-points">Driving product strategy and development across key banking functions, with focus on digital transformation and customer experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="chat-section" class="chat-section container">
+        <div class="chat-container">
+            <h2 class="chat-title">Hi, I'm Rio Anggara AI. Ask me anything!</h2>
+            
+            <div id="chatMessages"></div>
+            
+            <div class="chat-input-container">
+                <div class="input-group">
+                    <input type="text" id="userInput" placeholder="Hi, what's your question?">
+                    <button id="sendButton" onclick="sendMessage()">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                
+                <div class="quick-buttons">
+                    <button class="quick-btn" onclick="askQuestion('Can you tell me about Rio?')">About me</button>
+                    <button class="quick-btn" onclick="askQuestion('What skills does Rio have?')">Skills</button>
+                    <button class="quick-btn" onclick="askQuestion('What projects has Rio worked on?')">Projects</button>
+                    <button class="quick-btn" onclick="askQuestion('What is Rio\'s educational background?')">Education</button>
+                    <button class="quick-btn" onclick="askQuestion('How can I contact Rio?')">Contact</button>
+                </div>
+                
+                <p class="disclaimer">I can make mistakes. Please be more understanding.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Connect with me</p>
+            <div class="social-links">
+                <a href="contact.html"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/rio-anggara"><i class="fab fa-linkedin"></i></a>
+                <a href="https://bit.ly/PortofolioRio-2025"><i class="fas fa-folder"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
+
+    <script type="module">
+        import { RIO_SYSTEM_CONTENT } from './rio-content.js';
+        
+        const API_URL = "https://api.openai.com/v1/chat/completions";
+        const API_KEY = "";
+
+        async function query(userMessage) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${API_KEY}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4o-mini-2024-07-18",
+                        messages: [
+                            {
+                                role: "system",
+                                content: RIO_SYSTEM_CONTENT
+                            },
+                            {
+                                role: "user",
+                                content: userMessage
+                            }
+                        ],
+                        temperature: 1,
+                        max_tokens: 2048,
+                        top_p: 1,
+                        frequency_penalty: 0,
+                        presence_penalty: 0,
+                        response_format: { "type": "text" }
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                console.log("API Response:", result);
+
+                if (result.choices && result.choices[0].message) {
+                    return result.choices[0].message.content;
+                }
+                
+                return "I apologize, I'm having trouble responding right now.";
+            } catch (error) {
+                console.error("API Error:", error);
+                throw error;
+            }
+        }
+
+        window.askQuestion = async function(question) {
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = question;
+            chatMessages.appendChild(userMessage);
+
+            // Add loading message
+            const loadingMessage = document.createElement('div');
+            loadingMessage.className = 'message bot-message';
+            loadingMessage.textContent = 'Thinking...';
+            chatMessages.appendChild(loadingMessage);
+
+            try {
+                const response = await query(question);
+                loadingMessage.textContent = response;
+            } catch (error) {
+                loadingMessage.textContent = "Sorry, I encountered an error. Please try again.";
+            }
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        window.generateAIResponse = query;
+    </script>
+
+    <script>
+        let messageHistory = [];
+
+        function formatMessageWithLinks(message) {
+            // First handle the dashes by converting them to line breaks
+            message = message.replace(/\s-\s/g, '<br>- ');
+            
+            // Enhanced URL regex pattern to better catch .com domains
+            const urlRegex = /(https?:\/\/[^\s]+)|(\b(?:www\.|[a-zA-Z0-9-]+\.)?[a-zA-Z0-9-]+\.com(?:\/[^\s]*)?)\b|(bit\.ly\/[^\s]+)/g;
+            message = message.replace(urlRegex, function(url) {
+                // Add https:// if it's missing
+                const href = url.startsWith('http') ? url : 'https://' + url;
+                return `<a href="${href}" target="_blank">${url}</a>`;
+            });
+
+            // Auto-detect email addresses
+            const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+            message = message.replace(emailRegex, '<a href="mailto:$1">$1</a>');
+
+            return message;
+        }
+
+        function addMessage(text, sender) {
+            const messages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            
+            if (sender === 'bot') {
+                // Create profile container
+                const profileContainer = document.createElement('div');
+                profileContainer.className = 'bot-profile-container';
+                
+                // Create profile image
+                const profileImg = document.createElement('img');
+                profileImg.src = 'assets/foto-akmal.jpeg';
+                profileImg.className = 'bot-profile-img';
+                profileContainer.appendChild(profileImg);
+                
+                // Add thinking status if needed
+                if (text === 'Thinking...') {
+                    const thinkingStatus = document.createElement('div');
+                    thinkingStatus.className = 'thinking-status';
+                    thinkingStatus.textContent = 'Thinking...';
+                    profileContainer.appendChild(thinkingStatus);
+                }
+                
+                // Create message content
+                const messageContent = document.createElement('div');
+                messageContent.className = 'bot-message';
+                messageContent.innerHTML = formatMessageWithLinks(text);
+                
+                // Append both to message div
+                messageDiv.appendChild(profileContainer);
+                messageDiv.appendChild(messageContent);
+            } else {
+                const userMessage = document.createElement('div');
+                userMessage.className = 'user-message';
+                userMessage.textContent = text;
+                messageDiv.appendChild(userMessage);
+            }
+            
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+            messageHistory.push({ role: sender === 'user' ? 'user' : 'assistant', content: text });
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message to chat
+            addMessage(message, 'user');
+            input.value = '';
+
+            try {
+                // Create thinking message with profile picture
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
+                
+                // Create profile container
+                const profileContainer = document.createElement('div');
+                profileContainer.className = 'bot-profile-container';
+                
+                // Add profile image
+                const profileImg = document.createElement('img');
+                profileImg.src = 'assets/foto-akmal.jpeg';
+                profileImg.className = 'bot-profile-img';
+                profileContainer.appendChild(profileImg);
+                
+                // Add thinking message
+                const thinkingMessage = document.createElement('div');
+                thinkingMessage.className = 'bot-message';
+                thinkingMessage.textContent = 'Thinking...';
+                
+                // Append both to message div
+                messageDiv.appendChild(profileContainer);
+                messageDiv.appendChild(thinkingMessage);
+                
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.appendChild(messageDiv);
+                
+                // Scroll to bottom after adding thinking message
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Get AI response
+                const response = await generateAIResponse(message);
+                
+                // Remove thinking message
+                messageDiv.remove();
+                
+                // Add AI response
+                addMessage(response, 'bot');
+                
+                // Scroll to bottom again after adding response
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+                
+                // Scroll to bottom if error occurs
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+
+        // Add event listener for Enter key
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial greeting message
+            setTimeout(() => {
+                addMessage("Hi! Thank you for visiting my personal website. What would you like to know about me?", 'bot');
+            }, 500);
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('userInput');
+            
+            if (!input) {
+                console.error('Input element not found!');
+                return;
+            }
+
+            const questions = [
+                "Hi, what's your question?",
+                "What are Rio's key achievements?",
+                "How can I contact Rio for opportunities?",
+                "What is Rio's leadership experience?",
+                "Tell me about Rio's product development skills",
+                "What makes Rio stand out from other candidates?",
+                "What international experience does Rio have?",
+                "What are Rio's strongest technical skills?",
+                "Has Rio led any significant projects?",
+                "What competitions has Rio won?",
+                "What is Rio's educational background?",
+                "What industries has Rio worked in?",
+                "What are Rio's career goals?",
+                "Does Rio have experience working in teams?"
+            ];
+            
+            let currentIndex = 0;
+            
+            // Set initial placeholder
+            input.placeholder = questions[0];
+            
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % questions.length;
+                input.placeholder = questions[currentIndex];
+            }, 4000);
+        });
+    </script>
+
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable F11 and developer tools
+        document.addEventListener('keydown', function(e) {
+            // Disable F11
+            if (e.keyCode == 122) {
+                e.preventDefault();
+            }
+            
+            // Disable Ctrl+U (view source)
+            if (e.ctrlKey && e.keyCode == 85) {
+                e.preventDefault();
+            }
+            
+            // Disable Ctrl+Shift+I and F12 (developer tools)
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                e.preventDefault();
+            }
+            if (e.keyCode == 123) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the button
+            const button = document.querySelector('a[href="#chat-section"]');
+            
+            // Add click event listener
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Smooth scroll to chat section
+                document.querySelector('#chat-section').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('userInput');
+            
+            input.addEventListener('keydown', function(e) {
+                // Check if the pressed key is Tab
+                if (e.key === 'Tab') {
+                    e.preventDefault(); // Prevent default tab behavior
+                    
+                    // Get current placeholder text and set it as input value
+                    const placeholderText = this.placeholder;
+                    this.value = placeholderText;
+                    
+                    // Place cursor at the end of the text
+                    this.setSelectionRange(placeholderText.length, placeholderText.length);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

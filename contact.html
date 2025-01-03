@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rio Anggara - Contact</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pwc-orange: #D04A02;
+            --pwc-yellow: #FFB600;
+            --pwc-rose: #DB536A;
+            --pwc-tangerine: #EB8C00;
+            --pwc-grey-15: #DEDEDE;
+            --pwc-grey-55: #7D7D7D;
+            --pwc-grey-90: #2D2D2D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--pwc-grey-90);
+            background-color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header Styles - Identical to index.html */
+        header {
+            padding: 2rem 0;
+            position: relative;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 4rem;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'ITC Charter Black', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--pwc-grey-90);
+            position: relative;
+            padding-left: 15px;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background: var(--pwc-orange);
+            border-radius: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--pwc-grey-55);
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--pwc-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--pwc-grey-90);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--pwc-grey-90);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content Styles */
+        .contact-section {
+            position: relative;
+            padding: 2rem 0 6rem;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            right: -5%;
+            top: -5%;
+            width: 200px;
+            height: 200px;
+            background: var(--pwc-yellow);
+            opacity: 0.05;
+            border-radius: 0 0 0 100%;
+            z-index: -1;
+        }
+
+        .contact-section::after {
+            content: '';
+            position: absolute;
+            left: -5%;
+            bottom: -5%;
+            width: 150px;
+            height: 150px;
+            background: var(--pwc-rose);
+            opacity: 0.05;
+            border-radius: 100% 0 0 0;
+            z-index: -1;
+        }
+
+        h1 {
+            font-family: 'ITC Charter Black', serif;
+            font-size: 3.5rem;
+            color: var(--pwc-grey-90);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        h1::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15%;
+            height: 70%;
+            width: 6px;
+            background: var(--pwc-orange);
+            border-radius: 3px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: var(--pwc-grey-55);
+            max-width: 600px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--pwc-grey-90);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--pwc-grey-15);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--pwc-orange);
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--pwc-orange);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--pwc-tangerine);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(208, 74, 2, 0.2);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-form {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+        }
+
+        /* Add these new styles in your existing style section */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 1000;
+        }
+
+        .chat-header {
+            padding: 15px;
+            background: var(--pwc-orange);
+            color: white;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .chat-input {
+            padding: 15px;
+            border-top: 1px solid var(--pwc-grey-15);
+        }
+
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--pwc-orange);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(208, 74, 2, 0.2);
+            z-index: 1000;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background: var(--pwc-grey-15);
+            margin-left: auto;
+        }
+
+        .bot-message {
+            background: var(--pwc-yellow);
+            opacity: 0.8;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <a href="index.html" class="logo">RIO ANGGARA</a>
+            <div class="nav-links">
+                <a href="about-me.html">About Me</a>
+                <a href="past-works.html">Past Works</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container contact-section">
+        <h1>Let's Connects</h1>
+        <p class="subtitle">I'm always interested in hearing about new opportunities and collaborations.</p>
+
+        <form class="contact-form" id="contactForm" onsubmit="sendEmail(event)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </main>
+
+    <script>
+        function sendEmail(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            const mailtoLink = `mailto:rioanggaraclub@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+`Name: ${name}
+Email: ${email}
+
+Message:
+${message}`)}`;
+
+            window.location.href = mailtoLink;
+        }
+    </script>
+
+    <script type="module">
+        import { HuggingFaceInferenceEmbeddings } from 'https://esm.sh/@langchain/community/embeddings/hf';
+        import { HuggingFaceInference } from 'https://esm.sh/@langchain/community/llms/hf';
+        
+        const model = new HuggingFaceInference({
+            model: "gpt2", // You can use other free models like "facebook/opt-125m"
+            temperature: 0.7,
+            maxTokens: 50
+        });
+
+        async function generateResponse(input) {
+            try {
+                const response = await model.call(input);
+                return response;
+            } catch (error) {
+                console.error('Error:', error);
+                return "I apologize, but I'm having trouble generating a response right now.";
+            }
+        }
+
+        // Make the function available globally
+        window.generateResponse = generateResponse;
+    </script>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message to chat
+            addMessage(message, 'user');
+            input.value = '';
+
+            try {
+                // Show typing indicator
+                const loadingMessage = 'Thinking...';
+                addMessage(loadingMessage, 'bot');
+
+                // Get response from model
+                const response = await generateResponse(message);
+
+                // Remove loading message and add actual response
+                const messages = document.getElementById('chatMessages');
+                messages.removeChild(messages.lastChild);
+                addMessage(response, 'bot');
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+            }
+        }
+
+        // ... rest of your existing chat UI code ...
+    </script>
+
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable F11 and developer tools
+        document.addEventListener('keydown', function(e) {
+            // Disable F11
+            if (e.keyCode == 122) {
+                e.preventDefault();
+            }
+            
+            // Disable Ctrl+U (view source)
+            if (e.ctrlKey && e.keyCode == 85) {
+                e.preventDefault();
+            }
+            
+            // Disable Ctrl+Shift+I and F12 (developer tools)
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                e.preventDefault();
+            }
+            if (e.keyCode == 123) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html> 
