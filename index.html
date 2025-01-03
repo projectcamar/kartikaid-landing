@@ -1225,16 +1225,12 @@
         import { RIO_SYSTEM_CONTENT } from './rio-content.js';
         
         const API_URL = "https://api.openai.com/v1/chat/completions";
-        const API_KEY = "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";
+        const API_KEY = process.env.OPENAI_API_KEY;
 
         async function query(userMessage) {
             try {
-                const response = await fetch(API_URL, {
+                const response = await fetch('/.netlify/functions/query-ai', {
                     method: "POST",
-                    headers: {
-                        "Authorization": `Bearer ${API_KEY}`,
-                        "Content-Type": "application/json"
-                    },
                     body: JSON.stringify({
                         model: "gpt-4o-mini-2024-07-18",
                         messages: [
@@ -1261,8 +1257,7 @@
                 }
 
                 const result = await response.json();
-                console.log("API Response:", result);
-
+                
                 if (result.choices && result.choices[0].message) {
                     return result.choices[0].message.content;
                 }
