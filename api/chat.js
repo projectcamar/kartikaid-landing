@@ -1,3 +1,5 @@
+const rioContent = require('../rio-content.js'); // Note: one level up since we're in api folder
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -17,7 +19,7 @@ export default async function handler(req, res) {
         messages: [
           {
             role: "system",
-            content: "You are Rio Anggara AI, an AI assistant that helps answer questions about Rio Anggara's background, experience, and achievements."
+            content: rioContent // Use the imported content
           },
           {
             role: "user",

@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const rioContent = require('../../rio-content.js');
 
 exports.handler = async function(event, context) {
     // Only allow POST requests
@@ -19,11 +20,11 @@ exports.handler = async function(event, context) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "gpt-3.5-turbo",
+                model: "gpt-4o-mini-2024-07-18",
                 messages: [
                     {
                         role: "system",
-                        content: "You are Rio Anggara AI, an AI assistant that helps answer questions about Rio Anggara's background, experience, and achievements."
+                        content: rioContent
                     },
                     {
                         role: "user",
