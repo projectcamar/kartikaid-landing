@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { messages } = req.body; // Changed from message to messages to match frontend
+    const { message } = req.body;
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -14,22 +14,29 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: "gpt-4o-mini-2024-07-18",
-        messages: messages, // Use the messages array from the request
-        temperature: 1,
-        max_tokens: 2048,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-        response_format: { "type": "text" }
+        messages: [
+          {
+            role: "system",
+            content: "You are Rio Anggara AI, an AI assistant that helps answer questions about Rio Anggara's background, experience, and achievements."
+          },
+          {
+            role: "user",
+            content: message
+          }
+        ],
+        temperature: 0.7,
+        max_tokens: 500
       })
     });
 
     if (!response.ok) {
-      throw new Error(`API call failed with status: ${response.status}`);
+      throw new Error(`OpenAI API error: ${response.status}`);
     }
 
     const data = await response.json();
-    return res.status(200).json(data);
+    return res.status(200).json({ 
+      message: data.choices[0].message.content 
+    });
   } catch (error) {
     console.error('Error:', error);
     return res.status(500).json({ 
