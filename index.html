@@ -1229,22 +1229,13 @@
 
         async function query(userMessage) {
             try {
-                const response = await fetch('/api/chat', {
+                const response = await fetch('/.netlify/functions/chat', {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        messages: [
-                            {
-                                role: "system",
-                                content: RIO_SYSTEM_CONTENT
-                            },
-                            {
-                                role: "user",
-                                content: userMessage
-                            }
-                        ]
+                        message: userMessage
                     })
                 });
 
@@ -1253,7 +1244,7 @@
                 }
 
                 const result = await response.json();
-                return result.choices[0].message.content;
+                return result.message;
             } catch (error) {
                 console.error("API Error:", error);
                 throw error;
