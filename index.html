@@ -1225,11 +1225,10 @@
         import { RIO_SYSTEM_CONTENT } from './rio-content.js';
         
         const API_URL = "https://api.openai.com/v1/chat/completions";
-        const API_KEY = process.env.OPENAI_API_KEY;  // Load from environment variable
 
         async function query(userMessage) {
             try {
-                const response = await fetch('/.netlify/functions/chat', {
+                const response = await fetch('/api/chat', {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
