@@ -1,4 +1,5 @@
-import { RIO_SYSTEM_CONTENT } from './rio-content.js';
+// Import from public directory
+const RIO_SYSTEM_CONTENT = require('../public/rio-content.js').RIO_SYSTEM_CONTENT;
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -25,8 +26,7 @@ export default async function handler(req, res) {
         max_tokens: 2048,
         top_p: 1,
         frequency_penalty: 0,
-        presence_penalty: 0,
-        response_format: { "type": "text" }
+        presence_penalty: 0
       })
     });
 

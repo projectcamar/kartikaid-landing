@@ -4,12 +4,12 @@
     { "src": "api/**/*.js", "use": "@vercel/node" },
     { "src": "*.html", "use": "@vercel/static" },
     { "src": "assets/**", "use": "@vercel/static" },
-    { "src": "*.js", "use": "@vercel/static" }
+    { "src": "public/**/*", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/assets/(.*)", "dest": "/assets/$1" },
-    { "src": "/(.*)\\.js", "dest": "/$1.js" },
+    { "src": "/rio-content.js", "dest": "/public/rio-content.js" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
