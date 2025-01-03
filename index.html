@@ -1222,74 +1222,84 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
 
     <script type="module">
+        import { RIO_SYSTEM_CONTENT } from './rio-content.js';
+        
+        const API_URL = "https://api.openai.com/v1/chat/completions";
+        const API_KEY = "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";
+
         async function query(userMessage) {
             try {
-                console.log('Sending request...'); // Debug log
-                
-                const response = await fetch("/api/chat", {
+                const response = await fetch(API_URL, {
                     method: "POST",
                     headers: {
+                        "Authorization": `Bearer ${API_KEY}`,
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
+                        model: "gpt-4o-mini-2024-07-18",
                         messages: [
+                            {
+                                role: "system",
+                                content: RIO_SYSTEM_CONTENT
+                            },
                             {
                                 role: "user",
                                 content: userMessage
                             }
-                        ]
+                        ],
+                        temperature: 1,
+                        max_tokens: 2048,
+                        top_p: 1,
+                        frequency_penalty: 0,
+                        presence_penalty: 0,
+                        response_format: { "type": "text" }
                     })
                 });
 
                 if (!response.ok) {
-                    const errorData = await response.json();
-                    console.error('API Error:', errorData); // Debug log
-                    throw new Error(errorData.details || 'Failed to get response');
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
                 const result = await response.json();
-                console.log('API Response:', result); // Debug log
-                
-                if (!result.choices || !result.choices[0]?.message?.content) {
-                    throw new Error('Invalid response format');
-                }
+                console.log("API Response:", result);
 
-                return result.choices[0].message.content;
+                if (result.choices && result.choices[0].message) {
+                    return result.choices[0].message.content;
+                }
+                
+                return "I apologize, I'm having trouble responding right now.";
             } catch (error) {
-                console.error('Query Error:', error); // Debug log
-                return `Sorry, I encountered an error: ${error.message}. Please try again.`;
+                console.error("API Error:", error);
+                throw error;
             }
         }
 
-        // Make these functions available to the window object
-        window.query = query;
         window.askQuestion = async function(question) {
             const chatMessages = document.getElementById('chatMessages');
-            if (!chatMessages) return;
             
             // Add user message
-            addMessage(question, 'user');
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = question;
+            chatMessages.appendChild(userMessage);
+
+            // Add loading message
+            const loadingMessage = document.createElement('div');
+            loadingMessage.className = 'message bot-message';
+            loadingMessage.textContent = 'Thinking...';
+            chatMessages.appendChild(loadingMessage);
 
             try {
-                // Show thinking message
-                addMessage('Thinking...', 'bot');
-                
                 const response = await query(question);
-                
-                // Remove thinking message and add actual response
-                const thinkingMessage = document.querySelector('.message:last-child');
-                if (thinkingMessage) {
-                    thinkingMessage.remove();
-                }
-                
-                addMessage(response, 'bot');
+                loadingMessage.textContent = response;
             } catch (error) {
-                console.error('Ask Question Error:', error);
-                addMessage("Sorry, I encountered an error. Please try again.", 'bot');
+                loadingMessage.textContent = "Sorry, I encountered an error. Please try again.";
             }
 
             chatMessages.scrollTop = chatMessages.scrollHeight;
-        };
+        }
+
+        window.generateAIResponse = query;
     </script>
 
     <script>
@@ -1358,62 +1368,63 @@
             messageHistory.push({ role: sender === 'user' ? 'user' : 'assistant', content: text });
         }
 
-        async function generateAIResponse(message) {
-            try {
-                const response = await fetch("/api/chat", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        messages: [
-                            {
-                                role: "user",
-                                content: message
-                            }
-                        ]
-                    })
-                });
-
-                if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error.message || 'Failed to get response');
-                }
-
-                const data = await response.json();
-                return data.choices[0].message.content;
-            } catch (error) {
-                console.error('Error:', error);
-                return `Sorry, I encountered an error: ${error.message}. Please try again.`;
-            }
-        }
-
         async function sendMessage() {
             const input = document.getElementById('userInput');
             const message = input.value.trim();
             if (!message) return;
 
+            // Add user message to chat
             addMessage(message, 'user');
             input.value = '';
 
             try {
-                addMessage('Thinking...', 'bot');
+                // Create thinking message with profile picture
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
+                
+                // Create profile container
+                const profileContainer = document.createElement('div');
+                profileContainer.className = 'bot-profile-container';
+                
+                // Add profile image
+                const profileImg = document.createElement('img');
+                profileImg.src = 'assets/foto-akmal.jpeg';
+                profileImg.className = 'bot-profile-img';
+                profileContainer.appendChild(profileImg);
+                
+                // Add thinking message
+                const thinkingMessage = document.createElement('div');
+                thinkingMessage.className = 'bot-message';
+                thinkingMessage.textContent = 'Thinking...';
+                
+                // Append both to message div
+                messageDiv.appendChild(profileContainer);
+                messageDiv.appendChild(thinkingMessage);
+                
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.appendChild(messageDiv);
+                
+                // Scroll to bottom after adding thinking message
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Get AI response
                 const response = await generateAIResponse(message);
                 
                 // Remove thinking message
-                const thinkingMessage = document.querySelector('.message:last-child');
-                if (thinkingMessage) {
-                    thinkingMessage.remove();
-                }
+                messageDiv.remove();
                 
+                // Add AI response
                 addMessage(response, 'bot');
+                
+                // Scroll to bottom again after adding response
+                chatMessages.scrollTop = chatMessages.scrollHeight;
             } catch (error) {
                 console.error('Error:', error);
                 addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+                
+                // Scroll to bottom if error occurs
+                chatMessages.scrollTop = chatMessages.scrollHeight;
             }
-
-            const chatMessages = document.getElementById('chatMessages');
-            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
         // Add event listener for Enter key
