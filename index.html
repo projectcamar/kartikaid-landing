@@ -1218,10 +1218,14 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
+
     <script type="module">
-        // Import system content
-        import { RIO_SYSTEM_CONTENT } from '/api/rio-content.js';
+        import { RIO_SYSTEM_CONTENT } from './rio-content.js';
         
+        const API_URL = "https://api.openai.com/v1/chat/completions";
+
         async function query(userMessage) {
             try {
                 const response = await fetch("/api/chat", {
@@ -1257,7 +1261,276 @@
             }
         }
 
-        window.query = query;  // Make query function available globally
+        window.askQuestion = async function(question) {
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = question;
+            chatMessages.appendChild(userMessage);
+
+            // Add loading message
+            const loadingMessage = document.createElement('div');
+            loadingMessage.className = 'message bot-message';
+            loadingMessage.textContent = 'Thinking...';
+            chatMessages.appendChild(loadingMessage);
+
+            try {
+                const response = await query(question);
+                loadingMessage.textContent = response;
+            } catch (error) {
+                loadingMessage.textContent = "Sorry, I encountered an error. Please try again.";
+            }
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        window.generateAIResponse = query;
+    </script>
+
+    <script>
+        let messageHistory = [];
+
+        function formatMessageWithLinks(message) {
+            // First handle the dashes by converting them to line breaks
+            message = message.replace(/\s-\s/g, '<br>- ');
+            
+            // Enhanced URL regex pattern to better catch .com domains
+            const urlRegex = /(https?:\/\/[^\s]+)|(\b(?:www\.|[a-zA-Z0-9-]+\.)?[a-zA-Z0-9-]+\.com(?:\/[^\s]*)?)\b|(bit\.ly\/[^\s]+)/g;
+            message = message.replace(urlRegex, function(url) {
+                // Add https:// if it's missing
+                const href = url.startsWith('http') ? url : 'https://' + url;
+                return `<a href="${href}" target="_blank">${url}</a>`;
+            });
+
+            // Auto-detect email addresses
+            const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+            message = message.replace(emailRegex, '<a href="mailto:$1">$1</a>');
+
+            return message;
+        }
+
+        function addMessage(text, sender) {
+            const messages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            
+            if (sender === 'bot') {
+                // Create profile container
+                const profileContainer = document.createElement('div');
+                profileContainer.className = 'bot-profile-container';
+                
+                // Create profile image
+                const profileImg = document.createElement('img');
+                profileImg.src = 'assets/foto-akmal.jpeg';
+                profileImg.className = 'bot-profile-img';
+                profileContainer.appendChild(profileImg);
+                
+                // Add thinking status if needed
+                if (text === 'Thinking...') {
+                    const thinkingStatus = document.createElement('div');
+                    thinkingStatus.className = 'thinking-status';
+                    thinkingStatus.textContent = 'Thinking...';
+                    profileContainer.appendChild(thinkingStatus);
+                }
+                
+                // Create message content
+                const messageContent = document.createElement('div');
+                messageContent.className = 'bot-message';
+                messageContent.innerHTML = formatMessageWithLinks(text);
+                
+                // Append both to message div
+                messageDiv.appendChild(profileContainer);
+                messageDiv.appendChild(messageContent);
+            } else {
+                const userMessage = document.createElement('div');
+                userMessage.className = 'user-message';
+                userMessage.textContent = text;
+                messageDiv.appendChild(userMessage);
+            }
+            
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+            messageHistory.push({ role: sender === 'user' ? 'user' : 'assistant', content: text });
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message to chat
+            addMessage(message, 'user');
+            input.value = '';
+
+            try {
+                // Create thinking message with profile picture
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
+                
+                // Create profile container
+                const profileContainer = document.createElement('div');
+                profileContainer.className = 'bot-profile-container';
+                
+                // Add profile image
+                const profileImg = document.createElement('img');
+                profileImg.src = 'assets/foto-akmal.jpeg';
+                profileImg.className = 'bot-profile-img';
+                profileContainer.appendChild(profileImg);
+                
+                // Add thinking message
+                const thinkingMessage = document.createElement('div');
+                thinkingMessage.className = 'bot-message';
+                thinkingMessage.textContent = 'Thinking...';
+                
+                // Append both to message div
+                messageDiv.appendChild(profileContainer);
+                messageDiv.appendChild(thinkingMessage);
+                
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.appendChild(messageDiv);
+                
+                // Scroll to bottom after adding thinking message
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Get AI response
+                const response = await generateAIResponse(message);
+                
+                // Remove thinking message
+                messageDiv.remove();
+                
+                // Add AI response
+                addMessage(response, 'bot');
+                
+                // Scroll to bottom again after adding response
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+                
+                // Scroll to bottom if error occurs
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+
+        // Add event listener for Enter key
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial greeting message
+            setTimeout(() => {
+                addMessage("Hi! Thank you for visiting my personal website. What would you like to know about me?", 'bot');
+            }, 500);
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('userInput');
+            
+            if (!input) {
+                console.error('Input element not found!');
+                return;
+            }
+
+            const questions = [
+                "Hi, what's your question?",
+                "What are Rio's key achievements?",
+                "How can I contact Rio for opportunities?",
+                "What is Rio's leadership experience?",
+                "Tell me about Rio's product development skills",
+                "What makes Rio stand out from other candidates?",
+                "What international experience does Rio have?",
+                "What are Rio's strongest technical skills?",
+                "Has Rio led any significant projects?",
+                "What competitions has Rio won?",
+                "What is Rio's educational background?",
+                "What industries has Rio worked in?",
+                "What are Rio's career goals?",
+                "Does Rio have experience working in teams?"
+            ];
+            
+            let currentIndex = 0;
+            
+            // Set initial placeholder
+            input.placeholder = questions[0];
+            
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % questions.length;
+                input.placeholder = questions[currentIndex];
+            }, 4000);
+        });
+    </script>
+
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable F11 and developer tools
+        document.addEventListener('keydown', function(e) {
+            // Disable F11
+            if (e.keyCode == 122) {
+                e.preventDefault();
+            }
+            
+            // Disable Ctrl+U (view source)
+            if (e.ctrlKey && e.keyCode == 85) {
+                e.preventDefault();
+            }
+            
+            // Disable Ctrl+Shift+I and F12 (developer tools)
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                e.preventDefault();
+            }
+            if (e.keyCode == 123) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the button
+            const button = document.querySelector('a[href="#chat-section"]');
+            
+            // Add click event listener
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Smooth scroll to chat section
+                document.querySelector('#chat-section').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('userInput');
+            
+            input.addEventListener('keydown', function(e) {
+                // Check if the pressed key is Tab
+                if (e.key === 'Tab') {
+                    e.preventDefault(); // Prevent default tab behavior
+                    
+                    // Get current placeholder text and set it as input value
+                    const placeholderText = this.placeholder;
+                    this.value = placeholderText;
+                    
+                    // Place cursor at the end of the text
+                    this.setSelectionRange(placeholderText.length, placeholderText.length);
+                }
+            });
+        });
     </script>
 </body>
 </html>
