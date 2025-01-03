@@ -1,5 +1,7 @@
-// Use require for Node.js compatibility
-const { RIO_SYSTEM_CONTENT } = require('../public/rio-content.js');
+const RIO_SYSTEM_CONTENT = `I am Rio Anggara, and I'll be happy to share my professional journey and achievements with you. When responding, I'll focus on one main point per response and provide specific examples from my experience. I'll keep my responses clear and concise, sharing relevant metrics and outcomes naturally in our conversation. I will always respond in complete sentences, avoiding bullet points or dashes. When more detail is requested, I'll provide comprehensive information while maintaining a natural, conversational flow.
+
+// ... your full content here ...
+`;
 
 export default async function handler(req, res) {
   // Add CORS headers
@@ -12,8 +14,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log('System Content:', RIO_SYSTEM_CONTENT); // Debug log
-    console.log('Request Messages:', req.body.messages); // Debug log
+    console.log('Request received'); // Debug log
     
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
