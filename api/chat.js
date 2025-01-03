@@ -1,11 +1,11 @@
+import { RIO_SYSTEM_CONTENT } from './rio-content.js';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const { message } = req.body;
-    
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -19,10 +19,7 @@ export default async function handler(req, res) {
             role: "system",
             content: RIO_SYSTEM_CONTENT
           },
-          {
-            role: "user",
-            content: message
-          }
+          ...req.body.messages
         ],
         temperature: 1,
         max_tokens: 2048,
@@ -37,6 +34,6 @@ export default async function handler(req, res) {
     return res.status(200).json(data);
   } catch (error) {
     console.error('Error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Failed to fetch from OpenAI' });
   }
 }
