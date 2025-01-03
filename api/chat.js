@@ -94,7 +94,7 @@ export default async function handler(req, res) {
             Important Links & Contact Information:
             - Email: rioanggaraclub@gmail.com
             - Phone: +6288801146881 (for professional purpose only please)
-            - LinkedIn: linkedin.com/in/rio-anggara
+            - LinkedIn: linkedin.com/in/rionggara
             - Portfolio: bit.ly/PortofolioRio-2025
             - Personal Website: rioanggara.com
             - Product Website: learnitab.com
