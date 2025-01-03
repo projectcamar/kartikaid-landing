@@ -1358,63 +1358,62 @@
             messageHistory.push({ role: sender === 'user' ? 'user' : 'assistant', content: text });
         }
 
+        async function generateAIResponse(message) {
+            try {
+                const response = await fetch("/api/chat", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        messages: [
+                            {
+                                role: "user",
+                                content: message
+                            }
+                        ]
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Failed to get response');
+                }
+
+                const data = await response.json();
+                return data.choices[0].message.content;
+            } catch (error) {
+                console.error('Error:', error);
+                return `Sorry, I encountered an error: ${error.message}. Please try again.`;
+            }
+        }
+
         async function sendMessage() {
             const input = document.getElementById('userInput');
             const message = input.value.trim();
             if (!message) return;
 
-            // Add user message to chat
             addMessage(message, 'user');
             input.value = '';
 
             try {
-                // Create thinking message with profile picture
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'message';
-                
-                // Create profile container
-                const profileContainer = document.createElement('div');
-                profileContainer.className = 'bot-profile-container';
-                
-                // Add profile image
-                const profileImg = document.createElement('img');
-                profileImg.src = 'assets/foto-akmal.jpeg';
-                profileImg.className = 'bot-profile-img';
-                profileContainer.appendChild(profileImg);
-                
-                // Add thinking message
-                const thinkingMessage = document.createElement('div');
-                thinkingMessage.className = 'bot-message';
-                thinkingMessage.textContent = 'Thinking...';
-                
-                // Append both to message div
-                messageDiv.appendChild(profileContainer);
-                messageDiv.appendChild(thinkingMessage);
-                
-                const chatMessages = document.getElementById('chatMessages');
-                chatMessages.appendChild(messageDiv);
-                
-                // Scroll to bottom after adding thinking message
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                // Get AI response
+                addMessage('Thinking...', 'bot');
                 const response = await generateAIResponse(message);
                 
                 // Remove thinking message
-                messageDiv.remove();
+                const thinkingMessage = document.querySelector('.message:last-child');
+                if (thinkingMessage) {
+                    thinkingMessage.remove();
+                }
                 
-                // Add AI response
                 addMessage(response, 'bot');
-                
-                // Scroll to bottom again after adding response
-                chatMessages.scrollTop = chatMessages.scrollHeight;
             } catch (error) {
                 console.error('Error:', error);
                 addMessage('Sorry, I encountered an error. Please try again.', 'bot');
-                
-                // Scroll to bottom if error occurs
-                chatMessages.scrollTop = chatMessages.scrollHeight;
             }
+
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
         // Add event listener for Enter key
