@@ -1,10 +1,12 @@
 const SYSTEM_CONTENT = "I am Rio Anggara AI, an AI assistant trained to provide information about Rio Anggara's professional background, achievements, and experiences.";
 
 export default async function handler(req, res) {
+  // Basic CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   if (req.method === 'OPTIONS') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     return res.status(200).end();
   }
 
@@ -13,38 +15,18 @@ export default async function handler(req, res) {
   }
 
   try {
-    if (!process.env.OPENAI_API_KEY) {
-      throw new Error('OpenAI API key is not configured');
-    }
+    // Log the incoming request
+    console.log('Received request:', req.body);
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini-2024-07-18",
-        messages: [
-          {
-            role: "system",
-            content: SYSTEM_CONTENT
-          },
-          {
-            role: "user",
-            content: req.body.messages[0].content
-          }
-        ]
-      })
+    // Test response without calling OpenAI
+    return res.status(200).json({
+      choices: [{
+        message: {
+          content: "This is a test response to verify the API connection is working."
+        }
+      }]
     });
 
-    const data = await response.json();
-    
-    if (!response.ok) {
-      throw new Error(data.error?.message || 'OpenAI API error');
-    }
-
-    return res.status(200).json(data);
   } catch (error) {
     console.error('API Error:', error);
     return res.status(500).json({ 
