@@ -1222,7 +1222,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
 
     <script type="module">
-        import { RIO_SYSTEM_CONTENT } from './rio-content.js';
+        // Update the import path to point to the correct location
+        import { RIO_SYSTEM_CONTENT } from './api/rio-content.js';
         
         const API_URL = "https://api.openai.com/v1/chat/completions";
 
@@ -1248,45 +1249,31 @@
                 }
 
                 const result = await response.json();
-                console.log("API Response:", result);
-
-                if (result.choices && result.choices[0].message) {
-                    return result.choices[0].message.content;
-                }
-                
-                return "I apologize, I'm having trouble responding right now.";
+                return result.choices?.[0]?.message?.content || "I apologize, I'm having trouble responding right now.";
             } catch (error) {
-                console.error("API Error:", error);
-                throw error;
+                console.error('API Error:', error);
+                return "Sorry, I encountered a connection error. Please try again.";
             }
         }
 
+        // Make these functions available to the window object
+        window.query = query;
         window.askQuestion = async function(question) {
             const chatMessages = document.getElementById('chatMessages');
+            if (!chatMessages) return;
             
             // Add user message
-            const userMessage = document.createElement('div');
-            userMessage.className = 'message user-message';
-            userMessage.textContent = question;
-            chatMessages.appendChild(userMessage);
-
-            // Add loading message
-            const loadingMessage = document.createElement('div');
-            loadingMessage.className = 'message bot-message';
-            loadingMessage.textContent = 'Thinking...';
-            chatMessages.appendChild(loadingMessage);
+            addMessage(question, 'user');
 
             try {
                 const response = await query(question);
-                loadingMessage.textContent = response;
+                addMessage(response, 'bot');
             } catch (error) {
-                loadingMessage.textContent = "Sorry, I encountered an error. Please try again.";
+                addMessage("Sorry, I encountered an error. Please try again.", 'bot');
             }
 
             chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        window.generateAIResponse = query;
+        };
     </script>
 
     <script>
