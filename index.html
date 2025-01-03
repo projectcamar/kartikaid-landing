@@ -1229,8 +1229,11 @@
 
         async function query(userMessage) {
             try {
-                const response = await fetch('/api/chat', {
+                const response = await fetch('/.netlify/functions/chat', {
                     method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                     body: JSON.stringify({
                         model: "gpt-4o-mini-2024-07-18",
                         messages: [
@@ -1253,10 +1256,13 @@
                 });
 
                 if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('API Error:', errorText);
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
                 const result = await response.json();
+                console.log('API Response:', result); // Debug log
                 
                 if (result.choices && result.choices[0].message) {
                     return result.choices[0].message.content;
