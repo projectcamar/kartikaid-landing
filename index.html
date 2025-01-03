@@ -1222,10 +1222,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
 
     <script type="module">
-        const API_URL = "https://api.openai.com/v1/chat/completions";
-
         async function query(userMessage) {
             try {
+                console.log('Sending request...'); // Debug log
+                
                 const response = await fetch("/api/chat", {
                     method: "POST",
                     headers: {
@@ -1242,14 +1242,22 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    const errorData = await response.json();
+                    console.error('API Error:', errorData); // Debug log
+                    throw new Error(errorData.details || 'Failed to get response');
                 }
 
                 const result = await response.json();
-                return result.choices?.[0]?.message?.content || "I apologize, I'm having trouble responding right now.";
+                console.log('API Response:', result); // Debug log
+                
+                if (!result.choices || !result.choices[0]?.message?.content) {
+                    throw new Error('Invalid response format');
+                }
+
+                return result.choices[0].message.content;
             } catch (error) {
-                console.error('API Error:', error);
-                return "Sorry, I encountered a connection error. Please try again.";
+                console.error('Query Error:', error); // Debug log
+                return `Sorry, I encountered an error: ${error.message}. Please try again.`;
             }
         }
 
@@ -1263,9 +1271,20 @@
             addMessage(question, 'user');
 
             try {
+                // Show thinking message
+                addMessage('Thinking...', 'bot');
+                
                 const response = await query(question);
+                
+                // Remove thinking message and add actual response
+                const thinkingMessage = document.querySelector('.message:last-child');
+                if (thinkingMessage) {
+                    thinkingMessage.remove();
+                }
+                
                 addMessage(response, 'bot');
             } catch (error) {
+                console.error('Ask Question Error:', error);
                 addMessage("Sorry, I encountered an error. Please try again.", 'bot');
             }
 
