@@ -1251,35 +1251,19 @@
         }
 
         window.askQuestion = async function(question) {
-            const chatMessages = document.getElementById('chatMessages');
+            if (isThinking) return;
             
-            // Add user message
-            const userMessage = document.createElement('div');
-            userMessage.className = 'message user-message';
-            userMessage.textContent = question;
-            chatMessages.appendChild(userMessage);
-
-            // Add loading message
-            const loadingMessage = document.createElement('div');
-            loadingMessage.className = 'message bot-message';
-            loadingMessage.textContent = 'Thinking...';
-            chatMessages.appendChild(loadingMessage);
-
-            try {
-                const response = await query(question);
-                loadingMessage.textContent = response;
-            } catch (error) {
-                loadingMessage.textContent = "Sorry, I encountered an error. Please try again.";
-            }
-
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
+            const input = document.getElementById('userInput');
+            input.value = question;
+            sendMessage();
+        };
 
         window.generateAIResponse = query;
     </script>
 
     <script>
         let messageHistory = [];
+        let isThinking = false;
 
         function formatMessageWithLinks(message) {
             // First handle the dashes by converting them to line breaks
@@ -1347,7 +1331,16 @@
         async function sendMessage() {
             const input = document.getElementById('userInput');
             const message = input.value.trim();
-            if (!message) return;
+            const sendButton = document.getElementById('sendButton');
+            
+            if (!message || isThinking) return;
+            
+            // Disable input and button while processing
+            isThinking = true;
+            input.disabled = true;
+            sendButton.disabled = true;
+            input.style.opacity = '0.7';
+            sendButton.style.opacity = '0.7';
 
             // Add user message to chat
             addMessage(message, 'user');
@@ -1358,29 +1351,23 @@
                 const messageDiv = document.createElement('div');
                 messageDiv.className = 'message';
                 
-                // Create profile container
                 const profileContainer = document.createElement('div');
                 profileContainer.className = 'bot-profile-container';
                 
-                // Add profile image
                 const profileImg = document.createElement('img');
                 profileImg.src = 'assets/foto-akmal.jpeg';
                 profileImg.className = 'bot-profile-img';
                 profileContainer.appendChild(profileImg);
                 
-                // Add thinking message
                 const thinkingMessage = document.createElement('div');
                 thinkingMessage.className = 'bot-message';
                 thinkingMessage.textContent = 'Thinking...';
                 
-                // Append both to message div
                 messageDiv.appendChild(profileContainer);
                 messageDiv.appendChild(thinkingMessage);
                 
                 const chatMessages = document.getElementById('chatMessages');
                 chatMessages.appendChild(messageDiv);
-                
-                // Scroll to bottom after adding thinking message
                 chatMessages.scrollTop = chatMessages.scrollHeight;
 
                 // Get AI response
@@ -1392,20 +1379,25 @@
                 // Add AI response
                 addMessage(response, 'bot');
                 
-                // Scroll to bottom again after adding response
+                // Scroll to bottom
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             } catch (error) {
                 console.error('Error:', error);
                 addMessage('Sorry, I encountered an error. Please try again.', 'bot');
-                
-                // Scroll to bottom if error occurs
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+            } finally {
+                // Re-enable input and button
+                isThinking = false;
+                input.disabled = false;
+                sendButton.disabled = false;
+                input.style.opacity = '1';
+                sendButton.style.opacity = '1';
+                input.focus();
             }
         }
 
-        // Add event listener for Enter key
+        // Update the event listener for Enter key
         document.getElementById('userInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && !isThinking) {
                 sendMessage();
             }
         });
