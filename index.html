@@ -1264,6 +1264,7 @@
     <script>
         let messageHistory = [];
         let isThinking = false;
+        let firstMessageSent = false; // Add this flag at the top with other variables
 
         function formatMessageWithLinks(message) {
             // First handle the dashes by converting them to line breaks
@@ -1335,8 +1336,19 @@
             
             if (!message || isThinking) return;
             
-            // Store current scroll position
+            // Store current scroll position and chat section position
             const currentScrollPos = window.scrollY;
+            const chatSection = document.getElementById('chat-section');
+            const chatSectionTop = chatSection.offsetTop;
+            
+            // If this is the first message and chat section isn't fully visible,
+            // scroll to it smoothly
+            if (!firstMessageSent && (currentScrollPos < chatSectionTop)) {
+                chatSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                firstMessageSent = true;
+                // Small delay to allow smooth scroll to complete
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
             
             // Disable input and button while processing
             isThinking = true;
@@ -1382,8 +1394,10 @@
                 // Add AI response
                 addMessage(response, 'bot');
                 
-                // Restore original scroll position
-                window.scrollTo(0, currentScrollPos);
+                // Only restore scroll position if not the first message
+                if (!firstMessageSent) {
+                    window.scrollTo(0, currentScrollPos);
+                }
                 
                 // Only scroll the chat container
                 chatMessages.scrollTop = chatMessages.scrollHeight;
