@@ -629,185 +629,190 @@
 
         /* Chat Section Styles */
         .chat-section {
-            padding: 2rem 0;
+            padding: 1rem 0;
             background: white;
             border-radius: 8px;
             color: var(--pwc-grey-90);
         }
 
-        .chat-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
         .chat-title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 500;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             color: var(--pwc-grey-90);
         }
 
-        #chatMessages {
-            min-height: 100px;
-            max-height: 400px;
-            margin-bottom: 1rem;
-            overflow-y: auto;
-            padding: 1rem;
-            scrollbar-width: thin;
-            scrollbar-color: var(--pwc-orange) var(--pwc-grey-15);
+        .chat-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
 
-        #chatMessages::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        #chatMessages::-webkit-scrollbar-track {
-            background: var(--pwc-grey-15);
-            border-radius: 3px;
-        }
-
-        #chatMessages::-webkit-scrollbar-thumb {
-            background: var(--pwc-orange);
-            border-radius: 3px;
-        }
-
-        #chatMessages::-webkit-scrollbar-thumb:hover {
-            background: var(--pwc-tangerine);
-        }
-
-        .message {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin: 10px 0;
-            width: 100%;
-        }
-
-        .message:has(.user-message) {
-            justify-content: flex-end;
-        }
-
-        .user-message {
-            background: #f0f0f0;  /* Light gray background */
-            color: #333;
-            padding: 10px 15px;
-            border-radius: 15px;
-            max-width: 70%;
-            margin-left: auto;
-        }
-
-        .bot-message {
-            background: var(--pwc-orange);
-            color: white;
-            margin-right: auto;
-            max-width: 70%;
-            border-radius: 15px;
-            padding: 10px 15px;
-        }
-
-        .bot-profile-container {
-            width: 35px;
-            flex-shrink: 0;
-        }
-
-        .bot-profile-img {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #fff;
-        }
-
-        .bot-message-content {
-            flex: 1;
-        }
-
-        .input-group {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .input-group input {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            border: 1px solid var(--pwc-grey-15);
-            border-radius: 25px;
-            background: white;
-            color: var(--pwc-grey-90);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--pwc-orange);
-            box-shadow: 0 0 0 2px rgba(208, 74, 2, 0.1);
-        }
-
-        .input-group input::placeholder {
-            color: var(--pwc-grey-55);
-            opacity: 1;
-            transition: opacity 0.3s ease;
+        .chat-main-wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
 
         .quick-buttons {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 1rem;
+            background: white;
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            height: 400px;
+            overflow-y: auto;
         }
 
         .quick-btn {
             background: transparent;
             border: 1px solid var(--pwc-grey-15);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
             color: var(--pwc-grey-55);
             cursor: pointer;
             transition: all 0.3s;
             font-size: 0.9rem;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 0.5rem;
         }
 
-        .quick-btn:hover {
-            border-color: var(--pwc-orange);
-            color: var(--pwc-orange);
-            background: rgba(208, 74, 2, 0.05);
+        .chat-main {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+        }
+
+        #chatMessages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+
+        .chat-input-container {
+            padding: 0.5rem;
+            border-top: 1px solid var(--pwc-grey-15);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--pwc-grey-15);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        #sendButton {
+            padding: 0.75rem;
+            border-radius: 6px;
         }
 
         .disclaimer {
-            text-align: center;
+            font-size: 0.75rem;
             color: var(--pwc-grey-55);
-            font-size: 0.85rem;
-            margin-top: 1rem;
+            text-align: center;
+            margin-top: 0.25rem;
         }
 
-        @keyframes messageAppear {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .message {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .bot-message, .user-message {
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            max-width: 80%;
+            background: #f5f5f5;
+        }
+
+        /* Style user messages */
+        .user-message {
+            margin-left: auto;
+            background: var(--pwc-orange);
+            color: white;
+        }
+
+        /* Style bot messages */
+        .bot-profile-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .bot-profile-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .bot-message {
+            background: #f5f5f5;
+            color: var(--pwc-grey-90);
+        }
+
+        /* Fix image display in messages */
+        .bot-message img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+        /* Update chat container to prevent image overflow */
+        #chatMessages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+
+        /* Ensure proper message alignment */
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message.bot {
+            justify-content: flex-start;
+        }
+
+        .quick-buttons::-webkit-scrollbar,
+        #chatMessages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .quick-buttons::-webkit-scrollbar-thumb,
+        #chatMessages::-webkit-scrollbar-thumb {
+            background: var(--pwc-grey-15);
+            border-radius: 2px;
         }
 
         @media (max-width: 768px) {
-            .chat-title {
-                font-size: 2rem;
+            .chat-main-wrapper {
+                grid-template-columns: 1fr;
             }
             
-            .quick-buttons {
-                gap: 0.5rem;
-            }
-            
-            .quick-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
+            .quick-buttons,
+            .chat-main {
+                height: 300px;
             }
         }
 
@@ -1085,104 +1090,30 @@
             text-align: center;
         }
 
-        /* Add these new styles */
-        .chat-section {
-            background: #1a1a1a;
-            color: #fff;
-            border-radius: 12px;
-            padding: 2rem;
-        }
-
-        .chat-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #fff;
-        }
-
-        .chat-categories {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .category h3 {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            color: #fff;
-            opacity: 0.9;
-        }
-
-        .category-items {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .chat-prompt {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        /* Add styles for the context header */
+        .context-header {
             font-size: 0.9rem;
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--pwc-grey-55);
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--pwc-grey-15);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .chat-prompt:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .input-group {
-            background: rgba(255, 255, 255, 0.1);
+        /* Update quick buttons container */
+        .quick-buttons {
+            background: white;
+            padding: 0;
             border-radius: 8px;
-            padding: 0.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            height: 400px;
+            overflow-y: auto;
         }
 
-        .input-group input {
-            background: transparent;
-            border: none;
-            color: #fff;
-            padding: 0.8rem;
-            width: 100%;
-        }
-
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        #sendButton {
-            background: transparent;
-            color: #fff;
-            opacity: 0.8;
-        }
-
-        .disclaimer {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.8rem;
-            text-align: center;
-            margin-top: 1rem;
-        }
-
-        /* Update message styles for dark theme */
-        .bot-message {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-
-        .user-message {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-        }
-
-        @media (max-width: 768px) {
-            .chat-categories {
-                grid-template-columns: 1fr;
-            }
+        .questions-container {
+            padding: 1rem;
         }
     </style>
 </head>
@@ -1281,67 +1212,34 @@
     </section>
 
     <section id="chat-section" class="chat-section container">
+        <h2 class="chat-title">Ask Me Anything About Rio!</h2>
         <div class="chat-container">
-            <h2 class="chat-title">Ai Chat</h2>
-            
-            <div class="chat-categories">
-                <div class="category">
-                    <h3>🔮 Recent</h3>
-                    <div class="category-items">
-                        <div class="chat-prompt" onclick="askQuestion('Tell me about your background and experience')">
-                            Background Check: Learn about Rio's experience and skills
-                        </div>
-                        <div class="chat-prompt" onclick="askQuestion('What projects have you worked on?')">
-                            Project Explorer: Discover Rio's key projects and achievements
-                        </div>
-                        <div class="chat-prompt" onclick="askQuestion('What are your technical skills?')">
-                            Skill Analysis: Review Rio's technical capabilities
-                        </div>
+            <div class="chat-main-wrapper">
+                <div class="quick-buttons">
+                    <div class="context-header">
+                        Question Box
                     </div>
-                </div>
-
-                <div class="category">
-                    <h3>🔍 Frequent</h3>
-                    <div class="category-items">
-                        <div class="chat-prompt" onclick="askQuestion('What is your educational background?')">
-                            Education Journey: Explore Rio's academic path
-                        </div>
-                        <div class="chat-prompt" onclick="askQuestion('What are your career achievements?')">
-                            Achievement Showcase: Notable career milestones
-                        </div>
-                        <div class="chat-prompt" onclick="askQuestion('How can I contact you?')">
-                            Contact Info: Ways to reach out to Rio
-                        </div>
+                    <div class="questions-container">
+                        <button class="quick-btn" onclick="askQuestion('Who is Rio Anggara?')">Who is Rio Anggara?</button>
+                        <button class="quick-btn" onclick="askQuestion('What are Rio\'s technical skills?')">What are Rio's technical skills?</button>
+                        <button class="quick-btn" onclick="askQuestion('What projects has Rio worked on?')">What projects has Rio worked on?</button>
+                        <button class="quick-btn" onclick="askQuestion('What is Rio\'s educational background?')">What is Rio's education?</button>
+                        <button class="quick-btn" onclick="askQuestion('How can I contact Rio?')">How can I contact Rio?</button>
                     </div>
-                </div>
-
-                <div class="category">
-                    <h3>⭐ Recommended</h3>
-                    <div class="category-items">
-                        <div class="chat-prompt" onclick="askQuestion('What makes you unique?')">
-                            Unique Value: What sets Rio apart
-                        </div>
-                        <div class="chat-prompt" onclick="askQuestion('What are your leadership experiences?')">
-                            Leadership Profile: Review management experience
-                        </div>
-                        <div class="chat-prompt" onclick="askQuestion('What industries have you worked in?')">
-                            Industry Expertise: Sectors and domains
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="chatMessages"></div>
-            
-            <div class="chat-input-container">
-                <div class="input-group">
-                    <input type="text" id="userInput" placeholder="How can I help you?">
-                    <button id="sendButton" onclick="sendMessage()">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
                 </div>
                 
-                <p class="disclaimer">AI Chat may produce inaccurate information about people, places, or facts.</p>
+                <div class="chat-main">
+                    <div id="chatMessages"></div>
+                    <div class="chat-input-container">
+                        <div class="input-group">
+                            <input type="text" id="userInput" placeholder="Ask something here...">
+                            <button id="sendButton" onclick="sendMessage()">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <p class="disclaimer">Note: AI responses may not always be accurate.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1472,14 +1370,8 @@
             const input = document.getElementById('userInput');
             const message = input.value.trim();
             const sendButton = document.getElementById('sendButton');
-            const chatCategories = document.querySelector('.chat-categories');
             
             if (!message || isThinking) return;
-            
-            // Hide the categories on first message
-            if (!firstMessageSent) {
-                chatCategories.style.display = 'none';
-            }
             
             // Store current scroll position and chat section position
             const currentScrollPos = window.scrollY;
@@ -1677,14 +1569,6 @@
                 }
             });
         });
-    </script>
-
-    <script>
-        // Optional: Add function to show categories again if needed
-        function showCategories() {
-            const chatCategories = document.querySelector('.chat-categories');
-            chatCategories.style.display = 'grid';
-        }
     </script>
 </body>
 </html>
