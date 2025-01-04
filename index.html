@@ -1855,6 +1855,10 @@
                 
                 // Only scroll the chat container
                 chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Increment message count after successful message
+                incrementMessageCount();
+                
             } catch (error) {
                 console.error('Error:', error);
                 addMessage('Sorry, I encountered an error. Please try again.', 'bot');
@@ -1879,6 +1883,14 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Set initial reset time if not exists
+            if (!localStorage.getItem('lastResetTime')) {
+                localStorage.setItem('lastResetTime', new Date().getTime());
+            }
+            
+            // Update the remaining messages display
+            updateRemainingMessages();
+
             // Initial greeting message
             setTimeout(() => {
                 addMessage("Hi! Thank you for visiting my personal website. What would you like to know about me?", 'bot');
@@ -2039,6 +2051,9 @@
                 
                 // Focus on input
                 userInput.focus();
+
+                // Update the remaining messages display after clearing
+                updateRemainingMessages();
             }, 1000); // Wait for animation to complete
         }
 
@@ -2134,15 +2149,18 @@
             const floatingInput = document.getElementById('floatingInput');
             const message = floatingInput.value.trim();
             
+            // Check message limit before processing
+            const currentCount = getMessageCount();
+            if (currentCount >= MAX_MESSAGES) {
+                const nextResetTime = new Date(parseInt(localStorage.getItem('lastResetTime')) + RESET_INTERVAL);
+                const formattedTime = nextResetTime.toLocaleTimeString();
+                
+                alert(`You've reached your daily message limit (${MAX_MESSAGES} messages). The limit will reset at ${formattedTime}. Please come back later or contact Rio directly!`);
+                floatingInput.value = '';
+                return;
+            }
+            
             if (message) {
-                // Check message limit
-                if (hasReachedLimit()) {
-                    const timeUntilReset = getTimeUntilReset();
-                    alert(`You've reached the maximum number of messages for today. Please wait ${timeUntilReset} for the limit to reset.`);
-                    return;
-                }
-
-                // Rest of your existing handleFloatingChat function code...
                 document.getElementById('chat-section').scrollIntoView({ behavior: 'smooth' });
                 setTimeout(() => {
                     document.getElementById('userInput').value = message;
@@ -2201,140 +2219,38 @@
     </script>
 
     <script>
-        // Constants for chat limits
+        // Add these constants at the top of your script
         const MAX_MESSAGES = 50;
         const RESET_INTERVAL = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
-        // Function to get chat data from localStorage
-        function getChatData() {
-            const chatData = localStorage.getItem('chatData');
-            if (chatData) {
-                return JSON.parse(chatData);
-            }
-            return {
-                messageCount: 0,
-                lastReset: Date.now()
-            };
-        }
+        // Add these functions to manage message limits
+        function getMessageCount() {
+            const count = localStorage.getItem('chatMessageCount') || 0;
+            const lastReset = localStorage.getItem('lastResetTime');
+            const currentTime = new Date().getTime();
 
-        // Function to update chat data
-        function updateChatData() {
-            let chatData = getChatData();
-            
-            // Check if 24 hours have passed since last reset
-            if (Date.now() - chatData.lastReset >= RESET_INTERVAL) {
-                chatData = {
-                    messageCount: 0,
-                    lastReset: Date.now()
-                };
-            }
-            
-            chatData.messageCount++;
-            localStorage.setItem('chatData', JSON.stringify(chatData));
-            return chatData;
-        }
-
-        // Function to check if user has reached message limit
-        function hasReachedLimit() {
-            const chatData = getChatData();
-            
-            // Reset if 24 hours have passed
-            if (Date.now() - chatData.lastReset >= RESET_INTERVAL) {
-                localStorage.setItem('chatData', JSON.stringify({
-                    messageCount: 0,
-                    lastReset: Date.now()
-                }));
-                return false;
-            }
-            
-            return chatData.messageCount >= MAX_MESSAGES;
-        }
-
-        // Function to get time until reset
-        function getTimeUntilReset() {
-            const chatData = getChatData();
-            const timeLeft = RESET_INTERVAL - (Date.now() - chatData.lastReset);
-            const hoursLeft = Math.floor(timeLeft / (60 * 60 * 1000));
-            const minutesLeft = Math.floor((timeLeft % (60 * 60 * 1000)) / (60 * 1000));
-            return `${hoursLeft}h ${minutesLeft}m`;
-        }
-
-        // Update your existing sendMessage function
-        async function sendMessage() {
-            const input = document.getElementById('userInput');
-            const message = input.value.trim();
-            const sendButton = document.getElementById('sendButton');
-            
-            if (!message || isThinking) return;
-
-            // Check message limit
-            if (hasReachedLimit()) {
-                const timeUntilReset = getTimeUntilReset();
-                addMessage(`You've reached the maximum number of messages for today. Please wait ${timeUntilReset} for the limit to reset.`, 'bot');
-                return;
+            // Check if we need to reset the counter
+            if (lastReset && (currentTime - lastReset) >= RESET_INTERVAL) {
+                localStorage.setItem('chatMessageCount', 0);
+                localStorage.setItem('lastResetTime', currentTime);
+                return 0;
             }
 
-            // Update message count
-            updateChatData();
-            
-            // Rest of your existing sendMessage function code...
-            isThinking = true;
-            input.disabled = true;
-            sendButton.disabled = true;
-            // ... (keep your existing code)
+            return parseInt(count);
         }
 
-        // Update your handleFloatingChat function
-        function handleFloatingChat() {
-            const floatingInput = document.getElementById('floatingInput');
-            const message = floatingInput.value.trim();
-            
-            if (message) {
-                // Check message limit
-                if (hasReachedLimit()) {
-                    const timeUntilReset = getTimeUntilReset();
-                    alert(`You've reached the maximum number of messages for today. Please wait ${timeUntilReset} for the limit to reset.`);
-                    return;
-                }
-
-                // Rest of your existing handleFloatingChat function code...
-                document.getElementById('chat-section').scrollIntoView({ behavior: 'smooth' });
-                setTimeout(() => {
-                    document.getElementById('userInput').value = message;
-                    floatingInput.value = '';
-                    sendMessage();
-                }, 500);
-            }
+        function incrementMessageCount() {
+            const currentCount = getMessageCount();
+            localStorage.setItem('chatMessageCount', currentCount + 1);
+            localStorage.setItem('lastResetTime', localStorage.getItem('lastResetTime') || new Date().getTime());
+            updateRemainingMessages();
         }
 
-        // Add a function to display remaining messages
-        function displayRemainingMessages() {
-            const chatData = getChatData();
-            const remaining = MAX_MESSAGES - chatData.messageCount;
+        function updateRemainingMessages() {
+            const remaining = MAX_MESSAGES - getMessageCount();
             const disclaimer = document.querySelector('.disclaimer');
-            
-            if (disclaimer) {
-                disclaimer.innerHTML = `Note: AI responses may not always be accurate... that's why you should interview the real Rio instead! 😉<br>
-                                      <span style="color: var(--pwc-grey-55)">You have ${remaining} messages remaining today.</span>`;
-            }
+            disclaimer.innerHTML = `Note: AI responses may not always be accurate... that's why you should interview the real Rio instead! 😉<br>You have <strong>${remaining}</strong> messages left today.`;
         }
-
-        // Update your DOMContentLoaded event to initialize the message counter
-        document.addEventListener('DOMContentLoaded', function() {
-            // Your existing DOMContentLoaded code...
-            
-            // Initialize message counter display
-            displayRemainingMessages();
-            
-            // Add message counter update after each message
-            const originalAddMessage = addMessage;
-            window.addMessage = function(text, sender) {
-                originalAddMessage(text, sender);
-                if (sender === 'user') {
-                    displayRemainingMessages();
-                }
-            };
-        });
     </script>
 </body>
 </html>
