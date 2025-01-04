@@ -649,11 +649,34 @@
             padding: 0 1rem;
         }
 
+        /* Update chat-main-wrapper to use position relative */
         .chat-main-wrapper {
             display: grid;
             grid-template-columns: 280px 1fr;
             gap: 1.5rem;
             margin: 2rem 0;
+            position: relative; /* Add this */
+        }
+
+        /* Update chat-main styles to use position absolute */
+        .chat-main {
+            position: absolute; /* Add this */
+            right: 0; /* Add this */
+            width: calc(100% - 295px); /* Updated from 335px */
+            background: white;
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+            border: 1px solid var(--pwc-grey-15);
+            transition: width 0.3s ease; /* Add transition for width only */
+        }
+
+        /* Add style for expanded chat when question box is minimized */
+        .quick-buttons.minimized + .chat-main {
+            width: calc(100% - 65px); /* 50px minimized width + 15px gap */
         }
 
         /* Update quick-buttons (left section) styles to match chat-main (right section) */
@@ -663,14 +686,55 @@
             border-radius: 8px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.05);
             height: 600px;
-            overflow-y: auto;
             border: 1px solid var(--pwc-grey-15);
+            transition: width 0.3s ease, min-width 0.3s ease;
+            position: relative;
+            min-width: 280px;
+            width: 280px;
+            overflow: visible; /* Changed from overflow-y: auto */
         }
 
-        /* Update context-header (QUESTION BOX text) */
+        .quick-buttons.minimized {
+            min-width: 50px;
+            width: 50px;
+            background: transparent;
+            border: none;
+            box-shadow: none !important; /* Force remove shadow */
+            transform: none !important; /* Prevent any transformations */
+        }
+
+        /* Remove context header styles when minimized */
+        .quick-buttons.minimized .context-header {
+            background: transparent;
+            border: none;
+        }
+
+        /* Remove hover effects completely when minimized */
+        .quick-buttons.minimized:hover {
+            box-shadow: none !important;
+            transform: none !important;
+            border: none;
+        }
+
+        /* Keep minimize button visible but remove container visuals */
+        .quick-buttons.minimized .minimize-question-box {
+            right: 0;
+            border-radius: 4px;
+            width: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .quick-buttons.minimized .questions-container,
+        .quick-buttons.minimized .context-header span {
+            display: none;
+        }
+
+        /* Update context-header styles */
         .context-header {
-            font-size: 0.9rem;
-            color: var(--pwc-grey-55);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             padding: 1rem;
             border-bottom: 1px solid var(--pwc-grey-15);
             margin-bottom: 0;
@@ -678,12 +742,62 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             background: white;
-            display: flex;
-            align-items: center;
             height: 72px;
+            position: relative;
         }
 
-        /* Update quick-btn styles to be more consistent */
+        /* Update minimize-question-box styles */
+        .minimize-question-box {
+            position: absolute;
+            right: -16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--pwc-orange);
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px 4px;
+            border-radius: 0 4px 4px 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 40px;
+            z-index: 1000;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        }
+
+        /* Add specific styles for minimize button when box is minimized */
+        .quick-buttons.minimized .minimize-question-box {
+            right: 0; /* Adjust position */
+            border-radius: 4px; /* Make all corners rounded */
+            width: 20px; /* Slightly wider */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Adjust shadow */
+        }
+
+        /* Update hover effect */
+        .minimize-question-box:hover {
+            background: var(--pwc-tangerine);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* Update icon rotation */
+        .minimize-question-box i {
+            transition: transform 0.3s ease;
+            font-size: 0.8rem; /* Slightly smaller icon */
+        }
+
+        /* Update minimized state positioning */
+        .quick-buttons.minimized .minimize-question-box {
+            right: -12px; /* Keep the same position when minimized */
+        }
+
+        .quick-buttons.minimized .minimize-question-box i {
+            transform: rotate(180deg);
+        }
+
+        /* Update quick-btn styles to remove arrow and add a cleaner hover effect */
         .quick-btn {
             background: white;
             border: 1px solid var(--pwc-grey-15);
@@ -696,103 +810,38 @@
             width: 100%;
             text-align: left;
             margin-bottom: 0.75rem;
-            position: relative;
-            overflow: hidden;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: space-between;
             font-family: 'Inter', sans-serif;
             font-weight: 400;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
+        /* Remove the ::before pseudo-element that was creating the arrow */
         .quick-btn::before {
-            content: '→';
-            font-family: 'Inter', sans-serif;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s ease;
+            display: none;
         }
 
+        /* Update hover effects */
         .quick-btn:hover {
             background: var(--pwc-orange);
             color: white;
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(208, 74, 2, 0.15);
-        }
-
-        .quick-btn:hover::before {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Update questions container padding */
-        .questions-container {
-            padding: 1rem;
-        }
-
-        /* Update chat-main-wrapper gap */
-        .chat-main-wrapper {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        /* Custom scrollbar for quick buttons */
-        .quick-buttons::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .quick-buttons::-webkit-scrollbar-track {
-            background: var(--pwc-grey-15);
-            border-radius: 2px;
-        }
-
-        .quick-buttons::-webkit-scrollbar-thumb {
-            background: var(--pwc-grey-55);
-            border-radius: 2px;
-            transition: background 0.3s ease;
-        }
-
-        .quick-buttons::-webkit-scrollbar-thumb:hover {
-            background: var(--pwc-orange);
-        }
-
-        /* Add hover effect for entire container */
-        .quick-buttons:hover {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             transform: translateY(-2px);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(208, 74, 2, 0.15);
+            padding-left: 1.5rem; /* Slightly increase left padding on hover */
         }
 
-        /* Add category badges */
+        /* Update question category badge positioning */
         .question-category {
             font-size: 0.7rem;
             padding: 2px 8px;
             border-radius: 12px;
             background: var(--pwc-grey-15);
             color: var(--pwc-grey-55);
-            margin-left: auto;
+            margin-left: 8px;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
-        }
-
-        .quick-btn:hover .question-category {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-
-        /* Update chat-main styles to match quick-buttons */
-        .chat-main {
-            background: white;
-            padding: 0; /* Remove padding */
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            height: 600px;
-            border: 1px solid var(--pwc-grey-15); /* Add border to match question box */
         }
 
         /* Update chat header styles */
@@ -919,21 +968,26 @@
             width: 4px;
         }
 
-        .quick-buttons::-webkit-scrollbar-thumb,
-        #chatMessages::-webkit-scrollbar-thumb {
+        .quick-buttons::-webkit-scrollbar-track {
             background: var(--pwc-grey-15);
             border-radius: 2px;
         }
 
-        @media (max-width: 768px) {
-            .chat-main-wrapper {
-                grid-template-columns: 1fr;
-            }
-            
-            .quick-buttons,
-            .chat-main {
-                height: 300px;
-            }
+        .quick-buttons::-webkit-scrollbar-thumb {
+            background: var(--pwc-grey-55);
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        .quick-buttons::-webkit-scrollbar-thumb:hover {
+            background: var(--pwc-orange);
+        }
+
+        /* Add hover effect for entire container */
+        .quick-buttons:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
         }
 
         /* Add these new styles for the send button */
@@ -1229,11 +1283,19 @@
             border-radius: 8px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.05);
             height: 600px;
-            overflow-y: auto;
+            border: 1px solid var(--pwc-grey-15);
+            transition: width 0.3s ease, min-width 0.3s ease;
+            position: relative;
+            min-width: 280px;
+            width: 280px;
+            overflow: visible; /* Changed from overflow-y: auto */
         }
 
+        /* Add separate scroll container for questions */
         .questions-container {
             padding: 1rem;
+            height: calc(100% - 72px); /* Subtract header height */
+            overflow-y: auto;
         }
 
         .message-timestamp {
@@ -1351,6 +1413,7 @@
             opacity: 1;
             visibility: visible;
             border: 1px solid var(--pwc-grey-15);
+            transform-origin: bottom right;
         }
 
         .floating-chat.hidden {
@@ -1359,67 +1422,99 @@
             transform: translateY(20px);
         }
 
+        .floating-chat.minimized {
+            width: auto; /* Adjust width to content */
+            padding-right: 8px; /* Add some padding for comfort */
+        }
+
         .floating-chat-header {
             padding: 12px 16px;
             border-bottom: 1px solid var(--pwc-grey-15);
             display: flex;
             align-items: center;
             gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .floating-chat.minimized .floating-chat-header {
+            padding: 8px 12px; /* Smaller padding when minimized */
+            border-bottom: none; /* Remove border when minimized */
         }
 
         .floating-chat-header img {
             width: 32px;
             height: 32px;
             border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .floating-chat.minimized .floating-chat-header img {
+            width: 28px; /* Slightly smaller image when minimized */
+            height: 28px;
         }
 
         .floating-chat-header-text {
             flex: 1;
+            transition: all 0.3s ease;
         }
 
         .floating-chat-header-text h4 {
             font-size: 0.9rem;
             margin: 0;
             color: var(--pwc-grey-90);
+            transition: all 0.3s ease;
         }
 
         .floating-chat-header-text p {
             font-size: 0.75rem;
             margin: 0;
             color: var(--pwc-grey-55);
-        }
-
-        .floating-chat-input {
-            padding: 12px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .floating-chat-input input {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid var(--pwc-grey-15);
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        .floating-chat-input button {
-            background: var(--pwc-orange);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .floating-chat-input button:hover {
-            background: var(--pwc-tangerine);
+        .floating-chat.minimized .floating-chat-header-text p {
+            display: none; /* Hide subtitle when minimized */
+        }
+
+        .floating-chat.minimized .floating-chat-header-text h4 {
+            font-size: 0.85rem; /* Slightly smaller text when minimized */
+        }
+
+        .minimize-btn {
+            background: none;
+            border: none;
+            color: var(--pwc-grey-55);
+            cursor: pointer;
+            padding: 4px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .minimize-btn:hover {
+            color: var(--pwc-orange);
+        }
+
+        .minimize-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .minimized .minimize-btn i {
+            transform: rotate(180deg);
+        }
+
+        /* Hide input area when minimized */
+        .floating-chat.minimized .floating-chat-input {
+            display: none;
+        }
+
+        /* Add hover effect for minimized state */
+        .floating-chat.minimized:hover {
             transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(0,0,0,0.2);
         }
 
         /* Tooltip styles */
@@ -1481,6 +1576,256 @@
         .message.clearing {
             animation: scatterMessage 0.5s ease-in forwards;
         }
+
+        /* Floating chat input styles */
+        .floating-chat-input {
+            padding: 12px;
+            border-top: 1px solid var(--pwc-grey-15);
+            display: flex;
+            gap: 8px;
+        }
+
+        .floating-chat-input input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid var(--pwc-grey-15);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .floating-chat-input input:focus {
+            border-color: var(--pwc-orange);
+            box-shadow: 0 0 0 2px rgba(208, 74, 2, 0.1);
+        }
+
+        .floating-chat-input button {
+            background: var(--pwc-orange);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .floating-chat-input button:hover {
+            background: var(--pwc-tangerine);
+            transform: translateY(-2px);
+        }
+
+        .minimize-btn {
+            background: none;
+            border: none;
+            color: var(--pwc-grey-55);
+            cursor: pointer;
+            padding: 4px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .minimize-btn:hover {
+            color: var(--pwc-orange);
+        }
+
+        .minimize-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .minimized .minimize-btn i {
+            transform: rotate(180deg);
+        }
+
+        /* Hide input area when minimized */
+        .floating-chat.minimized .floating-chat-input {
+            display: none;
+        }
+
+        /* Add hover effect for minimized state */
+        .floating-chat.minimized:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(0,0,0,0.2);
+        }
+
+        /* Hidden state */
+        .floating-chat.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        /* Add these keyframes for the glow effect */
+        @keyframes glowPwC {
+            0% {
+                box-shadow: 0 0 5px rgba(208, 74, 2, 0.2),
+                            0 0 10px rgba(208, 74, 2, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 10px rgba(208, 74, 2, 0.3),
+                            0 0 20px rgba(208, 74, 2, 0.2),
+                            0 0 30px rgba(208, 74, 2, 0.1);
+            }
+            100% {
+                box-shadow: 0 0 5px rgba(208, 74, 2, 0.2),
+                            0 0 10px rgba(208, 74, 2, 0.1);
+            }
+        }
+
+        /* Update input styles for both main chat and floating chat */
+        .input-group input,
+        .floating-chat-input input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--pwc-grey-15);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: white;
+            position: relative;
+        }
+
+        /* Enhanced focus states with glow */
+        .input-group input:focus,
+        .floating-chat-input input:focus {
+            outline: none;
+            border-color: var(--pwc-orange);
+            animation: glowPwC 2s infinite;
+            background: white;
+        }
+
+        /* Add subtle glow on hover */
+        .input-group input:hover,
+        .floating-chat-input input:hover {
+            border-color: var(--pwc-tangerine);
+            box-shadow: 0 0 10px rgba(208, 74, 2, 0.1);
+        }
+
+        /* Make placeholder text fade in/out smoothly */
+        .input-group input::placeholder,
+        .floating-chat-input input::placeholder {
+            color: var(--pwc-grey-55);
+            transition: opacity 0.3s ease;
+        }
+
+        .input-group input:focus::placeholder,
+        .floating-chat-input input:focus::placeholder {
+            opacity: 0.5;
+        }
+
+        /* Add subtle inner shadow for depth */
+        .input-group input,
+        .floating-chat-input input {
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Remove inner shadow on focus */
+        .input-group input:focus,
+        .floating-chat-input input:focus {
+            box-shadow: none;
+        }
+
+        /* Add transition for the send button */
+        #sendButton,
+        .floating-chat-input button {
+            background: var(--pwc-orange);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(208, 74, 2, 0.2);
+        }
+
+        #sendButton:hover,
+        .floating-chat-input button:hover {
+            background: var(--pwc-tangerine);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(208, 74, 2, 0.3);
+        }
+
+        #sendButton:active,
+        .floating-chat-input button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(208, 74, 2, 0.2);
+        }
+
+        /* Add rotating glow keyframes */
+        @keyframes rotatingGlow {
+            0% {
+                box-shadow: 3px 0 15px rgba(208, 74, 2, 0.4),
+                            -3px 0 15px rgba(255, 182, 0, 0.4);
+            }
+            25% {
+                box-shadow: 0 3px 15px rgba(208, 74, 2, 0.4),
+                            0 -3px 15px rgba(255, 182, 0, 0.4);
+            }
+            50% {
+                box-shadow: -3px 0 15px rgba(208, 74, 2, 0.4),
+                            3px 0 15px rgba(255, 182, 0, 0.4);
+            }
+            75% {
+                box-shadow: 0 -3px 15px rgba(208, 74, 2, 0.4),
+                            0 3px 15px rgba(255, 182, 0, 0.4);
+            }
+            100% {
+                box-shadow: 3px 0 15px rgba(208, 74, 2, 0.4),
+                            -3px 0 15px rgba(255, 182, 0, 0.4);
+            }
+        }
+
+        /* Update input styles */
+        .input-group input,
+        .floating-chat-input input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--pwc-grey-15);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: white;
+            position: relative;
+        }
+
+        /* Enhanced focus states with rotating glow */
+        .input-group input:focus,
+        .floating-chat-input input:focus {
+            outline: none;
+            border-color: var(--pwc-orange);
+            animation: rotatingGlow 4s linear infinite;
+            background: white;
+        }
+
+        /* Add subtle glow on hover */
+        .input-group input:hover,
+        .floating-chat-input input:hover {
+            border-color: var(--pwc-tangerine);
+            box-shadow: 0 0 15px rgba(255, 182, 0, 0.2);
+        }
+
+        /* Make placeholder text fade in/out smoothly */
+        .input-group input::placeholder,
+        .floating-chat-input input::placeholder {
+            color: var(--pwc-grey-55);
+            transition: opacity 0.3s ease;
+        }
+
+        .input-group input:focus::placeholder,
+        .floating-chat-input input:focus::placeholder {
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body>
@@ -1488,9 +1833,9 @@
         <div class="container nav">
             <div class="logo">RIO ANGGARA</div>
             <div class="nav-links">
-                <a href="about-me.html">About Me</a>
-                <a href="past-works.html">Past Works</a>
-                <a href="contact.html">Contact</a>
+                <a href="about-me.html">My Journey</a>
+                <a href="past-works.html">Portfolio</a>
+                <a href="contact.html">Let's Connect</a>
             </div>
         </div>
     </header>
@@ -1583,7 +1928,10 @@
             <div class="chat-main-wrapper">
                 <div class="quick-buttons">
                     <div class="context-header">
-                        Question Box
+                        <span>Question Box</span>
+                        <button class="minimize-question-box">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
                     </div>
                     <div class="questions-container">
                         <button class="quick-btn" onclick="askQuestion('Who is Rio Anggara?')">
@@ -1605,6 +1953,10 @@
                         <button class="quick-btn" onclick="askQuestion('How can I contact Rio?')">
                             How can I contact Rio?
                             <span class="question-category">Contact</span>
+                        </button>
+                        <button class="quick-btn" onclick="askQuestion('What is Rio\'s work experience?')">
+                            What is Rio's work experience?
+                            <span class="question-category">Experience</span>
                         </button>
                     </div>
                 </div>
@@ -1660,6 +2012,9 @@
                 <h4>Chat with Rio AI</h4>
                 <p>Ask me anything!</p>
             </div>
+            <button class="minimize-btn">
+                <i class="fas fa-chevron-down"></i>
+            </button>
         </div>
         <div class="floating-chat-input">
             <input type="text" placeholder="Type your question..." id="floatingInput">
@@ -1992,6 +2347,15 @@
 
     <script>
         function clearChat() {
+            // Add a debounce flag
+            if (window.isClearingChat) return;
+            window.isClearingChat = true;
+
+            // Disable clear button and add visual feedback
+            const clearButton = document.querySelector('.clear-chat');
+            clearButton.style.opacity = '0.5';
+            clearButton.style.pointerEvents = 'none';
+
             // Disable inputs immediately
             const userInput = document.getElementById('userInput');
             const sendButton = document.getElementById('sendButton');
@@ -2034,6 +2398,10 @@
                 sendButton.style.opacity = '1';
                 quickButtons.forEach(btn => btn.style.opacity = '1');
                 
+                // Re-enable clear button
+                clearButton.style.opacity = '1';
+                clearButton.style.pointerEvents = 'auto';
+                
                 // Add welcome message back
                 addMessage("Hi! Thank you for visiting my personal website. What would you like to know about me?", 'bot');
                 
@@ -2042,6 +2410,12 @@
 
                 // Update the remaining messages display after clearing
                 updateRemainingMessages();
+
+                // Reset the debounce flag after a cooldown period
+                setTimeout(() => {
+                    window.isClearingChat = false;
+                }, 2000); // 2-second cooldown before allowing another clear
+
             }, 1000); // Wait for animation to complete
         }
 
@@ -2122,6 +2496,10 @@
                     floatingChat.classList.add('hidden');
                 } else {
                     floatingChat.classList.remove('hidden');
+                    // Restore minimized state if it was minimized
+                    if (localStorage.getItem('chatMinimized') === 'true') {
+                        floatingChat.classList.add('minimized');
+                    }
                 }
             });
             
@@ -2209,7 +2587,7 @@
 
     <script>
         // Add these constants at the top of your script
-        const MAX_MESSAGES = 100;
+        const MAX_MESSAGES = 50;
         const RESET_INTERVAL = 12 * 60 * 60 * 1000; // 24 hours in milliseconds
 
         // Add these functions to manage message limits
@@ -2252,6 +2630,88 @@
                 disclaimer.innerHTML = `Note: AI responses may not always be accurate... that's why you should interview the real Rio instead! 😉<br>.`;
             }
         }
+    </script>
+
+    <script>
+        // Add this JavaScript to handle minimizing
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingChat = document.querySelector('.floating-chat');
+            const minimizeBtn = document.querySelector('.minimize-btn');
+            const chatHeader = document.querySelector('.floating-chat-header');
+            
+            // Handle minimize button click
+            minimizeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                floatingChat.classList.toggle('minimized');
+                
+                // Save state to localStorage
+                localStorage.setItem('chatMinimized', floatingChat.classList.contains('minimized'));
+            });
+            
+            // Handle header click to maximize
+            chatHeader.addEventListener('click', function() {
+                if (floatingChat.classList.contains('minimized')) {
+                    floatingChat.classList.remove('minimized');
+                    localStorage.setItem('chatMinimized', false);
+                }
+            });
+            
+            // Restore previous state
+            const wasMinimized = localStorage.getItem('chatMinimized') === 'true';
+            if (wasMinimized) {
+                floatingChat.classList.add('minimized');
+            }
+            
+            // Update existing scroll handling to preserve minimized state
+            window.addEventListener('scroll', function() {
+                const chatSection = document.getElementById('chat-section');
+                const chatSectionTop = chatSection.offsetTop;
+                const chatSectionBottom = chatSectionTop + chatSection.offsetHeight;
+                const scrollPosition = window.scrollY + window.innerHeight;
+                
+                // Hide floating chat when chat section is visible
+                if (scrollPosition > chatSectionTop && window.scrollY < chatSectionBottom) {
+                    floatingChat.classList.add('hidden');
+                } else {
+                    floatingChat.classList.remove('hidden');
+                    // Restore minimized state if it was minimized
+                    if (localStorage.getItem('chatMinimized') === 'true') {
+                        floatingChat.classList.add('minimized');
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // Add this JavaScript for the question box minimize functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const quickButtons = document.querySelector('.quick-buttons');
+            const minimizeQuestionBox = document.querySelector('.minimize-question-box');
+            
+            // Handle minimize button click
+            minimizeQuestionBox.addEventListener('click', function(e) {
+                e.stopPropagation();
+                quickButtons.classList.toggle('minimized');
+                
+                // Save state to localStorage
+                localStorage.setItem('questionBoxMinimized', quickButtons.classList.contains('minimized'));
+            });
+            
+            // Restore previous state
+            const wasMinimized = localStorage.getItem('questionBoxMinimized') === 'true';
+            if (wasMinimized) {
+                quickButtons.classList.add('minimized');
+            }
+            
+            // Handle clicking the minimized question box to restore
+            quickButtons.addEventListener('click', function() {
+                if (quickButtons.classList.contains('minimized')) {
+                    quickButtons.classList.remove('minimized');
+                    localStorage.setItem('questionBoxMinimized', false);
+                }
+            });
+        });
     </script>
 </body>
 </html>
