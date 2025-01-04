@@ -200,9 +200,6 @@ Technical Skills:
 - Advanced Microsoft Office Suite
 - Market Research Tools
 - CRM Systems
-- PLC Programming
-- Arduino Electronics
-- Quantum Computing fundamentals
 
 Core Competencies:
 - Product Development
