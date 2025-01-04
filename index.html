@@ -663,20 +663,107 @@
             box-shadow: 0 2px 12px rgba(0,0,0,0.05);
             height: 400px;
             overflow-y: auto;
+            border: 1px solid var(--pwc-grey-15);
         }
 
+        .questions-container {
+            padding: 1rem;
+        }
+
+        /* Enhanced quick button styles */
         .quick-btn {
-            background: transparent;
+            background: white;
             border: 1px solid var(--pwc-grey-15);
-            padding: 0.75rem 1rem;
-            border-radius: 6px;
-            color: var(--pwc-grey-55);
+            padding: 0.85rem 1.2rem;
+            border-radius: 8px;
+            color: var(--pwc-grey-90);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             font-size: 0.9rem;
             width: 100%;
             text-align: left;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quick-btn::before {
+            content: '→';
+            font-family: 'Inter', sans-serif;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .quick-btn:hover {
+            background: var(--pwc-orange);
+            color: white;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(208, 74, 2, 0.15);
+        }
+
+        .quick-btn:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Add category headers */
+        .context-header {
+            font-size: 0.9rem;
+            color: var(--pwc-grey-55);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--pwc-grey-15);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, var(--pwc-grey-15), transparent);
+        }
+
+        /* Custom scrollbar for quick buttons */
+        .quick-buttons::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .quick-buttons::-webkit-scrollbar-track {
+            background: var(--pwc-grey-15);
+            border-radius: 2px;
+        }
+
+        .quick-buttons::-webkit-scrollbar-thumb {
+            background: var(--pwc-grey-55);
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        .quick-buttons::-webkit-scrollbar-thumb:hover {
+            background: var(--pwc-orange);
+        }
+
+        /* Add hover effect for entire container */
+        .quick-buttons:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        /* Add category badges */
+        .question-category {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: var(--pwc-grey-15);
+            color: var(--pwc-grey-55);
+            margin-left: auto;
+            transition: all 0.3s ease;
+        }
+
+        .quick-btn:hover .question-category {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
         }
 
         .chat-main {
@@ -1115,6 +1202,41 @@
         .questions-container {
             padding: 1rem;
         }
+
+        .message-timestamp {
+            font-size: 0.7rem;
+            color: var(--pwc-grey-55);
+            margin-top: 4px;
+        }
+
+        .user-message .message-timestamp {
+            text-align: right;
+        }
+
+        /* Add to your existing CSS */
+        .thinking-dots {
+            display: inline-block;
+            margin-left: 4px;
+        }
+
+        .thinking-dots::after {
+            content: '';
+            animation: thinking 1.5s infinite;
+        }
+
+        @keyframes thinking {
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+            100% { content: ''; }
+        }
+
+        .bot-message {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
     </style>
 </head>
 <body>
@@ -1220,11 +1342,26 @@
                         Question Box
                     </div>
                     <div class="questions-container">
-                        <button class="quick-btn" onclick="askQuestion('Who is Rio Anggara?')">Who is Rio Anggara?</button>
-                        <button class="quick-btn" onclick="askQuestion('What are Rio\'s technical skills?')">What are Rio's technical skills?</button>
-                        <button class="quick-btn" onclick="askQuestion('What projects has Rio worked on?')">What projects has Rio worked on?</button>
-                        <button class="quick-btn" onclick="askQuestion('What is Rio\'s educational background?')">What is Rio's education?</button>
-                        <button class="quick-btn" onclick="askQuestion('How can I contact Rio?')">How can I contact Rio?</button>
+                        <button class="quick-btn" onclick="askQuestion('Who is Rio Anggara?')">
+                            Who is Rio Anggara?
+                            <span class="question-category">Profile</span>
+                        </button>
+                        <button class="quick-btn" onclick="askQuestion('What are Rio\'s technical skills?')">
+                            What are Rio's technical skills?
+                            <span class="question-category">Skills</span>
+                        </button>
+                        <button class="quick-btn" onclick="askQuestion('What projects has Rio worked on?')">
+                            What projects has Rio worked on?
+                            <span class="question-category">Projects</span>
+                        </button>
+                        <button class="quick-btn" onclick="askQuestion('What is Rio\'s educational background?')">
+                            What is Rio's education?
+                            <span class="question-category">Education</span>
+                        </button>
+                        <button class="quick-btn" onclick="askQuestion('How can I contact Rio?')">
+                            How can I contact Rio?
+                            <span class="question-category">Contact</span>
+                        </button>
                     </div>
                 </div>
                 
@@ -1413,7 +1550,15 @@
                 
                 const thinkingMessage = document.createElement('div');
                 thinkingMessage.className = 'bot-message';
-                thinkingMessage.textContent = 'Thinking...';
+                
+                // Get random thinking message
+                const randomThinking = thinkingVariations[Math.floor(Math.random() * thinkingVariations.length)];
+                thinkingMessage.textContent = randomThinking;
+                
+                // Add animated dots
+                const dotsContainer = document.createElement('span');
+                dotsContainer.className = 'thinking-dots';
+                thinkingMessage.appendChild(dotsContainer);
                 
                 messageDiv.appendChild(profileContainer);
                 messageDiv.appendChild(thinkingMessage);
