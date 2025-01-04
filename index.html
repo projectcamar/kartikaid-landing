@@ -1213,29 +1213,87 @@
             text-align: right;
         }
 
-        /* Add to your existing CSS */
-        .thinking-dots {
-            display: inline-block;
-            margin-left: 4px;
-        }
-
-        .thinking-dots::after {
-            content: '';
-            animation: thinking 1.5s infinite;
-        }
-
-        @keyframes thinking {
-            0% { content: ''; }
-            25% { content: '.'; }
-            50% { content: '..'; }
-            75% { content: '...'; }
-            100% { content: ''; }
-        }
-
-        .bot-message {
+        .chat-header {
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid var(--pwc-grey-15);
+        }
+
+        .bot-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .bot-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .bot-info h4 {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .status {
+            font-size: 0.8rem;
+            color: #2ecc71;
+        }
+
+        .chat-actions button {
+            background: none;
+            border: none;
+            color: var(--pwc-grey-55);
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .chat-actions button:hover {
+            color: var(--pwc-orange);
+        }
+
+        .typing-indicator {
+            display: flex;
             gap: 4px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--pwc-grey-55);
+            border-radius: 50%;
+            animation: typing 1s infinite ease-in-out;
+        }
+
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Add message animations */
+        .message {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -1366,6 +1424,20 @@
                 </div>
                 
                 <div class="chat-main">
+                    <div class="chat-header">
+                        <div class="bot-profile">
+                            <img src="assets/foto-akmal.jpeg" alt="Rio AI" class="bot-avatar">
+                            <div class="bot-info">
+                                <h4>Rio AI Assistant</h4>
+                                <span class="status">Online</span>
+                            </div>
+                        </div>
+                        <div class="chat-actions">
+                            <button class="clear-chat" onclick="clearChat()">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
                     <div id="chatMessages"></div>
                     <div class="chat-input-container">
                         <div class="input-group">
@@ -1375,6 +1447,9 @@
                             </button>
                         </div>
                         <p class="disclaimer">Note: AI responses may not always be accurate.</p>
+                        <div class="typing-indicator" style="display: none;">
+                            <span></span><span></span><span></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1535,6 +1610,9 @@
             addMessage(message, 'user');
             input.value = '';
 
+            const typingIndicator = document.querySelector('.typing-indicator');
+            typingIndicator.style.display = 'flex';
+            
             try {
                 // Create thinking message with profile picture
                 const messageDiv = document.createElement('div');
@@ -1550,15 +1628,7 @@
                 
                 const thinkingMessage = document.createElement('div');
                 thinkingMessage.className = 'bot-message';
-                
-                // Get random thinking message
-                const randomThinking = thinkingVariations[Math.floor(Math.random() * thinkingVariations.length)];
-                thinkingMessage.textContent = randomThinking;
-                
-                // Add animated dots
-                const dotsContainer = document.createElement('span');
-                dotsContainer.className = 'thinking-dots';
-                thinkingMessage.appendChild(dotsContainer);
+                thinkingMessage.textContent = 'Thinking...';
                 
                 messageDiv.appendChild(profileContainer);
                 messageDiv.appendChild(thinkingMessage);
@@ -1595,6 +1665,8 @@
                 sendButton.style.opacity = '1';
                 input.focus();
             }
+
+            typingIndicator.style.display = 'none';
         }
 
         // Update the event listener for Enter key
@@ -1714,6 +1786,78 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        function clearChat() {
+            const messages = document.getElementById('chatMessages');
+            messages.innerHTML = '';
+            messageHistory = [];
+            
+            // Add welcome message back
+            setTimeout(() => {
+                addMessage("Hi! Thank you for visiting my personal website. What would you like to know about me?", 'bot');
+            }, 500);
+        }
+
+        // Add sound effect for messages
+        function playMessageSound() {
+            const audio = new Audio('path/to/message-sound.mp3'); // Add your sound file
+            audio.volume = 0.2;
+            audio.play().catch(e => console.log('Audio play failed:', e));
+        }
+
+        // Update addMessage function to include timestamps
+        function addMessage(text, sender) {
+            const messages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            
+            if (sender === 'bot') {
+                // Create profile container
+                const profileContainer = document.createElement('div');
+                profileContainer.className = 'bot-profile-container';
+                
+                // Create profile image
+                const profileImg = document.createElement('img');
+                profileImg.src = 'assets/foto-akmal.jpeg';
+                profileImg.className = 'bot-profile-img';
+                profileContainer.appendChild(profileImg);
+                
+                // Add thinking status if needed
+                if (text === 'Thinking...') {
+                    const thinkingStatus = document.createElement('div');
+                    thinkingStatus.className = 'thinking-status';
+                    thinkingStatus.textContent = 'Thinking...';
+                    profileContainer.appendChild(thinkingStatus);
+                }
+                
+                // Create message content
+                const messageContent = document.createElement('div');
+                messageContent.className = 'bot-message';
+                messageContent.innerHTML = formatMessageWithLinks(text);
+                
+                // Append both to message div
+                messageDiv.appendChild(profileContainer);
+                messageDiv.appendChild(messageContent);
+            } else {
+                const userMessage = document.createElement('div');
+                userMessage.className = 'user-message';
+                userMessage.textContent = text;
+                messageDiv.appendChild(userMessage);
+            }
+            
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+            messageHistory.push({ role: sender === 'user' ? 'user' : 'assistant', content: text });
+
+            const timestamp = document.createElement('div');
+            timestamp.className = 'message-timestamp';
+            timestamp.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            messageDiv.appendChild(timestamp);
+            playMessageSound();
+        }
     </script>
 </body>
 </html>
