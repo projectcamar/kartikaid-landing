@@ -653,7 +653,7 @@
             display: grid;
             grid-template-columns: 280px 1fr;
             gap: 1.5rem;
-            margin-top: 1rem;
+            margin: 2rem 0;
         }
 
         .quick-buttons {
@@ -661,7 +661,7 @@
             padding: 0;
             border-radius: 8px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-            height: 400px;
+            height: 600px;
             overflow-y: auto;
             border: 1px solid var(--pwc-grey-15);
         }
@@ -773,7 +773,7 @@
             box-shadow: 0 2px 12px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
-            height: 400px;
+            height: 600px;
         }
 
         #chatMessages {
@@ -1195,7 +1195,7 @@
             padding: 0;
             border-radius: 8px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-            height: 400px;
+            height: 600px;
             overflow-y: auto;
         }
 
@@ -1294,6 +1294,99 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Optional: Adjust the container max-height for larger screens */
+        @media (min-height: 900px) {
+            .quick-buttons,
+            .chat-main {
+                height: 700px; /* Even taller for large screens */
+            }
+        }
+
+        /* Add these new styles for the floating chat */
+        .floating-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            width: 320px;
+            transition: all 0.3s ease;
+            opacity: 1;
+            visibility: visible;
+            border: 1px solid var(--pwc-grey-15);
+        }
+
+        .floating-chat.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        .floating-chat-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--pwc-grey-15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .floating-chat-header img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .floating-chat-header-text {
+            flex: 1;
+        }
+
+        .floating-chat-header-text h4 {
+            font-size: 0.9rem;
+            margin: 0;
+            color: var(--pwc-grey-90);
+        }
+
+        .floating-chat-header-text p {
+            font-size: 0.75rem;
+            margin: 0;
+            color: var(--pwc-grey-55);
+        }
+
+        .floating-chat-input {
+            padding: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .floating-chat-input input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid var(--pwc-grey-15);
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .floating-chat-input button {
+            background: var(--pwc-orange);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .floating-chat-input button:hover {
+            background: var(--pwc-tangerine);
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -1466,6 +1559,22 @@
             </div>
         </div>
     </footer>
+
+    <div class="floating-chat">
+        <div class="floating-chat-header">
+            <img src="assets/foto-akmal.jpeg" alt="Rio AI">
+            <div class="floating-chat-header-text">
+                <h4>Chat with Rio AI</h4>
+                <p>Ask me anything!</p>
+            </div>
+        </div>
+        <div class="floating-chat-input">
+            <input type="text" placeholder="Type your question..." id="floatingInput">
+            <button onclick="handleFloatingChat()">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
@@ -1857,6 +1966,55 @@
             
             messageDiv.appendChild(timestamp);
             playMessageSound();
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingChat = document.querySelector('.floating-chat');
+            const chatSection = document.getElementById('chat-section');
+            const floatingInput = document.getElementById('floatingInput');
+            
+            // Handle scroll events
+            window.addEventListener('scroll', function() {
+                const chatSectionTop = chatSection.offsetTop;
+                const chatSectionBottom = chatSectionTop + chatSection.offsetHeight;
+                const scrollPosition = window.scrollY + window.innerHeight;
+                
+                // Hide floating chat when chat section is visible
+                if (scrollPosition > chatSectionTop && window.scrollY < chatSectionBottom) {
+                    floatingChat.classList.add('hidden');
+                } else {
+                    floatingChat.classList.remove('hidden');
+                }
+            });
+            
+            // Handle floating chat input
+            floatingInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleFloatingChat();
+                }
+            });
+        });
+
+        function handleFloatingChat() {
+            const floatingInput = document.getElementById('floatingInput');
+            const message = floatingInput.value.trim();
+            
+            if (message) {
+                // Scroll to chat section
+                document.getElementById('chat-section').scrollIntoView({ behavior: 'smooth' });
+                
+                // Small delay to allow scroll to complete
+                setTimeout(() => {
+                    // Set the main chat input value
+                    document.getElementById('userInput').value = message;
+                    // Clear floating input
+                    floatingInput.value = '';
+                    // Trigger send message
+                    sendMessage();
+                }, 500);
+            }
         }
     </script>
 </body>
