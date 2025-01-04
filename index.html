@@ -1335,6 +1335,9 @@
             
             if (!message || isThinking) return;
             
+            // Store current scroll position
+            const currentScrollPos = window.scrollY;
+            
             // Disable input and button while processing
             isThinking = true;
             input.disabled = true;
@@ -1379,7 +1382,10 @@
                 // Add AI response
                 addMessage(response, 'bot');
                 
-                // Scroll to bottom
+                // Restore original scroll position
+                window.scrollTo(0, currentScrollPos);
+                
+                // Only scroll the chat container
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             } catch (error) {
                 console.error('Error:', error);
