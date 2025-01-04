@@ -100,6 +100,7 @@ export default async function handler(req, res) {
             - Product Website: learnitab.com
             - Learnitab website: learnitab.com
             - Learnitab Opportunity Portal Website: learnitab.com/app
+            - College Copilot instagram account: instagram.com/college.copilot
             
             Professional Experience:
             
