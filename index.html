@@ -1786,19 +1786,17 @@
             const sendButton = document.getElementById('sendButton');
             
             if (!message || isThinking) return;
-            
-            // Store current scroll position and chat section position
-            const currentScrollPos = window.scrollY;
-            const chatSection = document.getElementById('chat-section');
-            const chatSectionTop = chatSection.offsetTop;
-            
-            // If this is the first message and chat section isn't fully visible,
-            // scroll to it smoothly
-            if (!firstMessageSent && (currentScrollPos < chatSectionTop)) {
-                chatSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                firstMessageSent = true;
-                // Small delay to allow smooth scroll to complete
-                await new Promise(resolve => setTimeout(resolve, 500));
+
+            // Check message limit before processing
+            const currentCount = getMessageCount();
+            if (currentCount >= MAX_MESSAGES) {
+                const nextResetTime = new Date(parseInt(localStorage.getItem('lastResetTime')) + RESET_INTERVAL);
+                const formattedTime = nextResetTime.toLocaleTimeString();
+                
+                // Show error message and clear input
+                input.value = '';
+                addMessage(`You've reached your daily message limit (${MAX_MESSAGES} messages). The limit will reset at ${formattedTime}. Please come back later or contact Rio directly!`, 'bot');
+                return; // Stop execution here
             }
             
             // Disable input and button while processing
@@ -1848,31 +1846,21 @@
                 // Add AI response
                 addMessage(response, 'bot');
                 
-                // Only restore scroll position if not the first message
-                if (!firstMessageSent) {
-                    window.scrollTo(0, currentScrollPos);
-                }
-                
-                // Only scroll the chat container
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                // Increment message count after successful message
+                // Only increment if we successfully got and displayed a response
                 incrementMessageCount();
                 
             } catch (error) {
                 console.error('Error:', error);
                 addMessage('Sorry, I encountered an error. Please try again.', 'bot');
             } finally {
-                // Re-enable input and button
                 isThinking = false;
                 input.disabled = false;
                 sendButton.disabled = false;
                 input.style.opacity = '1';
                 sendButton.style.opacity = '1';
                 input.focus();
+                typingIndicator.style.display = 'none';
             }
-
-            typingIndicator.style.display = 'none';
         }
 
         // Update the event listener for Enter key
@@ -2157,6 +2145,7 @@
                 
                 alert(`You've reached your daily message limit (${MAX_MESSAGES} messages). The limit will reset at ${formattedTime}. Please come back later or contact Rio directly!`);
                 floatingInput.value = '';
+                floatingInput.disabled = true; // Disable input when limit is reached
                 return;
             }
             
@@ -2220,7 +2209,7 @@
 
     <script>
         // Add these constants at the top of your script
-        const MAX_MESSAGES = 5;
+        const MAX_MESSAGES = 10;
         const RESET_INTERVAL = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
         // Add these functions to manage message limits
@@ -2247,9 +2236,21 @@
         }
 
         function updateRemainingMessages() {
-            const remaining = MAX_MESSAGES - getMessageCount();
+            const remaining = Math.max(0, MAX_MESSAGES - getMessageCount()); // Ensure remaining never goes negative
             const disclaimer = document.querySelector('.disclaimer');
-            disclaimer.innerHTML = `Note: AI responses may not always be accurate... that's why you should interview the real Rio instead! 😉<br>You have <strong>${remaining}</strong> messages left today.`;
+            
+            if (remaining === 0) {
+                const nextResetTime = new Date(parseInt(localStorage.getItem('lastResetTime')) + RESET_INTERVAL);
+                const formattedTime = nextResetTime.toLocaleTimeString();
+                disclaimer.innerHTML = `You've reached your daily message limit. Messages will reset at ${formattedTime}. Please come back later or contact Rio directly! 😊`;
+                
+                // Disable inputs when limit is reached
+                document.getElementById('userInput').disabled = true;
+                document.getElementById('sendButton').disabled = true;
+                document.getElementById('floatingInput').disabled = true;
+            } else {
+                disclaimer.innerHTML = `Note: AI responses may not always be accurate... that's why you should interview the real Rio instead! 😉<br>You have <strong>${remaining}</strong> message${remaining === 1 ? '' : 's'} left today.`;
+            }
         }
     </script>
 </body>
