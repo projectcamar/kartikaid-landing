@@ -1084,6 +1084,106 @@
             margin-top: 4px;
             text-align: center;
         }
+
+        /* Add these new styles */
+        .chat-section {
+            background: #1a1a1a;
+            color: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .chat-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+
+        .chat-categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .category h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            opacity: 0.9;
+        }
+
+        .category-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .chat-prompt {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-prompt:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .input-group {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+
+        .input-group input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 0.8rem;
+            width: 100%;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        #sendButton {
+            background: transparent;
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        .disclaimer {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Update message styles for dark theme */
+        .bot-message {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .user-message {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .chat-categories {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1182,27 +1282,66 @@
 
     <section id="chat-section" class="chat-section container">
         <div class="chat-container">
-            <h2 class="chat-title">Hi, I'm Rio Anggara AI. Ask me anything!</h2>
+            <h2 class="chat-title">Ai Chat</h2>
             
+            <div class="chat-categories">
+                <div class="category">
+                    <h3>🔮 Recent</h3>
+                    <div class="category-items">
+                        <div class="chat-prompt" onclick="askQuestion('Tell me about your background and experience')">
+                            Background Check: Learn about Rio's experience and skills
+                        </div>
+                        <div class="chat-prompt" onclick="askQuestion('What projects have you worked on?')">
+                            Project Explorer: Discover Rio's key projects and achievements
+                        </div>
+                        <div class="chat-prompt" onclick="askQuestion('What are your technical skills?')">
+                            Skill Analysis: Review Rio's technical capabilities
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <h3>🔍 Frequent</h3>
+                    <div class="category-items">
+                        <div class="chat-prompt" onclick="askQuestion('What is your educational background?')">
+                            Education Journey: Explore Rio's academic path
+                        </div>
+                        <div class="chat-prompt" onclick="askQuestion('What are your career achievements?')">
+                            Achievement Showcase: Notable career milestones
+                        </div>
+                        <div class="chat-prompt" onclick="askQuestion('How can I contact you?')">
+                            Contact Info: Ways to reach out to Rio
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <h3>⭐ Recommended</h3>
+                    <div class="category-items">
+                        <div class="chat-prompt" onclick="askQuestion('What makes you unique?')">
+                            Unique Value: What sets Rio apart
+                        </div>
+                        <div class="chat-prompt" onclick="askQuestion('What are your leadership experiences?')">
+                            Leadership Profile: Review management experience
+                        </div>
+                        <div class="chat-prompt" onclick="askQuestion('What industries have you worked in?')">
+                            Industry Expertise: Sectors and domains
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="chatMessages"></div>
             
             <div class="chat-input-container">
                 <div class="input-group">
-                    <input type="text" id="userInput" placeholder="Hi, what's your question?">
+                    <input type="text" id="userInput" placeholder="How can I help you?">
                     <button id="sendButton" onclick="sendMessage()">
                         <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
                 
-                <div class="quick-buttons">
-                    <button class="quick-btn" onclick="askQuestion('Can you tell me about Rio?')">About me</button>
-                    <button class="quick-btn" onclick="askQuestion('What skills does Rio have?')">Skills</button>
-                    <button class="quick-btn" onclick="askQuestion('What projects has Rio worked on?')">Projects</button>
-                    <button class="quick-btn" onclick="askQuestion('What is Rio\'s educational background?')">Education</button>
-                    <button class="quick-btn" onclick="askQuestion('How can I contact Rio?')">Contact</button>
-                </div>
-                
-                <p class="disclaimer">I can make mistakes. Please be more understanding.</p>
+                <p class="disclaimer">AI Chat may produce inaccurate information about people, places, or facts.</p>
             </div>
         </div>
     </section>
@@ -1333,8 +1472,14 @@
             const input = document.getElementById('userInput');
             const message = input.value.trim();
             const sendButton = document.getElementById('sendButton');
+            const chatCategories = document.querySelector('.chat-categories');
             
             if (!message || isThinking) return;
+            
+            // Hide the categories on first message
+            if (!firstMessageSent) {
+                chatCategories.style.display = 'none';
+            }
             
             // Store current scroll position and chat section position
             const currentScrollPos = window.scrollY;
@@ -1532,6 +1677,14 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        // Optional: Add function to show categories again if needed
+        function showCategories() {
+            const chatCategories = document.querySelector('.chat-categories');
+            chatCategories.style.display = 'grid';
+        }
     </script>
 </body>
 </html>
