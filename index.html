@@ -2075,7 +2075,8 @@
 
         function formatMessageWithLinks(message) {
             // First handle the numbered points by converting them to line breaks and bold
-            message = message.replace(/(\d+)\.\s/g, '<br><strong>$1.</strong> ');
+            // Only match numbers followed by a period AND a colon (e.g., "1.: " or "1. Role:")
+            message = message.replace(/(\d+)\.\s*(?=.*:)/g, '<br><strong>$1.</strong> ');
             
             // Then handle the dashes by converting them to line breaks
             message = message.replace(/\s-\s/g, '<br>- ');
