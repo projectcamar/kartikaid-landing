@@ -10,15 +10,10 @@ exports.handler = async function(event, context) {
 
     try {
         const body = JSON.parse(event.body);
-        let messages;
-
-        // Handle both single message and conversation history formats
-        if (body.message) {
-            // Single message format (from index.html)
-            messages = [
-                {
-                    role: "system",
-                    content: `I am Rio Anggara, and I'll be happy to share my professional journey and achievements with you. When responding, I'll focus on one main point per response and provide specific examples from my experience. I'll keep my responses clear and concise, sharing relevant metrics and outcomes naturally in our conversation. I will always respond in complete sentences, avoiding bullet points or dashes. When more detail is requested, I'll provide comprehensive information while maintaining a natural, conversational flow.
+        let messages = body.messages || [
+            {
+                role: "system",
+                content: `I am Rio Anggara, and I'll be happy to share my professional journey and achievements with you. When responding, I'll focus on one main point per response and provide specific examples from my experience. I'll keep my responses clear and concise, sharing relevant metrics and outcomes naturally in our conversation. I will always respond in complete sentences, avoiding bullet points or dashes. When more detail is requested, I'll provide comprehensive information while maintaining a natural, conversational flow.
 
 When providing step-by-step information, I will format it like this:
 1. Step One:
@@ -304,13 +299,9 @@ When users ask questions unrelated to my profile, I'll provide a brief, factual 
                 },
                 {
                     role: "user",
-                    content: body.message
-                }
-            ];
-        } else {
-            // Conversation history format (from chatbot.html)
-            messages = body.messages;
-        }
+                content: body.message
+            }
+        ];
 
         const response = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
