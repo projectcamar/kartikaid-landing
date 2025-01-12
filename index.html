@@ -2068,102 +2068,176 @@
     </script>
 
     <script>
-        // Store conversation history
-        let conversationHistory = [
-            {
-                role: "system",
-                content: `I am Rio Anggara, and I'll be happy to share my professional journey and achievements with you...`  // Your existing Rio prompt here
+        let messageHistory = [];
+        let isThinking = false;
+        let firstMessageSent = false; // Add this flag at the top with other variables
+
+        function formatMessageWithLinks(message) {
+            // First handle the dashes by converting them to line breaks
+            message = message.replace(/\s-\s/g, '<br>- ');
+            
+            // Enhanced URL regex pattern to better catch .com domains
+            const urlRegex = /(https?:\/\/[^\s]+)|(\b(?:www\.|[a-zA-Z0-9-]+\.)?[a-zA-Z0-9-]+\.com(?:\/[^\s]*)?)\b|(bit\.ly\/[^\s]+)/g;
+            message = message.replace(urlRegex, function(url) {
+                // Add https:// if it's missing
+                const href = url.startsWith('http') ? url : 'https://' + url;
+                return `<a href="${href}" target="_blank">${url}</a>`;
+            });
+
+            // Auto-detect email addresses
+            const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+            message = message.replace(emailRegex, '<a href="mailto:$1">$1</a>');
+
+            return message;
+        }
+
+        function addMessage(text, sender) {
+            const messages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            
+            if (sender === 'bot') {
+                // Create profile container
+                const profileContainer = document.createElement('div');
+                profileContainer.className = 'bot-profile-container';
+                
+                // Create profile image
+                const profileImg = document.createElement('img');
+                profileImg.src = 'assets/foto-akmal.jpeg';
+                profileImg.className = 'bot-profile-img';
+                profileContainer.appendChild(profileImg);
+                
+                // Add thinking status if needed
+                if (text === 'Thinking...') {
+                    const thinkingStatus = document.createElement('div');
+                    thinkingStatus.className = 'thinking-status';
+                    thinkingStatus.textContent = 'Thinking...';
+                    profileContainer.appendChild(thinkingStatus);
+                }
+                
+                // Create message content
+                const messageContent = document.createElement('div');
+                messageContent.className = 'bot-message';
+                messageContent.innerHTML = formatMessageWithLinks(text);
+                
+                // Append both to message div
+                messageDiv.appendChild(profileContainer);
+                messageDiv.appendChild(messageContent);
+            } else {
+                const userMessage = document.createElement('div');
+                userMessage.className = 'user-message';
+                userMessage.textContent = text;
+                messageDiv.appendChild(userMessage);
             }
-        ];
+            
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+            messageHistory.push({ role: sender === 'user' ? 'user' : 'assistant', content: text });
+        }
 
         async function sendMessage() {
             const input = document.getElementById('userInput');
             const message = input.value.trim();
+            const sendButton = document.getElementById('sendButton');
             
-            if (!message) return;
+            if (!message || isThinking) return;
+
+            // Check message limit before processing
+            const currentCount = getMessageCount();
+            if (currentCount >= MAX_MESSAGES) {
+                const nextResetTime = new Date(parseInt(localStorage.getItem('lastResetTime')) + RESET_INTERVAL);
+                const formattedTime = nextResetTime.toLocaleTimeString();
+                
+                // Show error message and clear input
+                input.value = '';
+                addMessage(`You've reached your daily message limit (${MAX_MESSAGES} messages). The limit will reset at ${formattedTime}. Please come back later or contact Rio directly!`, 'bot');
+                return; // Stop execution here
+            }
             
-            // Add user message to UI and conversation history
+            // Disable input and button while processing
+            isThinking = true;
+            input.disabled = true;
+            sendButton.disabled = true;
+            input.style.opacity = '0.7';
+            sendButton.style.opacity = '0.7';
+
+            // Add user message to chat
             addMessage(message, 'user');
-            conversationHistory.push({
-                role: "user",
-                content: message
-            });
-            
             input.value = '';
+
+            const typingIndicator = document.querySelector('.typing-indicator');
+            typingIndicator.style.display = 'flex';
             
             try {
-                // Show typing indicator
-                const typingDiv = addMessage("Thinking...", 'bot');
+                // Create thinking message with profile picture
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
                 
-                const response = await fetch('/.netlify/functions/chat', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ 
-                        messages: conversationHistory 
-                    })
-                });
+                const profileContainer = document.createElement('div');
+                profileContainer.className = 'bot-profile-container';
                 
-                const data = await response.json();
+                const profileImg = document.createElement('img');
+                profileImg.src = 'assets/foto-akmal.jpeg';
+                profileImg.className = 'bot-profile-img';
+                profileContainer.appendChild(profileImg);
                 
-                // Remove typing indicator
-                typingDiv.remove();
+                const thinkingMessage = document.createElement('div');
+                thinkingMessage.className = 'bot-message';
+                thinkingMessage.textContent = 'Thinking...';
                 
-                // Add bot response to UI and conversation history
-                addMessage(data.message, 'bot');
-                conversationHistory.push({
-                    role: "assistant",
-                    content: data.message
-                });
+                messageDiv.appendChild(profileContainer);
+                messageDiv.appendChild(thinkingMessage);
                 
-                // Limit conversation history to last 10 messages to prevent token limit issues
-                if (conversationHistory.length > 12) {
-                    conversationHistory = [
-                        conversationHistory[0], // Keep system prompt
-                        ...conversationHistory.slice(-10) // Keep last 10 messages
-                    ];
-                }
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Get AI response
+                const response = await generateAIResponse(message);
+                
+                // Remove thinking message
+                messageDiv.remove();
+                
+                // Add AI response
+                addMessage(response, 'bot');
+                
+                // Only increment if we successfully got and displayed a response
+                incrementMessageCount();
+                
             } catch (error) {
                 console.error('Error:', error);
                 addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+            } finally {
+                isThinking = false;
+                input.disabled = false;
+                sendButton.disabled = false;
+                input.style.opacity = '1';
+                sendButton.style.opacity = '1';
+                input.focus();
+                typingIndicator.style.display = 'none';
             }
         }
 
-        function addMessage(text, type) {
-            const messagesDiv = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${type}-message`;
-            messageDiv.textContent = text;
-            messagesDiv.appendChild(messageDiv);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            return messageDiv;
-        }
-
-        // Handle floating input
-        function handleFloatingInput(message) {
-            if (message) {
-                document.getElementById('chat-section').scrollIntoView({ behavior: 'smooth' });
-                setTimeout(() => {
-                    document.getElementById('userInput').value = message;
-                    floatingInput.value = '';
-                    sendMessage();
-                }, 500);
+        // Update the event listener for Enter key
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !isThinking) {
+                sendMessage();
             }
-        }
+        });
 
-        // Initial greeting
-        window.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial reset time if not exists
+            if (!localStorage.getItem('lastResetTime')) {
+                localStorage.setItem('lastResetTime', new Date().getTime());
+            }
+            
+            // Update the remaining messages display
+            updateRemainingMessages();
+
+            // Initial greeting message
             setTimeout(() => {
                 addMessage("Hi! Thank you for visiting my personal website. What would you like to know about me?", 'bot');
             }, 500);
-        });
-
-        // Handle Enter key
-        document.getElementById('userInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
         });
     </script>
 

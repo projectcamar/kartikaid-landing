@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
+    // Only allow POST requests
     if (event.httpMethod !== 'POST') {
         return {
             statusCode: 405,
@@ -9,11 +10,20 @@ exports.handler = async function(event, context) {
     }
 
     try {
-        const body = JSON.parse(event.body);
-        let messages = body.messages || [
-            {
-                role: "system",
-                content: `I am Rio Anggara, and I'll be happy to share my professional journey and achievements with you. When responding, I'll focus on one main point per response and provide specific examples from my experience. I'll keep my responses clear and concise, sharing relevant metrics and outcomes naturally in our conversation. I will always respond in complete sentences, avoiding bullet points or dashes. When more detail is requested, I'll provide comprehensive information while maintaining a natural, conversational flow.
+        const { message } = JSON.parse(event.body);
+
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: "gpt-4o-mini-2024-07-18",
+                messages: [
+                    {
+                        role: "system",
+                        content: `I am Rio Anggara, and I'll be happy to share my professional journey and achievements with you. When responding, I'll focus on one main point per response and provide specific examples from my experience. I'll keep my responses clear and concise, sharing relevant metrics and outcomes naturally in our conversation. I will always respond in complete sentences, avoiding bullet points or dashes. When more detail is requested, I'll provide comprehensive information while maintaining a natural, conversational flow.
 
 When providing step-by-step information, I will format it like this:
 1. Step One:
@@ -296,24 +306,14 @@ Product Development - Learnitab:
 
 When users ask questions unrelated to my profile, I'll provide a brief, factual response and then say something like:
 "While I can provide basic information on general topics, I'd love to share more about my experience with [related aspect]. For example, did you know that I [relevant achievement/experience]?"`
-                },
-                {
-                    role: "user",
-                content: body.message
-            }
-        ];
-
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                model: "gpt-4",
-                messages: messages,
+                    },
+                    {
+                        role: "user",
+                        content: message
+                    }
+                ],
                 temperature: 0.7,
-                max_tokens: 1000
+                max_tokens: 500
             })
         });
 
