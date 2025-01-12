@@ -2068,6 +2068,7 @@
     </script>
 
     <script>
+        // Add this at the top with other global variables
         let messageHistory = [];
         let isThinking = false;
         let firstMessageSent = false; // Add this flag at the top with other variables
@@ -2135,6 +2136,7 @@
             messageHistory.push({ role: sender === 'user' ? 'user' : 'assistant', content: text });
         }
 
+        // Update the sendMessage function
         async function sendMessage() {
             const input = document.getElementById('userInput');
             const message = input.value.trim();
@@ -2148,20 +2150,17 @@
                 const nextResetTime = new Date(parseInt(localStorage.getItem('lastResetTime')) + RESET_INTERVAL);
                 const formattedTime = nextResetTime.toLocaleTimeString();
                 
-                // Show error message and clear input
                 input.value = '';
                 addMessage(`You've reached your daily message limit (${MAX_MESSAGES} messages). The limit will reset at ${formattedTime}. Please come back later or contact Rio directly!`, 'bot');
-                return; // Stop execution here
+                return;
             }
             
-            // Disable input and button while processing
             isThinking = true;
             input.disabled = true;
             sendButton.disabled = true;
             input.style.opacity = '0.7';
             sendButton.style.opacity = '0.7';
 
-            // Add user message to chat
             addMessage(message, 'user');
             input.value = '';
 
@@ -2169,7 +2168,6 @@
             typingIndicator.style.display = 'flex';
             
             try {
-                // Create thinking message with profile picture
                 const messageDiv = document.createElement('div');
                 messageDiv.className = 'message';
                 
@@ -2192,16 +2190,29 @@
                 chatMessages.appendChild(messageDiv);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
 
-                // Get AI response
-                const response = await generateAIResponse(message);
+                // Send message with history to the API
+                const response = await fetch('/.netlify/functions/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        history: messageHistory
+                    })
+                });
+
+                const data = await response.json();
                 
                 // Remove thinking message
                 messageDiv.remove();
                 
                 // Add AI response
-                addMessage(response, 'bot');
+                addMessage(data.message, 'bot');
                 
-                // Only increment if we successfully got and displayed a response
+                // Update message history with the new conversation
+                messageHistory = data.history;
+                
                 incrementMessageCount();
                 
             } catch (error) {
@@ -2346,77 +2357,64 @@
     </script>
 
     <script>
+        // Update the clearChat function to also clear message history
         function clearChat() {
-            // Add a debounce flag
             if (window.isClearingChat) return;
             window.isClearingChat = true;
 
-            // Disable clear button and add visual feedback
             const clearButton = document.querySelector('.clear-chat');
             clearButton.style.opacity = '0.5';
             clearButton.style.pointerEvents = 'none';
 
-            // Disable inputs immediately
             const userInput = document.getElementById('userInput');
             const sendButton = document.getElementById('sendButton');
             const quickButtons = document.querySelectorAll('.quick-btn');
             const floatingInput = document.getElementById('floatingInput');
             const messages = document.querySelectorAll('#chatMessages .message');
             
-            // Disable all inputs
             userInput.disabled = true;
             sendButton.disabled = true;
             floatingInput.disabled = true;
             quickButtons.forEach(btn => btn.style.pointerEvents = 'none');
             
-            // Add visual feedback
             userInput.style.opacity = '0.7';
             sendButton.style.opacity = '0.7';
             quickButtons.forEach(btn => btn.style.opacity = '0.7');
             
-            // Animate each message with random rotation
             messages.forEach((message, index) => {
-                const randomRotation = Math.random() * 360 - 180; // Random rotation between -180 and 180 degrees
+                const randomRotation = Math.random() * 360 - 180;
                 message.style.setProperty('--rotation', `${randomRotation}deg`);
                 message.classList.add('clearing');
             });
             
-            // Clear the chat after animation
             setTimeout(() => {
                 const chatMessages = document.getElementById('chatMessages');
                 chatMessages.innerHTML = '';
-                messageHistory = [];
+                messageHistory = []; // Clear the message history
                 
-                // Re-enable everything
                 userInput.disabled = false;
                 sendButton.disabled = false;
                 floatingInput.disabled = false;
                 quickButtons.forEach(btn => btn.style.pointerEvents = 'auto');
                 
-                // Restore visual appearance
                 userInput.style.opacity = '1';
                 sendButton.style.opacity = '1';
                 quickButtons.forEach(btn => btn.style.opacity = '1');
                 
-                // Re-enable clear button
                 clearButton.style.opacity = '1';
                 clearButton.style.pointerEvents = 'auto';
                 
-                // Add welcome message back
                 addMessage("Hi! Thank you for visiting my personal website. What would you like to know about me?", 'bot');
                 
-                // Focus on input
                 userInput.focus();
 
-                // Update the remaining messages display after clearing
                 updateRemainingMessages();
 
-                // Reset the debounce flag after a cooldown period
                 setTimeout(() => {
                     window.isClearingChat = false;
-                }, 2000); // 2-second cooldown before allowing another clear
+                }, 2000);
 
-            }, 1000); // Wait for animation to complete
+            }, 1000);
         }
 
         // Add sound effect for messages
