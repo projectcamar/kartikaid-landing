@@ -2142,26 +2142,12 @@
             
             if (!message || isThinking) return;
 
-            // Check message limit before processing
-            const currentCount = getMessageCount();
-            if (currentCount >= MAX_MESSAGES) {
-                const nextResetTime = new Date(parseInt(localStorage.getItem('lastResetTime')) + RESET_INTERVAL);
-                const formattedTime = nextResetTime.toLocaleTimeString();
-                
-                // Show error message and clear input
-                input.value = '';
-                addMessage(`You've reached your daily message limit (${MAX_MESSAGES} messages). The limit will reset at ${formattedTime}. Please come back later or contact Rio directly!`, 'bot');
-                return; // Stop execution here
-            }
-            
-            // Disable input and button while processing
             isThinking = true;
             input.disabled = true;
             sendButton.disabled = true;
             input.style.opacity = '0.7';
             sendButton.style.opacity = '0.7';
 
-            // Add user message to chat
             addMessage(message, 'user');
             input.value = '';
 
@@ -2169,40 +2155,12 @@
             typingIndicator.style.display = 'flex';
             
             try {
-                // Create thinking message with profile picture
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'message';
-                
-                const profileContainer = document.createElement('div');
-                profileContainer.className = 'bot-profile-container';
-                
-                const profileImg = document.createElement('img');
-                profileImg.src = 'assets/foto-akmal.jpeg';
-                profileImg.className = 'bot-profile-img';
-                profileContainer.appendChild(profileImg);
-                
-                const thinkingMessage = document.createElement('div');
-                thinkingMessage.className = 'bot-message';
-                thinkingMessage.textContent = 'Thinking...';
-                
-                messageDiv.appendChild(profileContainer);
-                messageDiv.appendChild(thinkingMessage);
-                
-                const chatMessages = document.getElementById('chatMessages');
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+                messageHistory.push({ role: 'user', content: message });
 
-                // Get AI response
-                const response = await generateAIResponse(message);
+                const response = await generateAIResponse(message, messageHistory);
                 
-                // Remove thinking message
-                messageDiv.remove();
-                
-                // Add AI response
                 addMessage(response, 'bot');
-                
-                // Only increment if we successfully got and displayed a response
-                incrementMessageCount();
+                messageHistory.push({ role: 'assistant', content: response });
                 
             } catch (error) {
                 console.error('Error:', error);
@@ -2215,6 +2173,31 @@
                 sendButton.style.opacity = '1';
                 input.focus();
                 typingIndicator.style.display = 'none';
+            }
+        }
+
+        async function generateAIResponse(userMessage, history) {
+            try {
+                const response = await fetch(API_ENDPOINT, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        message: userMessage,
+                        history: history
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                return result.message;
+            } catch (error) {
+                console.error("API Error:", error);
+                throw error;
             }
         }
 
