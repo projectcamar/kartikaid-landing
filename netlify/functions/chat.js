@@ -1,7 +1,6 @@
 const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
-    // Only allow POST requests
     if (event.httpMethod !== 'POST') {
         return {
             statusCode: 405,
@@ -10,7 +9,29 @@ exports.handler = async function(event, context) {
     }
 
     try {
-        const { messages } = JSON.parse(event.body);
+        const body = JSON.parse(event.body);
+        let messages;
+
+        // Handle both single message and conversation history formats
+        if (body.message) {
+            // Single message format (from index.html)
+            messages = [
+                {
+                    role: "system",
+                    content: `I am Rio Anggara, and I'll be happy to share my professional journey and achievements with you. When responding, I'll focus on one main point per response and provide specific examples from my experience. I'll keep my responses clear and concise, sharing relevant metrics and outcomes naturally in our conversation. I will always respond in complete sentences, avoiding bullet points or dashes. When more detail is requested, I'll provide comprehensive information while maintaining a natural, conversational flow.
+
+                    // ... (rest of Rio's system prompt)
+                    `
+                },
+                {
+                    role: "user",
+                    content: body.message
+                }
+            ];
+        } else {
+            // Conversation history format (from chatbot.html)
+            messages = body.messages;
+        }
 
         const response = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
