@@ -2073,6 +2073,7 @@
         let isThinking = false;
         let firstMessageSent = false; // Add this flag at the top with other variables
 
+        // Update the formatMessageWithLinks function
         function formatMessageWithLinks(message) {
             // First handle bold text marked with asterisks
             message = message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -2094,9 +2095,11 @@
                 return `<a href="${href}" target="_blank">${url}</a>`;
             });
 
-            // Auto-detect email addresses
-            const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
-            message = message.replace(emailRegex, '<a href="mailto:$1">$1</a>');
+            // Auto-detect email addresses and make text before @ bold
+            const emailRegex = /([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+            message = message.replace(emailRegex, function(match, username, domain) {
+                return `<a href="mailto:${match}"><strong>${username}</strong>@${domain}</a>`;
+            });
 
             return message;
         }
