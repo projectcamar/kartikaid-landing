@@ -41,50 +41,6 @@
             --pwc-grey-90: #2D2D2D;
         }
 
-        /* Table Styles */
-        .bot-message table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 10px 0;
-            background: white;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .bot-message th {
-            background: var(--pwc-orange);
-            color: white;
-            font-weight: 500;
-            text-align: left;
-            padding: 12px;
-            font-size: 0.9rem;
-        }
-
-        .bot-message td {
-            padding: 12px;
-            border: 1px solid var(--pwc-grey-15);
-            font-size: 0.9rem;
-            color: var(--pwc-grey-90);
-        }
-
-        .bot-message tr:nth-child(even) {
-            background: #f9f9f9;
-        }
-
-        .bot-message tr:hover {
-            background: #f5f5f5;
-        }
-
-        /* Make tables responsive */
-        @media (max-width: 768px) {
-            .bot-message table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -2133,35 +2089,6 @@
         function formatMessageWithLinks(message) {
             // First handle bold text marked with asterisks
             message = message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            
-            // Handle tables
-            message = message.replace(/\|([^|]+)\|/g, function(match, content) {
-                const rows = content.trim().split('\n');
-                if (rows.length < 2) return match;
-
-                let table = '<table>';
-                
-                // Handle header row
-                const headers = rows[0].split('|').map(cell => cell.trim());
-                table += '<tr>';
-                headers.forEach(header => {
-                    table += `<th>${header}</th>`;
-                });
-                table += '</tr>';
-
-                // Handle data rows
-                for (let i = 2; i < rows.length; i++) {
-                    const cells = rows[i].split('|').map(cell => cell.trim());
-                    table += '<tr>';
-                    cells.forEach(cell => {
-                        table += `<td>${cell}</td>`;
-                    });
-                    table += '</tr>';
-                }
-
-                table += '</table>';
-                return table;
-            });
             
             // Handle numbered points that start with ": " and end with "."
             message = message.replace(/:\s*(\d+)\./g, '<br><strong>$1.</strong>');
