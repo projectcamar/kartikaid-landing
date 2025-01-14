@@ -2090,6 +2090,35 @@
             // First handle bold text marked with asterisks
             message = message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             
+            // Handle tables
+            message = message.replace(/\|([^|]+)\|/g, function(match, content) {
+                const rows = content.trim().split('\n');
+                if (rows.length < 2) return match;
+
+                let table = '<table>';
+                
+                // Handle header row
+                const headers = rows[0].split('|').map(cell => cell.trim());
+                table += '<tr>';
+                headers.forEach(header => {
+                    table += `<th>${header}</th>`;
+                });
+                table += '</tr>';
+
+                // Handle data rows
+                for (let i = 2; i < rows.length; i++) {
+                    const cells = rows[i].split('|').map(cell => cell.trim());
+                    table += '<tr>';
+                    cells.forEach(cell => {
+                        table += `<td>${cell}</td>`;
+                    });
+                    table += '</tr>';
+                }
+
+                table += '</table>';
+                return table;
+            });
+            
             // Handle numbered points that start with ": " and end with "."
             message = message.replace(/:\s*(\d+)\./g, '<br><strong>$1.</strong>');
             
