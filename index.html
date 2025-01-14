@@ -41,6 +41,50 @@
             --pwc-grey-90: #2D2D2D;
         }
 
+        /* Table Styles */
+        .bot-message table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .bot-message th {
+            background: var(--pwc-orange);
+            color: white;
+            font-weight: 500;
+            text-align: left;
+            padding: 12px;
+            font-size: 0.9rem;
+        }
+
+        .bot-message td {
+            padding: 12px;
+            border: 1px solid var(--pwc-grey-15);
+            font-size: 0.9rem;
+            color: var(--pwc-grey-90);
+        }
+
+        .bot-message tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .bot-message tr:hover {
+            background: #f5f5f5;
+        }
+
+        /* Make tables responsive */
+        @media (max-width: 768px) {
+            .bot-message table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+
         * {
             margin: 0;
             padding: 0;
