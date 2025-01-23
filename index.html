@@ -1364,6 +1364,7 @@
             color: var(--pwc-orange);
         }
 
+        /* Keep only the typing indicator for loading state */
         .typing-indicator {
             display: flex;
             gap: 4px;
@@ -1378,9 +1379,6 @@
             border-radius: 50%;
             animation: typing 1s infinite ease-in-out;
         }
-
-        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
 
         @keyframes typing {
             0%, 100% { transform: translateY(0); }
@@ -2426,22 +2424,6 @@
             
             if (!message || isThinking) return;
 
-            // Hide the tab tooltip after first message
-            const tabTooltip = document.querySelector('.tab-tooltip');
-            tabTooltip.classList.remove('show-tooltip');
-            localStorage.setItem('tooltipShown', 'true');
-
-            // Check message limit before processing
-            const currentCount = getMessageCount();
-            if (currentCount >= MAX_MESSAGES) {
-                const nextResetTime = new Date(parseInt(localStorage.getItem('lastResetTime')) + RESET_INTERVAL);
-                const formattedTime = nextResetTime.toLocaleTimeString();
-                
-                input.value = '';
-                addMessage(`You've reached your daily message limit (${MAX_MESSAGES} messages). The limit will reset at ${formattedTime}. Please come back later or contact Rio directly!`, 'bot');
-                return;
-            }
-            
             isThinking = true;
             input.disabled = true;
             sendButton.disabled = true;
@@ -2455,29 +2437,7 @@
             typingIndicator.style.display = 'flex';
             
             try {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'message';
-                
-                const profileContainer = document.createElement('div');
-                profileContainer.className = 'bot-profile-container';
-                
-                const profileImg = document.createElement('img');
-                profileImg.src = 'assets/foto-akmal.jpeg';
-                profileImg.className = 'bot-profile-img';
-                profileContainer.appendChild(profileImg);
-                
-                const thinkingMessage = document.createElement('div');
-                thinkingMessage.className = 'bot-message';
-                thinkingMessage.textContent = 'Thinking...';
-                
-                messageDiv.appendChild(profileContainer);
-                messageDiv.appendChild(thinkingMessage);
-                
-                const chatMessages = document.getElementById('chatMessages');
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                // Send message with history to the API
+                // Remove the thinking message bubble and use typing indicator instead
                 const response = await fetch('/.netlify/functions/chat', {
                     method: 'POST',
                     headers: {
@@ -2490,9 +2450,6 @@
                 });
 
                 const data = await response.json();
-                
-                // Remove thinking message
-                messageDiv.remove();
                 
                 // Add AI response
                 addMessage(data.message, 'bot');
