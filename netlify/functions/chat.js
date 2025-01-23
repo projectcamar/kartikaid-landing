@@ -545,7 +545,7 @@ When users ask questions unrelated to my profile, I'll provide a brief, factual 
                     ...conversationHistory
                 ],
                 temperature: 0.7,
-                max_tokens: 500
+                max_tokens: 150
             })
         });
 
