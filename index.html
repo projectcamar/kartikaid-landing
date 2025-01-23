@@ -2049,6 +2049,12 @@
             0%, 100% { opacity: 0; }
             20%, 80% { opacity: 1; }
         }
+
+        /* Remove the tab tooltip styles */
+        .tab-tooltip,
+        .tab-key {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -2203,7 +2209,6 @@
                     <div class="chat-input-container">
                         <div class="input-group">
                             <input type="text" id="userInput" placeholder="Ask something here...">
-                            <div class="tab-tooltip">Presss <span class="tab-key">Tab</span> to autocomplete suggestion</div>
                             <button id="sendButton" onclick="sendMessage()">
                                 <i class="fas fa-arrow-right"></i>
                             </button>
@@ -2344,14 +2349,6 @@
                 profileImg.className = 'bot-profile-img';
                 profileContainer.appendChild(profileImg);
                 
-                // Add thinking status if needed
-                if (text === 'Thinking...') {
-                    const thinkingStatus = document.createElement('div');
-                    thinkingStatus.className = 'thinking-status';
-                    thinkingStatus.textContent = 'Thinking...';
-                    profileContainer.appendChild(thinkingStatus);
-                }
-                
                 // Create message content
                 const messageContent = document.createElement('div');
                 messageContent.className = 'bot-message';
@@ -2370,6 +2367,13 @@
             messages.appendChild(messageDiv);
             messages.scrollTop = messages.scrollHeight;
             messageHistory.push({ role: sender === 'user' ? 'user' : 'assistant', content: text });
+
+            const timestamp = document.createElement('div');
+            timestamp.className = 'message-timestamp';
+            timestamp.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            messageDiv.appendChild(timestamp);
+            playMessageSound();
         }
 
         // Update the sendMessage function
@@ -2379,11 +2383,6 @@
             const sendButton = document.getElementById('sendButton');
             
             if (!message || isThinking) return;
-
-            // Hide the tab tooltip after first message
-            const tabTooltip = document.querySelector('.tab-tooltip');
-            tabTooltip.classList.remove('show-tooltip');
-            localStorage.setItem('tooltipShown', 'true');
 
             // Check message limit before processing
             const currentCount = getMessageCount();
@@ -2404,33 +2403,8 @@
 
             addMessage(message, 'user');
             input.value = '';
-
-            const typingIndicator = document.querySelector('.typing-indicator');
-            typingIndicator.style.display = 'flex';
             
             try {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'message';
-                
-                const profileContainer = document.createElement('div');
-                profileContainer.className = 'bot-profile-container';
-                
-                const profileImg = document.createElement('img');
-                profileImg.src = 'assets/foto-akmal.jpeg';
-                profileImg.className = 'bot-profile-img';
-                profileContainer.appendChild(profileImg);
-                
-                const thinkingMessage = document.createElement('div');
-                thinkingMessage.className = 'bot-message';
-                thinkingMessage.textContent = 'Thinking...';
-                
-                messageDiv.appendChild(profileContainer);
-                messageDiv.appendChild(thinkingMessage);
-                
-                const chatMessages = document.getElementById('chatMessages');
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-
                 // Send message with history to the API
                 const response = await fetch('/.netlify/functions/chat', {
                     method: 'POST',
@@ -2444,9 +2418,6 @@
                 });
 
                 const data = await response.json();
-                
-                // Remove thinking message
-                messageDiv.remove();
                 
                 // Add AI response
                 addMessage(data.message, 'bot');
@@ -2466,7 +2437,6 @@
                 input.style.opacity = '1';
                 sendButton.style.opacity = '1';
                 input.focus();
-                typingIndicator.style.display = 'none';
             }
         }
 
@@ -2674,58 +2644,6 @@
             const audio = new Audio('path/to/message-sound.mp3'); // Add your sound file
             audio.volume = 0.2;
             audio.play().catch(e => console.log('Audio play failed:', e));
-        }
-
-        // Update addMessage function to include timestamps
-        function addMessage(text, sender) {
-            const messages = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message';
-            
-            if (sender === 'bot') {
-                // Create profile container
-                const profileContainer = document.createElement('div');
-                profileContainer.className = 'bot-profile-container';
-                
-                // Create profile image
-                const profileImg = document.createElement('img');
-                profileImg.src = 'assets/foto-akmal.jpeg';
-                profileImg.className = 'bot-profile-img';
-                profileContainer.appendChild(profileImg);
-                
-                // Add thinking status if needed
-                if (text === 'Thinking...') {
-                    const thinkingStatus = document.createElement('div');
-                    thinkingStatus.className = 'thinking-status';
-                    thinkingStatus.textContent = 'Thinking...';
-                    profileContainer.appendChild(thinkingStatus);
-                }
-                
-                // Create message content
-                const messageContent = document.createElement('div');
-                messageContent.className = 'bot-message';
-                messageContent.innerHTML = formatMessageWithLinks(text);
-                
-                // Append both to message div
-                messageDiv.appendChild(profileContainer);
-                messageDiv.appendChild(messageContent);
-            } else {
-                const userMessage = document.createElement('div');
-                userMessage.className = 'user-message';
-                userMessage.textContent = text;
-                messageDiv.appendChild(userMessage);
-            }
-            
-            messages.appendChild(messageDiv);
-            messages.scrollTop = messages.scrollHeight;
-            messageHistory.push({ role: sender === 'user' ? 'user' : 'assistant', content: text });
-
-            const timestamp = document.createElement('div');
-            timestamp.className = 'message-timestamp';
-            timestamp.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            
-            messageDiv.appendChild(timestamp);
-            playMessageSound();
         }
     </script>
 
@@ -3015,7 +2933,6 @@
         keyboardShortcuts.className = 'keyboard-shortcuts';
         keyboardShortcuts.innerHTML = `
             <span>Press <kbd>Enter</kbd> to send</span>
-            <span>Press <kbd>Tab</kbd> to use suggestion</span>
         `;
         document.querySelector('.chat-input-container').appendChild(keyboardShortcuts);
 
