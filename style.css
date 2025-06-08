@@ -22,7 +22,6 @@ body {
     background-color: #f7f7f7;
     color: #333;
     position: relative; /* Add position relative */
-    width: 100%; /* Ensure body takes full width */
 }
 
 /* Prevent images and other replaced elements from overflowing */
@@ -49,20 +48,26 @@ object {
 
 /* Header Styles */
 header {
-    background-color: #f07e3c; /* Orange background from image */
-    ; /* Dark brown from the image */
+    background-color: #f07e3c;
     padding: 10px 0;
-    position: relative;
+    position: fixed;
     z-index: 1000;
-    width: 100%; /* Change from 100vw to 100% */
+    width: 100%;
     left: 0;
     right: 0;
+    top: 0;
+    transition: transform 0.3s ease;
+}
+
+header:hover {
+    transform: translateY(0);
 }
 
 .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 20px;
 }
 
 .logo {
@@ -70,10 +75,15 @@ header {
     flex-direction: column;
     align-items: center;
     color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 .logo img {
-    height: 60px; /* Increased by 50% from 40px */
+    height: 120px; /* Doubled from 60px */
     margin-right: 0; /* Remove right margin since text will be below */
 }
 
@@ -84,16 +94,23 @@ header {
     color: #fff;
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .nav-links a {
     color: #fff;
     text-decoration: none;
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 600;
-    margin-left: 15px;
     padding: 8px 20px;
     border: 2px solid #fff;
     border-radius: 25px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .nav-links a:hover {
@@ -101,17 +118,18 @@ header {
 }
 
 .nav-links .btn {
-    background-color: transparent;
-    color: #fff;
+    background-color: #fff;
+    color: #d04a02;
     padding: 8px 20px;
-    border: 2px solid #fff;
+    border: 2px solid #d04a02;
     border-radius: 25px;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .nav-links .btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #f8f8f8;
+    color: #bb3f00;
 }
 
 /* Hero Section Styles */
@@ -120,13 +138,14 @@ header {
     flex-direction: column; /* Stack items vertically */
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically if space allows */
-    padding: 50px 0;
+    padding: 0; /* Removed internal padding for gap */
     background-color: #f07e3c; /* Orange background from image */
     color: #fff;
     position: relative;
     width: 100%; /* Change from 100vw to 100% */
     left: 0;
     right: 0;
+    margin-top: 150px; /* Push hero section down by header height */
 }
 
 .hero-content {
@@ -142,6 +161,7 @@ header {
     font-size: 3.5em;
     margin-bottom: 10px;
     line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-content p {
@@ -171,22 +191,26 @@ header {
 @media (max-width: 768px) {
     .nav {
         flex-direction: column;
+        padding: 10px;
     }
 
     .nav-links {
         margin-top: 10px;
-        display: flex;
         flex-wrap: wrap;
         justify-content: center;
     }
 
     .nav-links a {
-        margin: 5px 10px;
+        margin: 5px;
     }
+
+    /* Ensure no padding-top on body for mobile */
 
     .hero {
         flex-direction: column;
         text-align: center;
+        padding: 0; /* Removed internal padding for mobile */
+        margin-top: 150px; /* Push hero section down by header height for mobile */
     }
 
     .hero-content {
@@ -246,7 +270,7 @@ header {
 
 .about-us-content h1 {
     font-family: 'Gelasio', serif;
-    font-style: italic;
+    font-style: normal;
     font-size: 3.5em;
     margin-bottom: 20px;
     line-height: 1.2;
@@ -407,7 +431,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-right: 40px; /* Add space for the absolutely positioned logo */
 }
 
 .team-btn:hover {
@@ -424,24 +447,11 @@ header {
 }
 
 .btn-logo {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background-color: #fff; /* White background for the circular area */
-    border: 2px solid #fff; /* White border for inactive state */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    position: absolute;
-    right: -14px; /* Half of width to be outside the button visually */
-    top: 50%;
-    transform: translateY(-50%);
-    object-fit: contain; /* Scale the image to fit inside the <img> element */
-    padding: 4px; /* Add padding inside the circular image for the logo */
-    transition: border-color 0.3s ease, filter 0.3s ease;
+    display: none;
 }
 
 .team-btn.active .btn-logo {
-    border-color: #d04a02; /* Orange border for the active logo circle */
-    filter: brightness(0.6) sepia(1) saturate(10) hue-rotate(-20deg); /* Filter to make the logo orange */
+    display: none;
 }
 
 .team-gallery-container {
@@ -517,15 +527,6 @@ header {
     .team-btn {
         padding: 8px 15px;
         font-size: 1em;
-        padding-right: 35px; /* Adjust for smaller screens */
-    }
-
-    .btn-logo {
-        width: 24px;
-        height: 24px;
-        right: -12px;
-        border-width: 1px; /* Thinner border on mobile */
-        padding: 3px; /* Adjust padding for smaller logo */
     }
 
     .team-gallery {
@@ -548,40 +549,51 @@ header {
 
 .testimonials-carousel {
     display: flex;
-    overflow-x: auto;
+    overflow-x: hidden; /* Changed from auto to hidden */
     -webkit-overflow-scrolling: touch;
     gap: 30px;
     padding-bottom: 20px;
     margin-top: 30px;
     flex-wrap: nowrap;
-}
-
-.testimonials-carousel::-webkit-scrollbar {
-    height: 8px;
-}
-
-.testimonials-carousel::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-}
-
-.testimonials-carousel::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    width: 100%;
 }
 
 .testimonial-card {
-    flex: 0 0 350px; /* Fixed width for cards */
+    flex: 0 0 350px;
     scroll-snap-align: start;
-    background-color: rgba(0, 128, 128, 0.7); /* Teal color with opacity */
+    background-color: rgba(0, 128, 128, 0.7);
     border-radius: 12px;
     padding: 30px;
     color: #fff;
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: scrollLeft 30s linear infinite;
+    display: flex;
+    flex-direction: column;
+    min-height: 250px; /* Ensure consistent height */
 }
 
-.testimonial-card:hover {
-    background-color: rgba(0, 128, 128, 0.9); /* Slightly darker on hover */
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Remove scrollbar styles since we're using animation */
+.testimonials-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.testimonials-carousel::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+.testimonials-carousel::-webkit-scrollbar-track {
+    display: none;
 }
 
 .testimonial-text {
@@ -590,8 +602,9 @@ header {
     font-size: 1.2em;
     line-height: 1.6;
     margin-bottom: 20px;
-    white-space: normal; /* Ensure text wraps within the card */
-    word-break: break-word; /* Ensure long words break and wrap */
+    white-space: normal;
+    word-break: break-word;
+    flex-grow: 1; /* Allow text to take up available space */
 }
 
 .testimonial-author {
@@ -599,6 +612,9 @@ header {
     font-size: 1em;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.9);
+    margin-top: auto; /* Push to bottom */
+    padding-top: 15px; /* Add some space between text and author */
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Optional: add a subtle separator */
 }
 
 .testimonial-author strong {
@@ -961,125 +977,6 @@ header {
     50% { transform: scale(1.2); opacity: 1; }
 }
 
-/* Floating Chat Widget Styles */
-.floating-chat {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 350px;
-    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    z-index: 9999;
-    transition: all 0.3s ease-in-out;
-}
-
-.floating-chat.hidden {
-    display: none;
-}
-
-.floating-chat.minimized {
-    width: 250px;
-    height: 70px;
-    bottom: 20px;
-    right: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.floating-chat-header {
-    background-color: #d04a02; /* Kartika Orange */
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    cursor: pointer; /* To maximize on click */
-    user-select: none;
-}
-
-.floating-chat.minimized .floating-chat-header {
-    border-radius: 15px;
-}
-
-.floating-chat-header img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-    border: 2px solid #fff;
-}
-
-.floating-chat-header-text h4 {
-    margin: 0;
-    color: #fff;
-    font-family: 'Gelasio', serif;
-    font-style: italic;
-    font-size: 1.2em;
-}
-
-.floating-chat-header-text p {
-    margin: 0;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9em;
-    font-family: 'Josefin Sans', sans-serif;
-}
-
-.floating-chat-input {
-    display: flex;
-    padding: 15px;
-}
-
-.floating-chat.minimized .floating-chat-input {
-    display: none;
-}
-
-#floatingInput {
-    flex-grow: 1;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    padding: 10px 15px;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 1em;
-    outline: none;
-}
-
-#floatingInput::placeholder {
-    color: rgba(0, 0, 0, 0.5);
-}
-
-.floating-chat-input button {
-    background-color: #d04a02; /* Kartika Orange */
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 1.2em;
-    margin-left: 10px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.floating-chat-input button:hover {
-    background-color: #bb3f00; /* Darker orange on hover */
-}
-
-.minimize-btn {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 1.5em;
-    margin-left: auto;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.floating-chat.minimized .minimize-btn {
-    transform: rotate(180deg);
-}
-
 /* Footer Styles */
 footer {
     background-color: #333; /* Dark background */
@@ -1112,7 +1009,7 @@ footer .container {
 .section-title {
     color: #fff;
     font-family: 'Gelasio', serif;
-    font-style: italic;
+    font-style: normal;
     font-size: 3.5em;
     margin-bottom: 30px;
     text-align: center;
@@ -1147,4 +1044,131 @@ footer .container {
     .chat-main {
         width: 100%;
     }
+}
+
+.join-us-section {
+    width: 100%;
+    position: relative;
+    background-color: #f07e3c;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.join-us-content-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.join-us-image-wrapper {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.join-us-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+.join-us-text {
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-family: 'Josefin Sans', sans-serif;
+    font-style: normal;
+    font-size: 3.5em;
+    text-align: center;
+    z-index: 2;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.join-us-text:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 768px) {
+    .join-us-text {
+        font-size: 2.5em;
+    }
+    
+    .join-us-content-container {
+        padding: 0;
+    }
+    
+    .join-us-section {
+        padding: 0;
+    }
+}
+
+/* Add specific styling for testimonials heading */
+#testimonials .about-us-content {
+    flex: 1;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#testimonials .about-us-content h1 {
+    font-family: 'Gelasio', serif;
+    font-style: normal;
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+}
+
+#testimonials .about-us-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-gradient-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* To contain the absolute positioned pseudo-elements */
+}
+
+.carousel-gradient-wrapper::before,
+.carousel-gradient-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 150px; /* Adjust as needed */
+    height: 100%;
+    z-index: 3; /* Ensure gradients are on top of carousel content */
+    pointer-events: none; /* Allows interaction with elements beneath the gradient */
+}
+
+.carousel-gradient-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, #f07e3c 0%, rgba(240, 126, 60, 0) 100%);
+}
+
+.carousel-gradient-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, #f07e3c 0%, rgba(240, 126, 60, 0) 100%);
 }

@@ -1,4 +1,0 @@
-# Rio Anggara Portfolio Access Tracker
-# Format: Timestamp | Attempt | Success
-# Created: 2024-03-20
-# ----------------------------------------
