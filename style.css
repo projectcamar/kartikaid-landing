@@ -1,0 +1,1150 @@
+/* Import Gelasio font with italic variant */
+@import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
+html,
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrollbar */
+}
+
+/* Universal Box Sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* General Body Styles */
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    position: relative; /* Add position relative */
+    width: 100%; /* Ensure body takes full width */
+}
+
+/* Prevent images and other replaced elements from overflowing */
+img,
+video,
+svg,
+canvas,
+iframe,
+embed,
+object {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Ensures they don't leave extra space below if they are inline */
+}
+
+/* Container for consistent spacing */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%; /* Ensure container takes full width */
+    position: relative; /* Add position relative */
+}
+
+/* Header Styles */
+header {
+    background-color: #f07e3c; /* Orange background from image */
+    ; /* Dark brown from the image */
+    padding: 10px 0;
+    position: relative;
+    z-index: 1000;
+    width: 100%; /* Change from 100vw to 100% */
+    left: 0;
+    right: 0;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+}
+
+.logo img {
+    height: 60px; /* Increased by 50% from 40px */
+    margin-right: 0; /* Remove right margin since text will be below */
+}
+
+.logo p {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.2em;
+    margin: 5px 0 0 0;
+    color: #fff;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 600;
+    margin-left: 15px;
+    padding: 8px 20px;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-links .btn {
+    background-color: transparent;
+    color: #fff;
+    padding: 8px 20px;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.nav-links .btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Hero Section Styles */
+.hero {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically if space allows */
+    padding: 50px 0;
+    background-color: #f07e3c; /* Orange background from image */
+    color: #fff;
+    position: relative;
+    width: 100%; /* Change from 100vw to 100% */
+    left: 0;
+    right: 0;
+}
+
+.hero-content {
+    flex: none; /* Do not grow/shrink */
+    text-align: center;
+    padding-right: 0; /* Remove existing padding-right */
+    margin-bottom: 30px; /* Add space between text and image */
+}
+
+.hero-content h1 {
+    font-family: 'Gelasio', serif;
+    font-style: italic;
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.2em;
+    margin-top: 0;
+}
+
+.hero-image {
+    flex: none; /* Do not grow/shrink */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Align image to the bottom */
+    position: relative;
+    height: auto; /* Allow height to adjust based on content */
+    width: 100%; /* Ensure image container takes full width */
+}
+
+.hero-image img {
+    width: 100%; /* Make image span full width of its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    object-fit: cover; /* Ensure the image covers the entire area */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-links a {
+        margin: 5px 10px;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content {
+        padding-right: 0;
+        margin-bottom: 20px; /* Adjust margin for smaller screens */
+    }
+
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+
+    .hero-content p {
+        font-size: 1em;
+    }
+
+    .hero-image {
+        height: auto;
+    }
+}
+
+.hero-content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* About Us Section Styles */
+.about-us {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+    background-color: #f07e3c; /* Orange background from image */
+    color: #fff;
+    position: relative;
+    width: 100%; /* Change from 100vw to 100% */
+    left: 0;
+    right: 0;
+}
+
+.about-us-content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row; /* Default to row for larger screens */
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px; /* Space between text and image */
+}
+
+.about-us-content {
+    flex: 1;
+    text-align: left;
+}
+
+.about-us-content h1 {
+    font-family: 'Gelasio', serif;
+    font-style: italic;
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.about-us-content p {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.2em;
+    margin-top: 0;
+    line-height: 1.6;
+}
+
+.about-us-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-us-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px; /* Optional: adds a slight rounded corner to the image */
+}
+
+/* Responsive adjustments for About Us section */
+@media (max-width: 768px) {
+    .about-us-content-container {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        text-align: center;
+    }
+
+    .about-us-content {
+        padding-right: 0;
+        margin-bottom: 30px; /* Space between text and image when stacked */
+    }
+
+    .about-us-content h1 {
+        font-size: 2.5em;
+    }
+
+    .about-us-content p {
+        font-size: 1em;
+    }
+}
+
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.program-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 25px;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.program-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.program-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.program-icon i {
+    font-size: 24px;
+    color: #fff;
+}
+
+.program-item h3 {
+    color: #fff;
+    font-family: 'Gelasio', serif;
+    font-style: italic;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.program-item .subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.program-item p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .programs-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .program-item {
+        padding: 20px;
+    }
+    
+    .program-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .program-icon i {
+        font-size: 20px;
+    }
+    
+    .program-item h3 {
+        font-size: 1.5rem;
+    }
+    
+    .program-item .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .program-item p {
+        font-size: 1rem;
+    }
+}
+
+.team-nav {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    gap: 20px;
+}
+
+.team-btn {
+    background-color: transparent;
+    color: #fff;
+    padding: 10px 25px;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 40px; /* Add space for the absolutely positioned logo */
+}
+
+.team-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.team-btn.active {
+    background-color: #f8f8f8;
+    color: #d04a02;
+    border-color: #f8f8f8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #fff; /* White background for the circular area */
+    border: 2px solid #fff; /* White border for inactive state */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    right: -14px; /* Half of width to be outside the button visually */
+    top: 50%;
+    transform: translateY(-50%);
+    object-fit: contain; /* Scale the image to fit inside the <img> element */
+    padding: 4px; /* Add padding inside the circular image for the logo */
+    transition: border-color 0.3s ease, filter 0.3s ease;
+}
+
+.team-btn.active .btn-logo {
+    border-color: #d04a02; /* Orange border for the active logo circle */
+    filter: brightness(0.6) sepia(1) saturate(10) hue-rotate(-20deg); /* Filter to make the logo orange */
+}
+
+.team-gallery-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.team-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding-top: 20px;
+    display: none; /* Hidden by default */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.team-gallery.active {
+    display: grid; /* Display when active */
+}
+
+.team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.team-member img {
+    width: 100%; /* Make image fill the container */
+    max-width: 180px; /* Adjust max-width as needed */
+    height: auto;
+    border-radius: 8px; /* Slightly rounded corners for images */
+    margin-bottom: 15px;
+}
+
+.member-name {
+    font-family: 'Gelasio', serif;
+    font-style: italic;
+    font-size: 1.4em;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.member-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments for Team section */
+@media (max-width: 992px) {
+    .team-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-nav {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .team-btn {
+        padding: 8px 15px;
+        font-size: 1em;
+        padding-right: 35px; /* Adjust for smaller screens */
+    }
+
+    .btn-logo {
+        width: 24px;
+        height: 24px;
+        right: -12px;
+        border-width: 1px; /* Thinner border on mobile */
+        padding: 3px; /* Adjust padding for smaller logo */
+    }
+
+    .team-gallery {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .team-member img {
+        max-width: 150px;
+    }
+
+    .member-name {
+        font-size: 1.2em;
+    }
+
+    .member-title {
+        font-size: 0.8em;
+    }
+}
+
+.testimonials-carousel {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 30px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+    flex-wrap: nowrap;
+}
+
+.testimonials-carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.testimonials-carousel::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.testimonials-carousel::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.testimonial-card {
+    flex: 0 0 350px; /* Fixed width for cards */
+    scroll-snap-align: start;
+    background-color: rgba(0, 128, 128, 0.7); /* Teal color with opacity */
+    border-radius: 12px;
+    padding: 30px;
+    color: #fff;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-card:hover {
+    background-color: rgba(0, 128, 128, 0.9); /* Slightly darker on hover */
+}
+
+.testimonial-text {
+    font-family: 'Gelasio', serif;
+    font-style: italic;
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    white-space: normal; /* Ensure text wraps within the card */
+    word-break: break-word; /* Ensure long words break and wrap */
+}
+
+.testimonial-author {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.testimonial-author strong {
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Responsive adjustments for Testimonials */
+@media (max-width: 768px) {
+    .testimonials-carousel {
+        gap: 20px;
+    }
+
+    .testimonial-card {
+        flex: 0 0 90%; /* Adjust width for smaller screens */
+        padding: 25px;
+    }
+
+    .testimonial-text {
+        font-size: 1.1em;
+    }
+
+    .testimonial-author {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-card {
+        flex: 0 0 100%; /* Full width on very small screens */
+    }
+}
+
+/* Chat Section Styles */
+.chat-section {
+    background-color: #f07e3c; /* Orange background from image */
+    padding: 50px 0;
+    color: #fff;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-title {
+    font-family: 'Gelasio', serif;
+    font-style: italic;
+    font-size: 3.5em;
+    margin-bottom: 30px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.chat-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    backdrop-filter: blur(5px); /* Optional: subtle blur effect */
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.chat-main-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+/* Quick Buttons (Question Box) Styles */
+.quick-buttons {
+    flex: 0 0 300px; /* Fixed width for the question box */
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.quick-buttons.minimized {
+    flex: 0 0 60px;
+    overflow: hidden;
+}
+
+.context-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.context-header span {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.minimize-question-box {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.quick-buttons.minimized .minimize-question-box {
+    transform: rotate(180deg);
+}
+
+.questions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 5px; /* For scrollbar */
+}
+
+.quick-buttons.minimized .questions-container {
+    display: none;
+}
+
+.quick-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px 15px;
+    text-align: left;
+    color: #fff;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quick-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.question-category {
+    font-size: 0.8em;
+    opacity: 0.8;
+    font-weight: 400;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+/* Chat Main Styles */
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.05); /* Slightly darker background for chat area */
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.bot-profile {
+    display: flex;
+    align-items: center;
+}
+
+.bot-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid #fff;
+}
+
+.bot-info h4 {
+    margin: 0;
+    font-family: 'Gelasio', serif;
+    font-style: italic;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.status {
+    font-size: 0.8em;
+    color: #aaffaa; /* Green for online status */
+}
+
+.chat-actions .clear-chat {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    color: #fff;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.chat-actions .clear-chat:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+#chatMessages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.user-message {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 18px 18px 2px 18px;
+    max-width: 75%;
+    margin-left: auto; /* Push user message to the right */
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.bot-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50px; /* Fixed width for avatar area */
+    flex-shrink: 0;
+}
+
+.bot-profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    object-fit: cover;
+}
+
+.bot-message {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 18px 18px 18px 2px;
+    max-width: 75%;
+    text-align: left;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.message-timestamp {
+    font-size: 0.75em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 5px;
+    align-self: flex-end;
+}
+
+.chat-input-container {
+    padding: 15px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#userInput {
+    flex-grow: 1;
+    padding: 12px 20px;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1em;
+    outline: none;
+}
+
+#userInput::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#sendButton {
+    background-color: #d04a02; /* Kartika orange */
+    border: none;
+    padding: 12px 20px;
+    color: #fff;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#sendButton:hover {
+    background-color: #bb3f00; /* Darker orange on hover */
+}
+
+.disclaimer {
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.typing-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.typing-indicator span {
+    height: 8px;
+    width: 8px;
+    margin: 0 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: pulse 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) {
+    animation-delay: -0.3s;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: -0.15s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0s;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(0.8); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* Floating Chat Widget Styles */
+.floating-chat {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 9999;
+    transition: all 0.3s ease-in-out;
+}
+
+.floating-chat.hidden {
+    display: none;
+}
+
+.floating-chat.minimized {
+    width: 250px;
+    height: 70px;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.floating-chat-header {
+    background-color: #d04a02; /* Kartika Orange */
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer; /* To maximize on click */
+    user-select: none;
+}
+
+.floating-chat.minimized .floating-chat-header {
+    border-radius: 15px;
+}
+
+.floating-chat-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid #fff;
+}
+
+.floating-chat-header-text h4 {
+    margin: 0;
+    color: #fff;
+    font-family: 'Gelasio', serif;
+    font-style: italic;
+    font-size: 1.2em;
+}
+
+.floating-chat-header-text p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9em;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.floating-chat-input {
+    display: flex;
+    padding: 15px;
+}
+
+.floating-chat.minimized .floating-chat-input {
+    display: none;
+}
+
+#floatingInput {
+    flex-grow: 1;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1em;
+    outline: none;
+}
+
+#floatingInput::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.floating-chat-input button {
+    background-color: #d04a02; /* Kartika Orange */
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1.2em;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.floating-chat-input button:hover {
+    background-color: #bb3f00; /* Darker orange on hover */
+}
+
+.minimize-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5em;
+    margin-left: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.floating-chat.minimized .minimize-btn {
+    transform: rotate(180deg);
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333; /* Dark background */
+    color: #fff;
+    text-align: center;
+    padding: 30px 0;
+    font-family: 'Josefin Sans', sans-serif;
+    width: 100vw;
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 1.5em;
+    margin: 0 10px;
+    transition: color 0.2s ease;
+}
+
+.social-links a:hover {
+    color: #f07e3c; /* Kartika orange on hover */
+}
+
+/* General Section Title (if used outside about-us) */
+.section-title {
+    color: #fff;
+    font-family: 'Gelasio', serif;
+    font-style: italic;
+    font-size: 3.5em;
+    margin-bottom: 30px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Re-adjustments for smaller screens */
+@media (max-width: 768px) {
+    .chat-container {
+        flex-direction: column;
+    }
+
+    .quick-buttons {
+        flex: none; /* Remove fixed flex basis */
+        width: 100%; /* Take full width on small screens */
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 0;
+    }
+
+    .quick-buttons.minimized {
+        width: 100%;
+        flex: none;
+        height: auto; /* Allow height to adjust */
+        padding: 20px;
+    }
+
+    .chat-main-wrapper {
+        flex-direction: column;
+    }
+
+    .chat-main {
+        width: 100%;
+    }
+}

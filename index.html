@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rio Anggara - Portfolio</title>
+    <title>Kartika.id</title>
     
     <!-- Basic Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -18,1957 +18,319 @@
     <meta name="theme-color" content="#ffffff">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gelasio:wght@600&family=Josefin+Sans:wght@600&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary-color: #D04A02;
-            --secondary-color: #FFB600;
-            --accent-color: #DB536A;
-            --dark-color: #000000;
-            --text-color: #333;
-            --bg-light: #fff;
-            --spacing: 2rem;
-            --pwc-orange: #D04A02;
-            --pwc-yellow: #FFB600;
-            --pwc-rose: #DB536A;
-            --pwc-tangerine: #EB8C00;
-            --pwc-grey-15: #DEDEDE;
-            --pwc-grey-55: #7D7D7D;
-            --pwc-grey-90: #2D2D2D;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body:not(a):not(.experience-card):not(input):not(textarea) {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Header Styles */
-        header {
-            padding: 2rem 0;
-            position: relative;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'ITC Charter Black', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--pwc-grey-90);
-            position: relative;
-            padding-left: 15px;
-        }
-
-        .logo::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 24px;
-            background: var(--pwc-orange);
-            border-radius: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--pwc-grey-55);
-            font-size: 0.95rem;
-            position: relative;
-            transition: color 0.3s;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--pwc-orange);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--pwc-grey-90);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            padding: 1.5rem 0;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            right: -5%;
-            top: -5%;
-            width: 200px;
-            height: 200px;
-            background: var(--pwc-yellow);
-            opacity: 0.1;
-            border-radius: 0 0 0 100%;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            left: -2%;
-            bottom: -2%;
-            width: 150px;
-            height: 150px;
-            background: var(--pwc-rose);
-            opacity: 0.1;
-            border-radius: 0 100% 0 0;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-content h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--pwc-grey-90);
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .hero-content h1::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 15%;
-            height: 70%;
-            width: 6px;
-            background: var(--pwc-orange);
-            border-radius: 3px;
-        }
-
-        .hero-content p {
-            color: var(--pwc-grey-55);
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: var(--pwc-orange);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            transition: 0.5s;
-        }
-
-        .btn:hover {
-            background-color: var(--pwc-tangerine);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(208, 74, 2, 0.2);
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .hero-image {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-image img {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            border-radius: 4px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            position: relative;
-        }
-
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 100%;
-            height: 100%;
-            background: var(--pwc-orange);
-            opacity: 0.1;
-            border-radius: 4px;
-            z-index: -1;
-        }
-
-        /* Add these styles for the overlapping squares */
-        .hero-image {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-image::after {
-            content: '';
-            position: absolute;
-            bottom: -40px;
-            right: -20px;
-            width: 120px;
-            height: 120px;
-            background: 
-                linear-gradient(45deg, var(--pwc-orange) 25%, transparent 25%) -20px 0,
-                linear-gradient(-45deg, var(--pwc-yellow) 25%, transparent 25%) 0 -20px,
-                linear-gradient(45deg, var(--pwc-rose) 25%, transparent 25%) -40px -20px;
-            background-size: 40px 40px;
-            opacity: 0.1;
-            z-index: -1;
-        }
-
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -30px;
-            width: 100px;
-            height: 100px;
-            background: 
-                linear-gradient(-45deg, var(--pwc-tangerine) 25%, transparent 25%) 0 0,
-                linear-gradient(45deg, var(--pwc-orange) 25%, transparent 25%) -20px -20px,
-                linear-gradient(-45deg, var(--pwc-yellow) 25%, transparent 25%) -40px 0;
-            background-size: 35px 35px;
-            opacity: 0.1;
-            z-index: -1;
-        }
-
-        /* Add additional decorative squares */
-        .hero-image .squares {
-            position: absolute;
-            top: 50%;
-            right: 80px;
-            width: 200px;
-            height: 200px;
-            z-index: -1;
-            transform: translateY(-50%);
-        }
-
-        /* Create multiple layered squares with different sizes */
-        .squares::before {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: var(--pwc-orange);
-            opacity: 0.2;
-            top: 0;
-            left: 0;
-        }
-
-        .squares::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: var(--pwc-yellow);
-            opacity: 0.2;
-            top: 15px;
-            left: 15px;
-        }
-
-        /* Add more squares with increasing sizes */
-        .squares .square-1 {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: var(--pwc-rose);
-            opacity: 0.2;
-            top: 30px;
-            left: 30px;
-        }
-
-        .squares .square-2 {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: var(--pwc-tangerine);
-            opacity: 0.2;
-            top: 45px;
-            left: 45px;
-        }
-
-        .squares .square-3 {
-            position: absolute;
-            width: 55px;
-            height: 55px;
-            background: var(--pwc-orange);
-            opacity: 0.15;
-            top: 60px;
-            left: 60px;
-        }
-
-        .squares .square-4 {
-            position: absolute;
-            width: 70px;
-            height: 70px;
-            background: var(--pwc-yellow);
-            opacity: 0.15;
-            top: 75px;
-            left: 75px;
-        }
-
-        .squares .square-5 {
-            position: absolute;
-            width: 85px;
-            height: 85px;
-            background: var(--pwc-rose);
-            opacity: 0.1;
-            top: 90px;
-            left: 90px;
-        }
-
-        .squares .square-6 {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: var(--pwc-tangerine);
-            opacity: 0.1;
-            top: 105px;
-            left: 105px;
-        }
-
-        /* Areas of Work */
-        .areas {
-            padding: 1.5rem 0;
-            background-color: var(--bg-light);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .areas::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(45deg, transparent 48%, var(--pwc-orange) 48%, var(--pwc-orange) 52%, transparent 52%),
-                linear-gradient(-45deg, transparent 48%, var(--pwc-yellow) 48%, var(--pwc-yellow) 52%, transparent 52%);
-            background-size: 100px 100px;
-            opacity: 0.05;
-            z-index: 1;
-        }
-
-        .areas .container {
-            position: relative;
-            z-index: 2;
-        }
-
-        .section-title {
-            position: relative;
-            display: inline-block;
-            color: var(--pwc-grey-90);
-            text-transform: uppercase;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 700;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--pwc-orange);
-        }
-
-        .experience-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .experience-item {
-            min-height: 300px;
-            position: relative;
-            padding: 2rem;
-            background: white;
-            border-radius: 4px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
-
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            right: 2rem;
-            top: 2rem;
-            width: 40px;
-            height: 2px;
-            background: var(--pwc-orange);
-        }
-
-        .experience-item h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Education & Accolades */
-        .education-accolades {
-            padding: 1.5rem 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .education-item, .accolade-item {
-            margin-bottom: 3rem;
-        }
-
-        .education-item h3, .accolade-item h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .subtitle {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-        }
-
-        /* Experience Section */
-        .experience {
-            padding: 1.5rem 0;
-            background-color: #f9f9f9;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .experience::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(90deg, transparent 47%, var(--pwc-rose) 47%, var(--pwc-rose) 53%, transparent 53%),
-                linear-gradient(0deg, transparent 47%, var(--pwc-orange) 47%, var(--pwc-orange) 53%, transparent 53%);
-            background-size: 60px 60px;
-            opacity: 0.04;
-            z-index: 1;
-        }
-
-        .experience .container {
-            position: relative;
-            z-index: 2;
-        }
-
-        .experience-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .experience-item {
-            min-height: 300px;
-            position: relative;
-            padding: 2rem;
-            background: white;
-            border-radius: 4px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-            margin-bottom: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
-
-        .experience-item::after {
-            content: '';
-            position: absolute;
-            right: 2rem;
-            top: 2rem;
-            width: 40px;
-            height: 2px;
-            background: var(--pwc-orange);
-        }
-
-        .experience-item h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        .social-links {
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            color: white;
-            margin: 0 1rem;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        @media (max-width: 768px) {
-            .hero, .experience-grid, .education-accolades, .experience-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .experience-item, .experience-item {
-                min-height: 250px;
-            }
-        }
-
-        /* Color block accents */
-        .experience-grid, .experience-grid {
-            position: relative;
-        }
-
-        .experience-grid::after {
-            content: '';
-            position: absolute;
-            right: -20px;
-            bottom: -20px;
-            width: 100px;
-            height: 100px;
-            background: var(--pwc-yellow);
-            opacity: 0.1;
-            z-index: 0;
-        }
-
-        .experience-grid::before {
-            content: '';
-            position: absolute;
-            left: -20px;
-            top: -20px;
-            width: 120px;
-            height: 120px;
-            background: var(--pwc-rose);
-            opacity: 0.1;
-            z-index: 0;
-        }
-
-        /* Chat Section Styles */
-        .chat-section {
-            padding: 1rem 0; /* Reduced from 1.5rem */
-            background: white;
-            border-radius: 8px;
-            color: var(--pwc-grey-90);
-        }
-
-        .chat-title {
-            font-size: 2rem;
-            font-weight: 500;
-            text-align: center;
-            margin-bottom: 1rem; /* Reduced from 1.5rem */
-            color: var(--pwc-grey-90);
-        }
-
-        .chat-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        /* Update chat-main-wrapper to use position relative */
-        .chat-main-wrapper {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 1.5rem;
-            margin: 1rem 0; /* Reduced from 2rem */
-            position: relative; /* Add this */
-        }
-
-        /* Update chat-main styles to use position absolute */
-        .chat-main {
-            position: absolute; /* Add this */
-            right: 0; /* Add this */
-            width: calc(100% - 295px); /* Updated from 335px */
-            background: white;
-            padding: 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            height: 600px;
-            border: 1px solid var(--pwc-grey-15);
-            transition: width 0.3s ease; /* Add transition for width only */
-        }
-
-        /* Add style for expanded chat when question box is minimized */
-        .quick-buttons.minimized + .chat-main {
-            width: calc(100% - 65px); /* 50px minimized width + 15px gap */
-        }
-
-        /* Update quick-buttons (left section) styles to match chat-main (right section) */
-        .quick-buttons {
-            background: white;
-            padding: 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-            height: 600px;
-            border: 1px solid var(--pwc-grey-15);
-            transition: width 0.3s ease, min-width 0.3s ease;
-            position: relative;
-            min-width: 280px;
-            width: 280px;
-            overflow: visible; /* Changed from overflow-y: auto */
-        }
-
-        .quick-buttons.minimized {
-            min-width: 50px;
-            width: 50px;
-            background: transparent;
-            border: none;
-            box-shadow: none !important; /* Force remove shadow */
-            transform: none !important; /* Prevent any transformations */
-        }
-
-        /* Remove context header styles when minimized */
-        .quick-buttons.minimized .context-header {
-            background: transparent;
-            border: none;
-        }
-
-        /* Remove hover effects completely when minimized */
-        .quick-buttons.minimized:hover {
-            box-shadow: none !important;
-            transform: none !important;
-            border: none;
-        }
-
-        /* Keep minimize button visible but remove container visuals */
-        .quick-buttons.minimized .minimize-question-box {
-            right: 0;
-            border-radius: 4px;
-            width: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-
-        .quick-buttons.minimized .questions-container,
-        .quick-buttons.minimized .context-header span {
-            display: none;
-        }
-
-        /* Update context-header styles */
-        .context-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem;
-            border-bottom: 1px solid var(--pwc-grey-15);
-            margin-bottom: 0;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            background: white;
-            height: 72px;
-            position: relative;
-        }
-
-        /* Update minimize-question-box styles */
-        .minimize-question-box {
-            position: absolute;
-            right: -16px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--pwc-orange);
-            border: none;
-            color: white;
-            cursor: pointer;
-            padding: 8px 4px;
-            border-radius: 0 4px 4px 0;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 16px;
-            height: 40px;
-            z-index: 1000;
-            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
-        }
-
-        /* Add specific styles for minimize button when box is minimized */
-        .quick-buttons.minimized .minimize-question-box {
-            right: 0; /* Adjust position */
-            border-radius: 4px; /* Make all corners rounded */
-            width: 20px; /* Slightly wider */
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Adjust shadow */
-        }
-
-        /* Update hover effect */
-        .minimize-question-box:hover {
-            background: var(--pwc-tangerine);
-            transform: translateY(-50%) scale(1.05);
-        }
-
-        /* Update icon rotation */
-        .minimize-question-box i {
-            transition: transform 0.3s ease;
-            font-size: 0.8rem; /* Slightly smaller icon */
-        }
-
-        /* Update minimized state positioning */
-        .quick-buttons.minimized .minimize-question-box {
-            right: -12px; /* Keep the same position when minimized */
-        }
-
-        .quick-buttons.minimized .minimize-question-box i {
-            transform: rotate(180deg);
-        }
-
-        /* Update quick-btn styles to remove arrow and add a cleaner hover effect */
-        .quick-btn {
-            background: white;
-            border: 1px solid var(--pwc-grey-15);
-            padding: 0.85rem 1.2rem;
-            border-radius: 8px;
-            color: var(--pwc-grey-90);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            width: 100%;
-            text-align: left;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        /* Remove the ::before pseudo-element that was creating the arrow */
-        .quick-btn::before {
-            display: none;
-        }
-
-        /* Update hover effects */
-        .quick-btn:hover {
-            background: var(--pwc-orange);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(208, 74, 2, 0.15);
-            padding-left: 1.5rem; /* Slightly increase left padding on hover */
-        }
-
-        /* Update question category badge positioning */
-        .question-category {
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 12px;
-            background: var(--pwc-grey-15);
-            color: var(--pwc-grey-55);
-            margin-left: 8px;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Update chat header styles */
-        .chat-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem;
-            border-bottom: 1px solid var(--pwc-grey-15);
-            height: 72px; /* Match question box header height */
-        }
-
-        /* Update chat messages container */
-        #chatMessages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-            margin-bottom: 0;
-            word-break: break-word;
-        }
-
-        /* Update chat input container */
-        .chat-input-container {
-            padding: 1rem;
-            border-top: 1px solid var(--pwc-grey-15);
-            background: white; /* Ensure white background */
-            border-radius: 0 0 8px 8px; /* Round bottom corners */
-        }
-
-        .input-group {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .input-group input {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--pwc-grey-15);
-            border-radius: 6px;
-            font-size: 0.9rem;
-        }
-
-        #sendButton {
-            padding: 0.75rem;
-            border-radius: 6px;
-        }
-
-        .disclaimer {
-            font-size: 0.75rem;
-            color: var(--pwc-grey-55);
-            text-align: center;
-            margin-top: 0.25rem;
-        }
-
-        .message {
-            margin: 0.5rem 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-        }
-
-        .bot-message, .user-message {
-            padding: 0.75rem 1rem;
-            border-radius: 6px;
-            max-width: 80%;
-            background: #f5f5f5;
-        }
-
-        /* Style user messages */
-        .user-message {
-            margin-left: auto;
-            background: var(--pwc-orange);
-            color: white;
-        }
-
-        /* Style bot messages */
-        .bot-profile-container {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .bot-profile-img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .bot-message {
-            background: #f5f5f5;
-            color: var(--pwc-grey-90);
-        }
-
-        /* Fix image display in messages */
-        .bot-message img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-            margin: 0.5rem 0;
-        }
-
-        /* Update chat container to prevent image overflow */
-        #chatMessages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 0.5rem;
-            margin-bottom: 0.5rem;
-            word-break: break-word;
-        }
-
-        /* Ensure proper message alignment */
-        .message.user {
-            justify-content: flex-end;
-        }
-
-        .message.bot {
-            justify-content: flex-start;
-        }
-
-        .quick-buttons::-webkit-scrollbar,
-        #chatMessages::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .quick-buttons::-webkit-scrollbar-track {
-            background: var(--pwc-grey-15);
-            border-radius: 2px;
-        }
-
-        .quick-buttons::-webkit-scrollbar-thumb {
-            background: var(--pwc-grey-55);
-            border-radius: 2px;
-            transition: background 0.3s ease;
-        }
-
-        .quick-buttons::-webkit-scrollbar-thumb:hover {
-            background: var(--pwc-orange);
-        }
-
-        /* Add hover effect for entire container */
-        .quick-buttons:hover {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transform: translateY(-2px);
-            transition: all 0.3s ease;
-        }
-
-        /* Add these new styles for the send button */
-        #sendButton {
-            background: var(--pwc-orange);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        #sendButton:hover {
-            background: var(--pwc-tangerine);
-            transform: translateY(-2px);
-        }
-
-        #sendButton i {
-            font-size: 1.2rem;
-        }
-
-        /* Add smooth scroll behavior */
-        .chat-container {
-            scroll-behavior: smooth;
-        }
-
-        /* For short messages, make them fit content */
-        .message:empty,
-        .message:only-child {
-            width: fit-content;
-            min-width: 100px;
-        }
-
-        /* Animation for message appearance */
-        @keyframes messageAppear {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .message {
-            animation: messageAppear 0.3s ease-out;
-        }
-
-        @keyframes changePlaceholder {
-            0%, 20% { content: "Ask something here..."; }
-            20%, 40% { content: "What projects has Rio worked on?"; }
-            40%, 60% { content: "Tell me about Rio's achievements"; }
-            60%, 80% { content: "What is Rio's experience in product development?"; }
-            80%, 100% { content: "What competitions has Rio won?"; }
-        }
-
-        .input-group input::placeholder {
-            color: var(--pwc-grey-55);
-            opacity: 0;
-            animation: fadeInOut 20s infinite;
-        }
-
-        .input-group input {
-            position: relative;
-        }
-
-        .input-group input::before {
-            content: "Hi, what's your question?";
-            position: absolute;
-            color: var(--pwc-grey-55);
-            animation: changePlaceholder 20s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes fadeInOut {
-            0%, 15% { opacity: 1; }
-            17%, 18% { opacity: 0; }
-            20%, 35% { opacity: 1; }
-            37%, 38% { opacity: 0; }
-            40%, 55% { opacity: 1; }
-            57%, 58% { opacity: 0; }
-            60%, 75% { opacity: 1; }
-            77%, 78% { opacity: 0; }
-            80%, 95% { opacity: 1; }
-            97%, 100% { opacity: 0; }
-        }
-
-        /* Explicitly set placeholder styles */
-        .input-group input::placeholder {
-            color: var(--pwc-grey-55) !important;
-            opacity: 1 !important;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* For Firefox */
-        .input-group input::-moz-placeholder {
-            color: var(--pwc-grey-55) !important;
-            opacity: 1 !important;
-        }
-
-        /* For Edge */
-        .input-group input:-ms-input-placeholder {
-            color: var(--pwc-grey-55) !important;
-            opacity: 1 !important;
-        }
-
-        /* For IE */
-        .input-group input::-ms-input-placeholder {
-            color: var(--pwc-grey-55) !important;
-            opacity: 1 !important;
-        }
-
-        /* Allow text selection in input fields */
-        input, textarea {
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Update link styles in chat bubbles */
-        .bot-message a {
-            color: inherit;  /* Use the same color as the message text */
-            text-decoration: underline;
-            font-weight: bold;
-            transition: opacity 0.3s ease;
-        }
-
-        .bot-message a:hover {
-            opacity: 0.8;
-        }
-
-        .experience-card {
-            padding: 2rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            border: 2px solid transparent;
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
-        }
-
-        .experience-card:hover {
-            border-color: var(--pwc-yellow);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        }
-
-        .experience-card h3 {
-            font-family: 'ITC Charter Black', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--pwc-grey-90);
-        }
-
-        .experience-card .company {
-            color: var(--pwc-grey-55);
-            margin-bottom: 1rem;
-        }
-
-        .experience-card p {
-            color: var(--pwc-grey-55);
-            line-height: 1.6;
-        }
-
-        /* Allow text selection for other interactive elements */
-        a, input, textarea, .hover-link {
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
-        }
-
-        .work-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .work-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 4px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-            position: relative;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .work-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.12),
-                        0 0 0 1px var(--pwc-yellow),
-                        0 0 20px rgba(255, 182, 0, 0.2);
-            border-color: var(--pwc-yellow);
-        }
-
-        .work-item h3 {
-            font-family: 'ITC Charter Black', serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            color: var(--pwc-grey-90);
-            line-height: 1.3;
-        }
-
-        .work-item p {
-            color: var(--pwc-grey-55);
-            margin-bottom: 0.8rem;
-            font-size: 0.95rem;
-        }
-
-        @media (max-width: 768px) {
-            .work-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Add these styles if not already present */
-        .hover-link {
-            text-decoration: none;
-            color: inherit;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .hover-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--pwc-orange);
-            transition: width 0.3s ease;
-        }
-
-        .hover-link:hover::after {
-            width: 100%;
-        }
-
-        /* Allow text selection for links */
-        .hover-link {
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
-        }
-
-        /* Add thinking status style */
-        .thinking-status {
-            font-size: 12px;
-            color: #666;
-            margin-top: 4px;
-            text-align: center;
-        }
-
-        /* Add styles for the context header */
-        .context-header {
-            font-size: 0.9rem;
-            color: var(--pwc-grey-55);
-            padding: 0.5rem 1rem;
-            border-bottom: 1px solid var(--pwc-grey-15);
-            margin-bottom: 0.75rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Update quick buttons container */
-        .quick-buttons {
-            background: white;
-            padding: 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-            height: 600px;
-            border: 1px solid var(--pwc-grey-15);
-            transition: width 0.3s ease, min-width 0.3s ease;
-            position: relative;
-            min-width: 280px;
-            width: 280px;
-            overflow: visible; /* Changed from overflow-y: auto */
-        }
-
-        /* Add separate scroll container for questions */
-        .questions-container {
-            padding: 1rem;
-            height: calc(100% - 72px); /* Subtract header height */
-            overflow-y: auto;
-        }
-
-        .message-timestamp {
-            font-size: 0.7rem;
-            color: var(--pwc-grey-55);
-            margin-top: 4px;
-        }
-
-        .user-message .message-timestamp {
-            text-align: right;
-        }
-
-        .chat-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem;
-            border-bottom: 1px solid var(--pwc-grey-15);
-        }
-
-        .bot-profile {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .bot-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .bot-info h4 {
-            font-size: 1rem;
-            margin: 0;
-        }
-
-        .status {
-            font-size: 0.8rem;
-            color: #2ecc71;
-        }
-
-        .chat-actions button {
-            background: none;
-            border: none;
-            color: var(--pwc-grey-55);
-            cursor: pointer;
-            padding: 0.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .chat-actions button:hover {
-            color: var(--pwc-orange);
-        }
-
-        .typing-indicator {
-            display: flex;
-            gap: 4px;
-            padding: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .typing-indicator span {
-            width: 8px;
-            height: 8px;
-            background: var(--pwc-grey-55);
-            border-radius: 50%;
-            animation: typing 1s infinite ease-in-out;
-        }
-
-        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typing {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        /* Add message animations */
-        .message {
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Optional: Adjust the container max-height for larger screens */
-        @media (min-height: 900px) {
-            .quick-buttons,
-            .chat-main {
-                height: 700px; /* Even taller for large screens */
-            }
-        }
-
-        /* Add these new styles for the floating chat */
-        .floating-chat {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-            width: 320px;
-            transition: all 0.3s ease;
-            opacity: 1;
-            visibility: visible;
-            border: 1px solid var(--pwc-grey-15);
-            transform-origin: bottom right;
-        }
-
-        .floating-chat.hidden {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-        }
-
-        .floating-chat.minimized {
-            width: auto; /* Adjust width to content */
-            padding-right: 8px; /* Add some padding for comfort */
-        }
-
-        .floating-chat-header {
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--pwc-grey-15);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .floating-chat.minimized .floating-chat-header {
-            padding: 8px 12px; /* Smaller padding when minimized */
-            border-bottom: none; /* Remove border when minimized */
-        }
-
-        .floating-chat-header img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .floating-chat.minimized .floating-chat-header img {
-            width: 28px; /* Slightly smaller image when minimized */
-            height: 28px;
-        }
-
-        .floating-chat-header-text {
-            flex: 1;
-            transition: all 0.3s ease;
-        }
-
-        .floating-chat-header-text h4 {
-            font-size: 0.9rem;
-            margin: 0;
-            color: var(--pwc-grey-90);
-            transition: all 0.3s ease;
-        }
-
-        .floating-chat-header-text p {
-            font-size: 0.75rem;
-            margin: 0;
-            color: var(--pwc-grey-55);
-            transition: all 0.3s ease;
-        }
-
-        .floating-chat.minimized .floating-chat-header-text p {
-            display: none; /* Hide subtitle when minimized */
-        }
-
-        .floating-chat.minimized .floating-chat-header-text h4 {
-            font-size: 0.85rem; /* Slightly smaller text when minimized */
-        }
-
-        .minimize-btn {
-            background: none;
-            border: none;
-            color: var(--pwc-grey-55);
-            cursor: pointer;
-            padding: 4px;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .minimize-btn:hover {
-            color: var(--pwc-orange);
-        }
-
-        .minimize-btn i {
-            transition: transform 0.3s ease;
-        }
-
-        .minimized .minimize-btn i {
-            transform: rotate(180deg);
-        }
-
-        /* Hide input area when minimized */
-        .floating-chat.minimized .floating-chat-input {
-            display: none;
-        }
-
-        /* Add hover effect for minimized state */
-        .floating-chat.minimized:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 28px rgba(0,0,0,0.2);
-        }
-
-        /* Tooltip styles */
-        .chat-actions button {
-            position: relative;
-        }
-
-        .chat-actions button::before {
-            content: 'Clear chat';
-            position: absolute;
-            background: var(--pwc-orange);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(208, 74, 2, 0.2);
-        }
-
-        .chat-actions button::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 5px;
-            border-style: solid;
-            border-color: var(--pwc-orange) transparent transparent transparent;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .chat-actions button:hover::before,
-        .chat-actions button:hover::after {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Add these animation keyframes */
-        @keyframes scatterMessage {
-            0% {
-                transform: translateY(0) rotate(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(var(--rotation));
-                opacity: 0;
-            }
-        }
-
-        /* Add class for animating messages */
-        .message.clearing {
-            animation: scatterMessage 0.5s ease-in forwards;
-        }
-
-        /* Floating chat input styles */
-        .floating-chat-input {
-            padding: 12px;
-            border-top: 1px solid var(--pwc-grey-15);
-            display: flex;
-            gap: 8px;
-        }
-
-        .floating-chat-input input {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid var(--pwc-grey-15);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .floating-chat-input input:focus {
-            border-color: var(--pwc-orange);
-            box-shadow: 0 0 0 2px rgba(208, 74, 2, 0.1);
-        }
-
-        .floating-chat-input button {
-            background: var(--pwc-orange);
-            color: white;
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .floating-chat-input button:hover {
-            background: var(--pwc-tangerine);
-            transform: translateY(-2px);
-        }
-
-        .minimize-btn {
-            background: none;
-            border: none;
-            color: var(--pwc-grey-55);
-            cursor: pointer;
-            padding: 4px;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .minimize-btn:hover {
-            color: var(--pwc-orange);
-        }
-
-        .minimize-btn i {
-            transition: transform 0.3s ease;
-        }
-
-        .minimized .minimize-btn i {
-            transform: rotate(180deg);
-        }
-
-        /* Hide input area when minimized */
-        .floating-chat.minimized .floating-chat-input {
-            display: none;
-        }
-
-        /* Add hover effect for minimized state */
-        .floating-chat.minimized:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 28px rgba(0,0,0,0.2);
-        }
-
-        /* Hidden state */
-        .floating-chat.hidden {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-        }
-
-        /* Add these keyframes for the glow effect */
-        @keyframes glowPwC {
-            0% {
-                box-shadow: 0 0 5px rgba(208, 74, 2, 0.2),
-                            0 0 10px rgba(208, 74, 2, 0.1);
-            }
-            50% {
-                box-shadow: 0 0 10px rgba(208, 74, 2, 0.3),
-                            0 0 20px rgba(208, 74, 2, 0.2),
-                            0 0 30px rgba(208, 74, 2, 0.1);
-            }
-            100% {
-                box-shadow: 0 0 5px rgba(208, 74, 2, 0.2),
-                            0 0 10px rgba(208, 74, 2, 0.1);
-            }
-        }
-
-        /* Update input styles for both main chat and floating chat */
-        .input-group input,
-        .floating-chat-input input {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: 2px solid var(--pwc-grey-15);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            background: white;
-            position: relative;
-        }
-
-        /* Enhanced focus states with glow */
-        .input-group input:focus,
-        .floating-chat-input input:focus {
-            outline: none;
-            border-color: var(--pwc-orange);
-            animation: glowPwC 2s infinite;
-            background: white;
-        }
-
-        /* Add subtle glow on hover */
-        .input-group input:hover,
-        .floating-chat-input input:hover {
-            border-color: var(--pwc-tangerine);
-            box-shadow: 0 0 10px rgba(208, 74, 2, 0.1);
-        }
-
-        /* Make placeholder text fade in/out smoothly */
-        .input-group input::placeholder,
-        .floating-chat-input input::placeholder {
-            color: var(--pwc-grey-55);
-            transition: opacity 0.3s ease;
-        }
-
-        .input-group input:focus::placeholder,
-        .floating-chat-input input:focus::placeholder {
-            opacity: 0.5;
-        }
-
-        /* Add subtle inner shadow for depth */
-        .input-group input,
-        .floating-chat-input input {
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        /* Remove inner shadow on focus */
-        .input-group input:focus,
-        .floating-chat-input input:focus {
-            box-shadow: none;
-        }
-
-        /* Add transition for the send button */
-        #sendButton,
-        .floating-chat-input button {
-            background: var(--pwc-orange);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(208, 74, 2, 0.2);
-        }
-
-        #sendButton:hover,
-        .floating-chat-input button:hover {
-            background: var(--pwc-tangerine);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(208, 74, 2, 0.3);
-        }
-
-        #sendButton:active,
-        .floating-chat-input button:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(208, 74, 2, 0.2);
-        }
-
-        /* Add rotating glow keyframes */
-        @keyframes rotatingGlow {
-            0% {
-                box-shadow: 3px 0 15px rgba(208, 74, 2, 0.4),
-                            -3px 0 15px rgba(255, 182, 0, 0.4);
-            }
-            25% {
-                box-shadow: 0 3px 15px rgba(208, 74, 2, 0.4),
-                            0 -3px 15px rgba(255, 182, 0, 0.4);
-            }
-            50% {
-                box-shadow: -3px 0 15px rgba(208, 74, 2, 0.4),
-                            3px 0 15px rgba(255, 182, 0, 0.4);
-            }
-            75% {
-                box-shadow: 0 -3px 15px rgba(208, 74, 2, 0.4),
-                            0 3px 15px rgba(255, 182, 0, 0.4);
-            }
-            100% {
-                box-shadow: 3px 0 15px rgba(208, 74, 2, 0.4),
-                            -3px 0 15px rgba(255, 182, 0, 0.4);
-            }
-        }
-
-        /* Update input styles */
-        .input-group input,
-        .floating-chat-input input {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: 2px solid var(--pwc-grey-15);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            background: white;
-            position: relative;
-        }
-
-        /* Enhanced focus states with rotating glow */
-        .input-group input:focus,
-        .floating-chat-input input:focus {
-            outline: none;
-            border-color: var(--pwc-orange);
-            animation: rotatingGlow 4s linear infinite;
-            background: white;
-        }
-
-        /* Add subtle glow on hover */
-        .input-group input:hover,
-        .floating-chat-input input:hover {
-            border-color: var(--pwc-tangerine);
-            box-shadow: 0 0 15px rgba(255, 182, 0, 0.2);
-        }
-
-        /* Make placeholder text fade in/out smoothly */
-        .input-group input::placeholder,
-        .floating-chat-input input::placeholder {
-            color: var(--pwc-grey-55);
-            transition: opacity 0.3s ease;
-        }
-
-        .input-group input:focus::placeholder,
-        .floating-chat-input input:focus::placeholder {
-            opacity: 0.5;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <div class="container nav">
-            <div class="logo">RIO ANGGARA</div>
+            <div class="logo">
+                <img src="assets/Kartika-logo.png" alt="Kartika.id Logo">
+                <p>Kartini Teknik Berdaya</p>
+            </div>
             <div class="nav-links">
-                <a href="about-me.html">My Journey</a>
-                <a href="past-works.html">Portfolio</a>
-                <a href="contact.html">Let's Connect</a>
+                <a href="#">About Us</a>
+                <a href="#">Our Programs</a>
+                <a href="#">Our Team</a>
+                <a href="#" class="btn">Join Now</a>
             </div>
         </div>
     </header>
 
-    <section class="hero container">
-        <div class="hero-content">
-            <h1>Rio Anggara</h1>
-            <p>I am an International Business student at Universitas Padjadjaran with a focus on product development and business strategy. I combine academic excellence with practical experience in investment, banking, and technology sectors.</p>
-            <p>Based in Jakarta, Indonesia, I'm passionate about creating innovative solutions and driving business growth through strategic thinking and technology.</p>
-            <a href="#chat-section" class="btn">Get in touch & Ask Rio Anything</a>
+    <section class="hero">
+        <div class="container hero-content-container">
+            <div class="hero-content">
+                <h1>Empowering Future<br>Female Engineers</h1>
+                <p>From Eastern Indonesia to the Nation</p>
+            </div>
         </div>
         <div class="hero-image">
-            <img src="assets/foto-akmal.jpeg" alt="Rio Anggara" />
-            <div class="squares">
-                <div class="square-1"></div>
-                <div class="square-2"></div>
-                <div class="square-3"></div>
-                <div class="square-4"></div>
-                <div class="square-5"></div>
-                <div class="square-6"></div>
+            <img src="assets/kartika sect-1.png" alt="Kartika Engineers" />
+            <!-- Removed squares as they are not in the provided image -->
+        </div>
+    </section>
+
+    <section class="about-us">
+        <div class="container about-us-content-container">
+            <div class="about-us-content">
+                <h1>About Us</h1>
+                <p>Kartika.id is a community initiative founded by Ugi Fitri Syawalyani, an Industrial Engineering student at Universitas Hasanuddin and an alumna of the Young Leaders for Indonesia program by McKinsey & Co. Our mission is to empower female engineering students—starting from Eastern Indonesia and now expanding nationwide. We aim to bridge the gap in support, opportunity, and access to networks through mentoring programs, career-sharing sessions, and inclusive community building. Kartika.id helps female engineering students navigate career paths in engineering, break stereotypes, and grow both professionally and personally.</p>
+            </div>
+            <div class="about-us-image">
+                <img src="assets/potrait-right.png" alt="Kartika.id Team" />
             </div>
         </div>
     </section>
 
-    <section class="areas">
-        <div class="container">
-            <h2 class="section-title">Field of Interest</h2>
-            <div class="experience-grid">
-                <div class="experience-item">
-                    <h3>Product Development</h3>
-                    <p>I develop and implement strategic solutions in investment and technology, specializing in digital banking products and browser extensions. Currently leading Learnitab, an EdTech platform helping students in career preparation.</p>
-                </div>
-                <div class="experience-item">
-                    <h3>Business Strategy</h3>
-                    <p>I lead initiatives in business development and strategic planning, with proven success in international business competitions and consulting projects. Notable achievements include winning ISMC 2024 and Wall Street Business Challenge.</p>
+    <section class="about-us">
+        <div class="container about-us-content-container">
+            <div class="about-us-content">
+                <h1>Our Programs</h1>
+                <div class="programs-grid">
+                    <div class="program-item">
+                        <div class="program-icon">
+                            <i class="fas fa-share-alt"></i>
+            </div>
+                        <h3>Kartishare</h3>
+                        <p class="subtitle">Knowledge Sharing Sessions</p>
+                        <p>Knowledge sharing sessions with expert women speakers from various engineering fields. Gain valuable information and inspiration to understand your potential career paths.</p>
+            </div>
+                    <div class="program-item">
+                        <div class="program-icon">
+                            <i class="fas fa-handshake"></i>
+        </div>
+                        <h3>Kartiship</h3>
+                        <p class="subtitle">Mentorship Program</p>
+                        <p>Mentorship program providing ongoing support and guidance. Get paired with mentors in your field of focus to navigate your career path and overcome challenges.</p>
+            </div>
+                    <div class="program-item">
+                        <div class="program-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>Kartinection</h3>
+                        <p class="subtitle">Networking Platform</p>
+                        <p>Networking for female engineering students. Connect with professionals, alumni, and peers to expand your professional network and gain industry insights.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="education-accolades container">
-        <div class="education">
-            <h2 class="section-title">Education</h2>
-            <div class="education-item">
-                <h3><a href="https://www.unpad.ac.id/" class="hover-link">Universitas Padjadjaran</a></h3>
-                <p class="subtitle">BSc in International Business (2020-2025)</p>
-                <p>GPA: 3.72/4.00</p>
-            </div>
-            <div class="education-item">
-                <h3><a href="https://www.ajou.ac.kr/en/index.do" class="hover-link">Ajou University</a></h3>
-                <p class="subtitle">Exchange Program (2024)</p>
-                <p>GPA: 81.7/100</p>
-            </div>
-        </div>
-        <div class="accolades">
-            <h2 class="section-title">Recent Achievements</h2>
-            <div class="accolade-item">
-                <h3><a href="https://yli.or.id" class="hover-link">Young Leaders for Indonesia</a></h3>
-                <p>McKinsey & Company Leadership Program</p>
-            </div>
-            <div class="accolade-item">
-                <h3><a href="https://cleanrecyclinginitiative.com/competition/" class="hover-link">International Competition Winner</a></h3>
-                <p>ISMC 2024 & Wall Street Business Challenge</p>
+    <section class="about-us" id="our-team">
+        <div class="container about-us-content-container">
+            <div class="about-us-content">
+                <h1>Our Team</h1>
+                <div class="team-nav">
+                    <button class="team-btn active" onclick="showTeam('coreteam')">Coreteam <img src="assets/Kartika-logo.png" alt="Logo" class="btn-logo"></button>
+                    <button class="team-btn" onclick="showTeam('mentors')">Mentors <img src="assets/Kartika-logo.png" alt="Logo" class="btn-logo"></button>
+                    <button class="team-btn" onclick="showTeam('members')">Members <img src="assets/Kartika-logo.png" alt="Logo" class="btn-logo"></button>
+                </div>
+                <div class="team-gallery-container">
+                    <div id="coreteam-gallery" class="team-gallery active">
+                        <!-- Core Team Members -->
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+1" alt="Coreteam Member">
+                            <p class="member-name">Member Name 1</p>
+                            <p class="member-title">Coreteam Role</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+2" alt="Coreteam Member">
+                            <p class="member-name">Member Name 2</p>
+                            <p class="member-title">Coreteam Role</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+3" alt="Coreteam Member">
+                            <p class="member-name">Member Name 3</p>
+                            <p class="member-title">Coreteam Role</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+4" alt="Coreteam Member">
+                            <p class="member-name">Member Name 4</p>
+                            <p class="member-title">Coreteam Role</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+5" alt="Coreteam Member">
+                            <p class="member-name">Member Name 5</p>
+                            <p class="member-title">Coreteam Role</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+6" alt="Coreteam Member">
+                            <p class="member-name">Member Name 6</p>
+                            <p class="member-title">Coreteam Role</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+7" alt="Coreteam Member">
+                            <p class="member-name">Member Name 7</p>
+                            <p class="member-title">Coreteam Role</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+8" alt="Coreteam Member">
+                            <p class="member-name">Member Name 8</p>
+                            <p class="member-title">Coreteam Role</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+9" alt="Coreteam Member">
+                            <p class="member-name">Member Name 9</p>
+                            <p class="member-title">Coreteam Role</p>
+                        </div>
+                    </div>
+                    <div id="mentors-gallery" class="team-gallery">
+                        <!-- Mentors Gallery -->
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+1" alt="Mentor">
+                            <p class="member-name">Mentor Name 1</p>
+                            <p class="member-title">Mentor Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+2" alt="Mentor">
+                            <p class="member-name">Mentor Name 2</p>
+                            <p class="member-title">Mentor Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+3" alt="Mentor">
+                            <p class="member-name">Mentor Name 3</p>
+                            <p class="member-title">Mentor Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+4" alt="Mentor">
+                            <p class="member-name">Mentor Name 4</p>
+                            <p class="member-title">Mentor Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+5" alt="Mentor">
+                            <p class="member-name">Mentor Name 5</p>
+                            <p class="member-title">Mentor Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+6" alt="Mentor">
+                            <p class="member-name">Mentor Name 6</p>
+                            <p class="member-title">Mentor Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+7" alt="Mentor">
+                            <p class="member-name">Mentor Name 7</p>
+                            <p class="member-title">Mentor Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+8" alt="Mentor">
+                            <p class="member-name">Mentor Name 8</p>
+                            <p class="member-title">Mentor Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+9" alt="Mentor">
+                            <p class="member-name">Mentor Name 9</p>
+                            <p class="member-title">Mentor Title</p>
+                        </div>
+                    </div>
+                    <div id="members-gallery" class="team-gallery">
+                        <!-- Members Gallery -->
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Member+1" alt="Member">
+                            <p class="member-name">Member Name 1</p>
+                            <p class="member-title">Member Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Member+2" alt="Member">
+                            <p class="member-name">Member Name 2</p>
+                            <p class="member-title">Member Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Member+3" alt="Member">
+                            <p class="member-name">Member Name 3</p>
+                            <p class="member-title">Member Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Member+4" alt="Member">
+                            <p class="member-name">Member Name 4</p>
+                            <p class="member-title">Member Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Member+5" alt="Member">
+                            <p class="member-name">Member Name 5</p>
+                            <p class="member-title">Member Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Member+6" alt="Member">
+                            <p class="member-name">Member Name 6</p>
+                            <p class="member-title">Member Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Member+7" alt="Member">
+                            <p class="member-name">Member Name 7</p>
+                            <p class="member-title">Member Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Member+8" alt="Member">
+                            <p class="member-name">Member Name 8</p>
+                            <p class="member-title">Member Title</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/1080x1080?text=Member+9" alt="Member">
+                            <p class="member-name">Member Name 9</p>
+                            <p class="member-title">Member Title</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="experience">
-        <div class="container">
-            <h2 class="section-title">Key Experiences</h2>
-            <div class="work-grid">
-                <div class="work-item" onclick="window.location.href='https://learnitab.com'">
-                    <h3>Founder & Product Owner</h3>
-                    <p>Learnitab | Jun 2024 - Present</p>
-                    <p class="key-points">Leading development of an EdTech browser extension platform, achieving 150+ downloads and 270% growth in user engagement.</p>
+    <section class="about-us" id="testimonials">
+        <div class="container about-us-content-container">
+            <div class="about-us-content">
+                <h1>What they say about us</h1>
+                <div class="testimonials-carousel">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">“Selama menjadi member kartika aku ga pernah merasa kurang sama sekali terkait setiap kegiatan yang dilakuin oleh Kartika. Aku sangat berterima kasih kepada Kak Ugi udah ciptain Kartika dan nerima aku, yang buat aku bener-bener ngerasain manfaat dari segi wawasan, pengalaman, relasi yang sangat berharga dan berkualitas.”</p>
+                        <p class="testimonial-author"><strong>A. Safinah</strong> | Mining Engineering | Universitas Hasanuddin</p>
                 </div>
-
-                <div class="work-item" onclick="window.location.href='https://jago.com'">
-                    <h3>Product Intern</h3>
-                    <p>Bank Jago | Aug 2024 - Feb 2024</p>
-                    <p class="key-points">Driving product strategy and development across key banking functions, with focus on digital transformation and customer experience.</p>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">“Selama program Kartika.id berlangsung saya menyukai sesi sharing karena bersifat sangat terbuka dan saya bisa bertanya secara puas untuk berbagi pengalaman yang belum pernah saya rasakan”</p>
+                        <p class="testimonial-author"><strong>Dwi Friandini</strong> | Industrial Engineering | Institut Pertanian Bogor</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">“Kartika.id membantu saya untuk bisa bertemu dengan mentors, speakers, dan teman-teman yang memiliki visi yang sejalan dan mempunyai semangat yang sama besarnya dengan saya, walau saya sedang menempuh studi di negara lain tapi saya merasa tantangan yang dihadapi tetaplah sama.”</p>
+                        <p class="testimonial-author"><strong>Salsabila Zulmi</strong> | Civil Engineering | Sungkyunkwan University</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">“The community at Kartika.id is truly inspiring. It's a great platform for female engineers to connect and grow. I've gained so much from the sharing sessions and mentorship.”</p>
+                        <p class="testimonial-author"><strong>Placeholder Name 4</strong> | Engineering Field | University Name</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">“Kartika.id has opened doors to opportunities I never thought possible. The networking events are invaluable, and the support from mentors is exceptional. Highly recommend!”</p>
+                        <p class="testimonial-author"><strong>Placeholder Name 5</strong> | Engineering Field | University Name</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">“Being part of Kartika.id has boosted my confidence and provided me with practical skills and insights for my career. The shared experiences are truly relatable and empowering.”</p>
+                        <p class="testimonial-author"><strong>Placeholder Name 6</strong> | Engineering Field | University Name</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">“I appreciate the diverse perspectives and the collaborative spirit within Kartika.id. It's a fantastic environment to learn, share, and get guidance from experienced professionals.”</p>
+                        <p class="testimonial-author"><strong>Placeholder Name 7</strong> | Engineering Field | University Name</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="chat-section" class="chat-section container">
-        <h2 class="chat-title">Chat with Rio Anggara AI to know more!</h2>
+        <h2 class="chat-title">Chat with Kartika.id AI!</h2>
         <div class="chat-container">
             <div class="chat-main-wrapper">
                 <div class="quick-buttons">
                     <div class="context-header">
-                        <span>Question Box</span>
+                        <span>FAQ</span>
                         <button class="minimize-question-box">
                             <i class="fas fa-chevron-left"></i>
                         </button>
                     </div>
                     <div class="questions-container">
-                        <button class="quick-btn" onclick="askQuestion('Who is Rio Anggara?')">
-                            Who is Rio Anggara?
-                            <span class="question-category">Profile</span>
+                        <button class="quick-btn" onclick="askQuestion('What is Kartika.id?')">
+                            What is Kartika.id?
+                            <span class="question-category">About</span>
                         </button>
-                        <button class="quick-btn" onclick="askQuestion('What are Rio\'s technical skills?')">
-                            What are Rio's technical skills?
-                            <span class="question-category">Skills</span>
+                        <button class="quick-btn" onclick="askQuestion('What are Kartika.id\'s programs?')">
+                            What are Kartika.id's programs?
+                            <span class="question-category">Programs</span>
                         </button>
-                        <button class="quick-btn" onclick="askQuestion('What projects has Rio worked on?')">
-                            What projects has Rio worked on?
-                            <span class="question-category">Projects</span>
+                        <button class="quick-btn" onclick="askQuestion('What are the requirements to join Kartika.id?')">
+                            What are the requirements to join Kartika.id?
+                            <span class="question-category">Joining</span>
                         </button>
-                        <button class="quick-btn" onclick="askQuestion('What is Rio\'s educational background?')">
-                            What is Rio's education?
-                            <span class="question-category">Education</span>
+                        <button class="quick-btn" onclick="askQuestion('How can I join Kartika.id?')">
+                            How can I join Kartika.id?
+                            <span class="question-category">Joining</span>
                         </button>
-                        <button class="quick-btn" onclick="askQuestion('How can I contact Rio?')">
-                            How can I contact Rio?
-                            <span class="question-category">Contact</span>
+                        <button class="quick-btn" onclick="askQuestion('Who founded Kartika.id?')">
+                            Who founded Kartika.id?
+                            <span class="question-category">About</span>
                         </button>
-                        <button class="quick-btn" onclick="askQuestion('What is Rio\'s work experience?')">
-                            What is Rio's work experience?
-                            <span class="question-category">Experience</span>
+                        <button class="quick-btn" onclick="askQuestion('What are the benefits of joining Kartika.id?')">
+                            What are the benefits of joining Kartika.id?
+                            <span class="question-category">Benefits</span>
                         </button>
                     </div>
                 </div>
@@ -2278,39 +640,44 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const input = document.getElementById('userInput');
+            const mainInput = document.getElementById('userInput');
+            const floatingInput = document.getElementById('floatingInput');
             
-            if (!input) {
-                console.error('Input element not found!');
-                return;
-            }
-
             const questions = [
-                "Hi, what's your question?",
-                "What are Rio's key achievements?",
-                "How can I contact Rio for opportunities?",
-                "What is Rio's leadership experience?",
-                "Tell me about Rio's product development skills",
-                "What makes Rio stand out from other candidates?",
-                "What international experience does Rio have?",
-                "What are Rio's strongest technical skills?",
-                "Has Rio led any significant projects?",
-                "What competitions has Rio won?",
-                "What is Rio's educational background?",
-                "What industries has Rio worked in?",
-                "What are Rio's career goals?",
-                "Does Rio have experience working in teams?"
+                "Hi, what's your question about Kartika.id?",
+                "What are Kartika.id's main programs?",
+                "What are the requirements to join Kartika.id?",
+                "How can I participate in Kartika.id events?",
+                "Who founded Kartika.id?",
+                "What are the benefits of being a Kartika.id member?",
+                "How does Kartika.id empower female engineers?",
+                "Tell me about Kartishare program.",
+                "Tell me about Kartiship program.",
+                "Tell me about Kartinection program."
             ];
             
             let currentIndex = 0;
             
-            // Set initial placeholder
-            input.placeholder = questions[0];
+            // Set initial placeholder for both inputs
+            mainInput.placeholder = questions[0];
+            floatingInput.placeholder = questions[0];
             
+            // Update placeholders periodically
             setInterval(() => {
                 currentIndex = (currentIndex + 1) % questions.length;
-                input.placeholder = questions[currentIndex];
+                mainInput.placeholder = questions[currentIndex];
+                floatingInput.placeholder = questions[currentIndex];
             }, 4000);
+
+            // Add Tab key functionality for floating input
+            floatingInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    e.preventDefault();
+                    const placeholderText = this.placeholder;
+                    this.value = placeholderText;
+                    this.setSelectionRange(placeholderText.length, placeholderText.length);
+                }
+            });
         });
     </script>
 
@@ -2566,20 +933,16 @@
             const floatingInput = document.getElementById('floatingInput');
             
             const questions = [
-                "Hi, what's your question?",
-                "What are Rio's key achievements?",
-                "How can I contact Rio for opportunities?",
-                "What is Rio's leadership experience?",
-                "Tell me about Rio's product development skills",
-                "What makes Rio stand out from other candidates?",
-                "What international experience does Rio have?",
-                "What are Rio's strongest technical skills?",
-                "Has Rio led any significant projects?",
-                "What competitions has Rio won?",
-                "What is Rio's educational background?",
-                "What industries has Rio worked in?",
-                "What are Rio's career goals?",
-                "Does Rio have experience working in teams?"
+                "Hi, what's your question about Kartika.id?",
+                "What are Kartika.id's main programs?",
+                "What are the requirements to join Kartika.id?",
+                "How can I participate in Kartika.id events?",
+                "Who founded Kartika.id?",
+                "What are the benefits of being a Kartika.id member?",
+                "How does Kartika.id empower female engineers?",
+                "Tell me about Kartishare program.",
+                "Tell me about Kartiship program.",
+                "Tell me about Kartinection program."
             ];
             
             let currentIndex = 0;
@@ -2735,5 +1098,61 @@
             });
         });
     </script>
+
+    <script>
+        function showTeam(teamType) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.team-btn').forEach(btn => btn.classList.remove('active'));
+            // Hide all galleries
+            document.querySelectorAll('.team-gallery').forEach(gallery => gallery.classList.remove('active'));
+
+            // Add active class to the clicked button
+            document.querySelector(`.team-btn[onclick="showTeam('${teamType}')"]`).classList.add('active');
+            // Show the corresponding gallery
+            document.getElementById(`${teamType}-gallery`).classList.add('active');
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.querySelector('.testimonials-carousel');
+            console.log('Carousel element:', carousel); // Debug: Check if carousel is found
+
+            if (!carousel) {
+                console.error('Testimonials carousel element not found!');
+                return; // Stop if carousel element is not found
+            }
+
+            let scrollAmount = 0;
+            const scrollSpeed = 2; // Increased for better visibility
+            let animationFrameId;
+
+            function autoScroll() {
+                scrollAmount += scrollSpeed;
+                if (scrollAmount >= carousel.scrollWidth - carousel.clientWidth) {
+                    scrollAmount = 0;
+                }
+                carousel.scrollLeft = scrollAmount;
+                animationFrameId = requestAnimationFrame(autoScroll);
+                console.log('Scrolling...', 'scrollLeft:', carousel.scrollLeft, 'scrollWidth:', carousel.scrollWidth, 'clientWidth:', carousel.clientWidth); // Debug: Check scrolling values
+            }
+
+            function startScroll() {
+                if (!animationFrameId) {
+                    autoScroll();
+                }
+            }
+
+            function stopScroll() {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
+
+            carousel.addEventListener('mouseenter', stopScroll);
+            carousel.addEventListener('mouseleave', startScroll);
+
+            startScroll(); // Start scrolling when page loads
+        });
+    </script>
 </body>
-</html>
+</html>ml>
