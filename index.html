@@ -432,7 +432,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
 
     <script type="module">
-        import { RIO_SYSTEM_CONTENT } from './rio-content.js';
+        import { KARTIKA_SYSTEM_CONTENT } from './kartika-content.js';
         
         const API_ENDPOINT = '/.netlify/functions/chat';  // Netlify Functions endpoint
 
@@ -567,7 +567,7 @@
                 const formattedTime = nextResetTime.toLocaleTimeString();
                 
                 input.value = '';
-                addMessage(`You've reached your daily message limit (${MAX_MESSAGES} messages). The limit will reset at ${formattedTime}. Please come back later or contact Rio directly!`, 'bot');
+                addMessage(`You've reached your daily message limit (${MAX_MESSAGES} messages). The limit will reset at ${formattedTime}. Please come back later!`, 'bot');
                 return;
             }
             
@@ -789,13 +789,13 @@
             if (remaining === 0) {
                 const nextResetTime = new Date(parseInt(localStorage.getItem('lastResetTime')) + RESET_INTERVAL);
                 const formattedTime = nextResetTime.toLocaleTimeString();
-                disclaimer.innerHTML = `You've reached your daily message limit. Messages will reset at ${formattedTime}. Please come back later or contact Rio directly! 😊`;
+                disclaimer.innerHTML = `You've reached your daily message limit. Messages will reset at ${formattedTime}. Please come back later! 😊`;
                 
                 // Disable inputs when limit is reached
                 document.getElementById('userInput').disabled = true;
                 document.getElementById('sendButton').disabled = true;
             } else {
-                disclaimer.innerHTML = `Note: AI responses may not always be accurate... that's why you should interview the real Rio instead! 😉`;
+                disclaimer.innerHTML = `Note: AI responses may not always be accurate... that's why you should join Kartika.id to learn more! 😉`;
             }
         }
     </script>
