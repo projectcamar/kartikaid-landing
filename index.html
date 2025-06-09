@@ -23,19 +23,114 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        footer {
+            background: linear-gradient(to bottom, #1a1a1a, #000000);
+            padding: 60px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #d04a02, #ff6b2b);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            padding: 40px 0;
+            flex-wrap: wrap;
+            gap: 30px;
+            position: relative;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .footer-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-section h3 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-family: 'Gelasio', serif;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #d04a02;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #b3b3b3;
+            text-decoration: none;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            padding: 5px 0;
+        }
+
+        .footer-section a:hover {
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .footer-section i {
+            margin-right: 12px;
+            width: 20px;
+            color: #d04a02;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .footer-section {
+                min-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container nav">
             <div class="logo">
                 <img src="assets/Kartika-logo.png" alt="Kartika.id Logo">
-                <p>Kartini Teknik Berdaya</p>
+                <p style="position: relative; z-index: 1000;">Kartini Teknik Berdaya</p>
             </div>
             <div class="nav-links">
-                <a href="#">About Us</a>
-                <a href="#">Our Programs</a>
-                <a href="#">Our Team</a>
-                <a href="#" class="btn">Join Now</a>
+                <a href="#about-us">About Us</a>
+                <a href="#our-programs">Our Programs</a>
+                <a href="#our-team">Our Team</a>
+                <a href="#join-us" class="btn">Join Now</a>
             </div>
         </div>
     </header>
@@ -53,7 +148,7 @@
         </div>
     </section>
 
-    <section class="about-us">
+    <section class="about-us" id="about-us">
         <div class="container about-us-content-container">
             <div class="about-us-content">
                 <h1>About Us</h1>
@@ -65,7 +160,7 @@
         </div>
     </section>
 
-    <section class="about-us">
+    <section class="about-us" id="our-programs">
         <div class="container about-us-content-container">
             <div class="about-us-content">
                 <h1>Our Programs</h1>
@@ -298,22 +393,37 @@
         </div>
     </section>
 
-    <section class="join-us-section">
+    <section class="join-us-section" id="join-us" style="position: relative; z-index: 1000;">
         <div class="container join-us-content-container">
             <div class="join-us-image-wrapper">
                 <img src="assets/Frame 8.png" alt="Join With Us">
-                <a href="https://www.instagram.com/kartikaidn/" target="_blank" class="join-us-text">Join With us</a>
+                <a href="https://www.instagram.com/kartikaidn/" target="_blank" class="join-us-text" style="text-decoration: none;">Join With us</a>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>Connect with me</p>
-            <div class="social-links">
-                <a href="contact.html"><i class="fas fa-envelope"></i></a>
-                <a href="https://www.linkedin.com/in/rionggara"><i class="fab fa-linkedin"></i></a>
-                <a href="https://bit.ly/PortofolioRio-2025"><i class="fas fa-folder"></i></a>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#about-us">About Us</a>
+                    <a href="#our-programs">Our Programs</a>
+                    <a href="#our-team">Our Team</a>
+                    <a href="#join-us">Join Now</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Programs</h3>
+                    <a href="#our-programs">Kartishare</a>
+                    <a href="#our-programs">Kartiship</a>
+                    <a href="#our-programs">Kartinection</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <a href="https://www.instagram.com/kartikaidn/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="https://www.linkedin.com/in/rionggara" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="mailto:contact@kartika.id"><i class="fas fa-envelope"></i> Email</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -743,6 +853,72 @@
             carousel.addEventListener('mouseleave', startScroll);
 
             startScroll(); // Start scrolling when page loads
+        });
+    </script>
+
+    <script>
+        // Add smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // Dynamic header padding and active navigation link
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            const body = document.body;
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const sections = document.querySelectorAll('section');
+
+            function adjustBodyPadding() {
+                if (header) {
+                    body.style.paddingTop = header.offsetHeight + 'px';
+                }
+            }
+
+            // Initial adjustment
+            adjustBodyPadding();
+
+            // Adjust padding on window resize
+            window.addEventListener('resize', adjustBodyPadding);
+
+            // Intersection Observer for active navigation links
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '-50% 0px -50% 0px', // Trigger when 50% of the section is visible
+                threshold: 0 // As soon as any part of the section is visible
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const currentSectionId = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${currentSectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                if (section.id) { // Only observe sections with an ID
+                    sectionObserver.observe(section);
+                }
+            });
         });
     </script>
 </body>

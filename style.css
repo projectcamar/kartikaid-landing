@@ -7,6 +7,7 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden; /* Prevent horizontal scrollbar */
+    padding-top: 0; /* Will be set by JS dynamically */
 }
 
 /* Universal Box Sizing */
@@ -145,7 +146,7 @@ header:hover {
     width: 100%; /* Change from 100vw to 100% */
     left: 0;
     right: 0;
-    margin-top: 150px; /* Push hero section down by header height */
+    margin-top: 0; /* Removed fixed margin-top */
 }
 
 .hero-content {
@@ -979,30 +980,97 @@ header:hover {
 
 /* Footer Styles */
 footer {
-    background-color: #333; /* Dark background */
-    color: #fff;
-    text-align: center;
-    padding: 30px 0;
-    font-family: 'Josefin Sans', sans-serif;
-    width: 100vw;
+    background: linear-gradient(to bottom, #1a1a1a, #000000);
+    padding: 60px 0 30px;
+    position: relative;
+    overflow: hidden;
 }
 
-footer .container {
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, #d04a02, #ff6b2b);
+}
+
+.footer-content {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
+    justify-content: space-between;
+    padding: 40px 0;
+    flex-wrap: wrap;
+    gap: 30px;
+    position: relative;
 }
 
-.social-links a {
-    color: #fff;
-    font-size: 1.5em;
-    margin: 0 10px;
-    transition: color 0.2s ease;
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.social-links a:hover {
-    color: #f07e3c; /* Kartika orange on hover */
+.footer-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.footer-section h3 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    font-family: 'Gelasio', serif;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: #d04a02;
+}
+
+.footer-section a {
+    display: block;
+    color: #b3b3b3;
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+    padding: 5px 0;
+}
+
+.footer-section a:hover {
+    color: #ffffff;
+    transform: translateX(5px);
+}
+
+.footer-section i {
+    margin-right: 12px;
+    width: 20px;
+    color: #d04a02;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .footer-section {
+        min-width: 100%;
+    }
 }
 
 /* General Section Title (if used outside about-us) */
