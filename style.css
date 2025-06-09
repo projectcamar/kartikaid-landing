@@ -192,76 +192,71 @@ header:hover {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .nav {
-        flex-direction: row; /* Changed from column to row */
+        flex-direction: row;
         padding: 10px;
-        flex-wrap: wrap; /* Allow wrapping if needed */
-        justify-content: space-between; /* Space between logo and nav links */
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 0; /* Remove any margin */
     }
 
     .nav-links {
-        margin-top: 0; /* Remove top margin */
+        margin: 0;
         display: flex;
-        flex-wrap: nowrap; /* Prevent wrapping of nav links */
-        gap: 8px; /* Reduce gap between links */
-        justify-content: flex-end; /* Align links to the right */
+        flex-wrap: nowrap;
+        gap: 8px;
+        justify-content: flex-end;
     }
 
     .nav-links a {
-        margin: 0; /* Remove margin */
-        padding: 6px 12px; /* Reduce padding */
+        margin: 0;
+        padding: 6px 12px;
+        font-size: 0.9em;
+        white-space: nowrap;
+    }
+
+    /* Fix team navigation buttons to stay in a row */
+    .team-nav {
+        flex-direction: row; /* Keep buttons in a row */
+        flex-wrap: nowrap; /* Prevent wrapping */
+        gap: 10px;
+        margin: 30px 0;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .team-btn {
+        flex: 1; /* Allow buttons to grow equally */
+        min-width: 0; /* Remove min-width constraint */
+        padding: 8px 12px; /* Adjust padding */
         font-size: 0.9em; /* Slightly smaller font */
         white-space: nowrap; /* Prevent text wrapping */
     }
 
-    /* Adjust logo for mobile */
-    .logo {
-        flex: 0 0 auto; /* Prevent logo from growing/shrinking */
-    }
-
-    .logo img {
-        height: 40px; /* Smaller logo on mobile */
-    }
-
-    .logo p {
-        font-size: 1em; /* Smaller text for logo */
-    }
-
-    /* Ensure no padding-top on body for mobile */
-
+    /* Adjust hero section to remove white gap */
     .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 0; /* Removed internal padding for mobile */
-        margin-top: 150px; /* Push hero section down by header height for mobile */
+        margin-top: 60px; /* Reduce top margin */
+        padding: 0;
     }
 
-    .hero-content {
-        padding-right: 0;
-        margin-bottom: 20px; /* Adjust margin for smaller screens */
+    /* Ensure no gaps in the layout */
+    body {
+        padding-top: 60px; /* Match with hero margin-top */
     }
 
-    .hero-content h1 {
-        font-size: 2.5em;
-    }
-
-    .hero-content p {
-        font-size: 1em;
-    }
-
-    .hero-image {
-        height: auto;
+    header {
+        padding: 5px 0;
     }
 }
 
-/* Add a breakpoint for very small screens */
+/* Additional adjustments for very small screens */
 @media (max-width: 480px) {
-    .nav-links {
-        gap: 4px; /* Even smaller gap for very small screens */
+    .team-nav {
+        gap: 5px; /* Even smaller gap */
     }
 
-    .nav-links a {
-        padding: 4px 8px; /* Even smaller padding */
-        font-size: 0.8em; /* Even smaller font */
+    .team-btn {
+        padding: 6px 8px; /* Smaller padding */
+        font-size: 0.8em; /* Smaller font */
     }
 }
 
