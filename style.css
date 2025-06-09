@@ -758,26 +758,72 @@ header:hover {
 /* Responsive adjustments for Testimonials */
 @media (max-width: 768px) {
     .testimonials-carousel {
+        display: flex;
         gap: 20px;
+        padding: 20px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Hide scrollbar for Firefox */
+        -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+    }
+
+    .testimonials-carousel::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for Chrome/Safari */
     }
 
     .testimonial-card {
-        flex: 0 0 90%; /* Adjust width for smaller screens */
-        padding: 25px;
+        flex: 0 0 280px; /* Fixed width for cards */
+        min-width: 280px; /* Minimum width */
+        max-width: 280px; /* Maximum width */
+        height: 300px; /* Fixed height */
+        scroll-snap-align: start;
+        margin: 0; /* Remove any margin */
+        padding: 20px;
     }
 
     .testimonial-text {
-        font-size: 1.1em;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-bottom: 15px;
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
     .testimonial-author {
-        font-size: 0.9em;
+        font-size: 0.85em;
+        margin-top: auto;
+    }
+
+    /* Adjust carousel wrapper */
+    .testimonials-carousel-wrapper {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Adjust gradient overlays for mobile */
+    .gradient-overlay {
+        width: 60px; /* Narrower gradient on mobile */
+    }
+
+    .gradient-overlay.left {
+        left: 0;
+    }
+
+    .gradient-overlay.right {
+        right: 0;
     }
 }
 
+/* Additional adjustments for very small screens */
 @media (max-width: 480px) {
     .testimonial-card {
-        flex: 0 0 100%; /* Full width on very small screens */
+        flex: 0 0 250px; /* Slightly smaller cards */
+        min-width: 250px;
+        max-width: 250px;
     }
 }
 
