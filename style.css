@@ -2027,13 +2027,13 @@ footer::before {
 .ribbon {
     position: absolute;
     top: -10px;
-    right: -60px;
+    left: -60px;
     background: #d04a02;
     color: #FEFAE4;
     padding: 5px 15px;
     font-size: 0.5em;
     font-weight: bold;
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
     transform-origin: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -2047,7 +2047,7 @@ footer::before {
     width: 10px;
     height: 100%;
     background: #d04a02;
-    transform: skewY(45deg);
+    transform: skewY(-45deg);
 }
 
 .ribbon::after {
@@ -2058,7 +2058,7 @@ footer::before {
     width: 10px;
     height: 100%;
     background: #d04a02;
-    transform: skewY(-45deg);
+    transform: skewY(45deg);
 }
 
 .timeline-image-wrapper {
