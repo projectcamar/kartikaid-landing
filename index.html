@@ -872,54 +872,5 @@
             });
         });
     </script>
-
-    <script>
-        // Dynamic header padding and active navigation link
-        document.addEventListener('DOMContentLoaded', function() {
-            const header = document.querySelector('header');
-            const body = document.body;
-            const navLinks = document.querySelectorAll('.nav-links a');
-            const sections = document.querySelectorAll('section');
-
-            function adjustBodyPadding() {
-                if (header) {
-                    body.style.paddingTop = header.offsetHeight + 'px';
-                }
-            }
-
-            // Initial adjustment
-            adjustBodyPadding();
-
-            // Adjust padding on window resize
-            window.addEventListener('resize', adjustBodyPadding);
-
-            // Intersection Observer for active navigation links
-            const observerOptions = {
-                root: null, // viewport
-                rootMargin: '-50% 0px -50% 0px', // Trigger when 50% of the section is visible
-                threshold: 0 // As soon as any part of the section is visible
-            };
-
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const currentSectionId = entry.target.id;
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === `#${currentSectionId}`) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }, observerOptions);
-
-            sections.forEach(section => {
-                if (section.id) { // Only observe sections with an ID
-                    sectionObserver.observe(section);
-                }
-            });
-        });
-    </script>
 </body>
 </html>

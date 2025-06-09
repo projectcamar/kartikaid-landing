@@ -7,7 +7,6 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden; /* Prevent horizontal scrollbar */
-    padding-top: 0; /* Will be set by JS dynamically */
 }
 
 /* Universal Box Sizing */
@@ -146,7 +145,7 @@ header:hover {
     width: 100%; /* Change from 100vw to 100% */
     left: 0;
     right: 0;
-    margin-top: 0; /* Removed fixed margin-top */
+    margin-top: 150px; /* Push hero section down by header height */
 }
 
 .hero-content {
