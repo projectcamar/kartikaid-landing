@@ -272,10 +272,11 @@ header:hover {
 
 .about-us-content h1 {
     font-family: 'Gelasio', serif;
-    font-style: normal;
-    font-size: 3.5em;
-    margin-bottom: 20px;
+    font-style: italic;
+    font-size: 3em;
+    margin-bottom: 50px; /* Increased margin to prevent overlap */
     line-height: 1.2;
+    text-align: center; /* Center align for consistency */
 }
 
 .about-us-content p {
@@ -324,7 +325,7 @@ header:hover {
     display: flex; /* Ensures flexbox behavior for centering */
     justify-content: center; /* Centers horizontally */
     align-items: center; /* Centers vertically if space allows */
-    min-height: 300px;
+    min-height: 450px; /* Increased height to prevent overlap with longer descriptions */
     position: relative;
     padding: 2rem 0;
 }
@@ -1158,13 +1159,12 @@ footer::before {
 
 /* General Section Title (if used outside about-us) */
 .section-title {
-    color: #FEFAE4;
     font-family: 'Gelasio', serif;
-    font-style: normal;
-    font-size: 3.5em;
-    margin-bottom: 30px;
+    font-style: italic;
+    font-size: 3em;
+    color: #FEFAE4;
     text-align: center;
-    line-height: 1.2;
+    margin-bottom: 50px; /* Increased margin to prevent overlap */
 }
 
 /* Re-adjustments for smaller screens */
