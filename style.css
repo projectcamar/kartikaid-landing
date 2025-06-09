@@ -381,11 +381,11 @@ header:hover {
     transition: opacity 0.5s ease, transform 0.5s ease;
     text-align: center;
     padding: 3rem;
-    background: #f07e3c; /* Set to Kartika orange */
+    background: #f07e3c;
     border-radius: 15px;
     width: 100%;
     max-width: 800px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: none; /* Remove shadow */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -443,6 +443,7 @@ header:hover {
     
     .program-item {
         padding: 20px;
+        box-shadow: none; /* Ensure no shadow on mobile */
     }
     
     .program-icon {
@@ -719,6 +720,19 @@ header:hover {
     overflow: hidden;
 }
 
+.testimonial-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.testimonial-text-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .testimonial-text {
     font-family: 'Gelasio', serif;
     font-style: italic;
@@ -734,12 +748,6 @@ header:hover {
     font-size: 1rem;
 }
 
-/* More aggressive size reduction for longer testimonials */
-.testimonial-text.long {
-    font-size: 0.75rem;
-    line-height: 1.3;
-}
-
 .testimonial-author {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 0.85em;
@@ -748,6 +756,23 @@ header:hover {
     margin-top: auto;
     padding-top: 15px;
     border-top: 1px solid rgba(254, 250, 228, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.testimonial-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* More aggressive size reduction for longer testimonials */
+.testimonial-text.long {
+    font-size: 0.75rem;
+    line-height: 1.3;
 }
 
 .testimonial-author strong {
@@ -1584,44 +1609,43 @@ footer::before {
 }
 
 .missions-nav {
-    flex: 0 0 300px; /* Fixed width for navigation */
-    background-color: rgba(0, 0, 0, 0.1); /* Darker background for contrast */
+    flex: 0 0 300px;
+    background-color: transparent;
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    border-right: none; /* Removed */
-    border-radius: 15px; /* Added border-radius for capsule look */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
+    border-right: none;
+    border-radius: 15px;
+    box-shadow: none;
 }
 
 .mission-btn {
-    background-color: rgba(254, 250, 228, 0.1); /* Light transparent background */
+    background-color: rgba(254, 250, 228, 0.1);
     color: #FEFAE4;
-    padding: 15px 25px; /* Increased padding for bigger capsule */
+    padding: 15px 25px;
     border: 2px solid #FEFAE4;
-    border-radius: 30px; /* More rounded for capsule look */
+    border-radius: 30px;
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 600;
-    font-size: 1.2em; /* Slightly larger font */
+    font-size: 1.2em;
     cursor: pointer;
-    text-align: center; /* Centered text for capsule */
+    text-align: center;
     transition: all 0.3s ease;
     white-space: nowrap;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Added shadow */
 }
 
 .mission-btn:hover {
     background-color: rgba(254, 250, 228, 0.25);
     transform: translateY(-3px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: none;
 }
 
 .mission-btn.active {
-    background-color: #FEFAE4; /* Changed to new white color */
+    background-color: #FEFAE4;
     color: #d04a02;
-    border-color: #FEFAE4; /* Changed to new white color */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow when active */
+    border-color: #FEFAE4;
+    box-shadow: none;
 }
 
 .missions-content-display {
@@ -1665,28 +1689,26 @@ footer::before {
 
     .missions-nav {
         flex: none;
-        width: calc(100% - 40px); /* Adjust width for padding */
+        width: 100%;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
-        border-right: none;
-        border-bottom: none; /* Removed */
-        border-radius: 15px; /* Keep consistent border-radius */
-        padding: 20px; /* Adjust padding for smaller screens */
-        margin-bottom: 0; /* Remove margin below nav for mobile, gap handles spacing */
+        padding: 20px;
+        background-color: transparent;
+        box-shadow: none;
     }
 
     .mission-btn {
-        flex: 1; /* Allow buttons to grow and shrink */
+        flex: 1;
         text-align: center;
-        min-width: 140px; /* Adjusted min-width */
-        padding: 12px 20px; /* Adjusted padding */
-        font-size: 1.1em; /* Adjusted font size */
+        min-width: 140px;
+        padding: 12px 20px;
+        font-size: 1.1em;
     }
 
     .missions-content-display {
         padding: 30px;
-        width: calc(100% - 40px); /* Ensure content capsule also takes full width */
+        width: calc(100% - 40px);
     }
 
     .mission-text-content {
@@ -1707,6 +1729,7 @@ footer::before {
     .mission-btn {
         padding: 12px 15px;
         font-size: 1em;
+        box-shadow: none;
     }
 
     .missions-content-display {
@@ -1997,6 +2020,45 @@ footer::before {
     color: #FEFAE4;
     margin-bottom: 30px;
     padding-top: 40px;
+    position: relative;
+    display: inline-block;
+}
+
+.ribbon {
+    position: absolute;
+    top: -10px;
+    right: -60px;
+    background: #d04a02;
+    color: #FEFAE4;
+    padding: 5px 15px;
+    font-size: 0.5em;
+    font-weight: bold;
+    transform: rotate(45deg);
+    transform-origin: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.ribbon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -5px;
+    width: 10px;
+    height: 100%;
+    background: #d04a02;
+    transform: skewY(45deg);
+}
+
+.ribbon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -5px;
+    width: 10px;
+    height: 100%;
+    background: #d04a02;
+    transform: skewY(-45deg);
 }
 
 .timeline-image-wrapper {
