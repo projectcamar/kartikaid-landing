@@ -23,101 +23,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        footer {
-            background: linear-gradient(to bottom, #1a1a1a, #000000);
-            padding: 60px 0 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(to right, #d04a02, #ff6b2b);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            padding: 40px 0;
-            flex-wrap: wrap;
-            gap: 30px;
-            position: relative;
-        }
-
-        .footer-section {
-            flex: 1;
-            min-width: 200px;
-            position: relative;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .footer-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .footer-section h3 {
-            color: #ffffff;
-            margin-bottom: 20px;
-            font-size: 1.4em;
-            font-family: 'Gelasio', serif;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: #d04a02;
-        }
-
-        .footer-section a {
-            display: block;
-            color: #b3b3b3;
-            text-decoration: none;
-            margin-bottom: 12px;
-            transition: all 0.3s ease;
-            font-size: 1.1em;
-            padding: 5px 0;
-        }
-
-        .footer-section a:hover {
-            color: #ffffff;
-            transform: translateX(5px);
-        }
-
-        .footer-section i {
-            margin-right: 12px;
-            width: 20px;
-            color: #d04a02;
-        }
-
-        @media (max-width: 768px) {
-            .footer-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .footer-section {
-                min-width: 100%;
-            }
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -190,29 +95,29 @@
             <div class="about-us-content">
                 <h1>Our Programs</h1>
                 <div class="programs-grid">
-                    <div class="program-item" onclick="openModal('kartishare')">
+                    <div class="program-item" id="kartishare">
                         <div class="program-icon">
                             <i class="fas fa-share-alt"></i>
                         </div>
                         <h3>Kartishare</h3>
                         <p class="subtitle">Career Sharing Sessions</p>
-                        <p>Click to learn more about our career sharing sessions with expert women speakers.</p>
+                        <p>Career sharing sessions with expert women speakers.</p>
                     </div>
-                    <div class="program-item" onclick="openModal('kartiship')">
+                    <div class="program-item" id="kartiship">
                         <div class="program-icon">
                             <i class="fas fa-handshake"></i>
                         </div>
                         <h3>Kartiship</h3>
                         <p class="subtitle">Mentorship Program</p>
-                        <p>Click to learn more about our mentorship program for aspiring engineers.</p>
+                        <p>Mentorship program for aspiring engineers.</p>
                     </div>
-                    <div class="program-item" onclick="openModal('kartinection')">
+                    <div class="program-item" id="kartinection">
                         <div class="program-icon">
                             <i class="fas fa-network-wired"></i>
                         </div>
                         <h3>Kartinection</h3>
                         <p class="subtitle">Networking Platform</p>
-                        <p>Click to learn more about our networking platform for female engineers.</p>
+                        <p>Networking platform for female engineers.</p>
                     </div>
                 </div>
             </div>
@@ -512,6 +417,32 @@
                 document.body.style.overflow = "auto";
             }
         }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const programs = ['kartishare', 'kartiship', 'kartinection'];
+            let currentIndex = 0;
+
+            function showNextProgram() {
+                // Remove active class from all programs
+                document.querySelectorAll('.program-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Add active class to current program
+                document.getElementById(programs[currentIndex]).classList.add('active');
+
+                // Update index for next program
+                currentIndex = (currentIndex + 1) % programs.length;
+            }
+
+            // Show first program immediately
+            showNextProgram();
+
+            // Set interval to rotate programs every 3 seconds
+            setInterval(showNextProgram, 3000);
+        });
     </script>
 </body>
 </html>

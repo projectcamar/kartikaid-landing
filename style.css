@@ -83,8 +83,9 @@ header:hover {
 }
 
 .logo img {
-    height: 60px; /* Changed from 120px */
-    margin-right: 0; /* Remove right margin since text will be below */
+    height: auto; /* Removed fixed height */
+    width: 100%; /* Make logo 100% of its container */
+    margin-right: 0;
 }
 
 .logo p {
@@ -265,7 +266,7 @@ header:hover {
 
 .about-us-content {
     flex: 1;
-    text-align: left;
+    text-align: center; /* Ensures the heading and content below are centered */
 }
 
 .about-us-content h1 {
@@ -319,23 +320,34 @@ header:hover {
 }
 
 .programs-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 30px;
+    display: flex; /* Ensures flexbox behavior for centering */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically if space allows */
+    min-height: 300px;
+    position: relative;
+    padding: 2rem 0;
 }
 
 .program-item {
-    background: rgba(254, 250, 228, 0.1);
-    border-radius: 12px;
-    padding: 25px;
-    transition: transform 0.3s ease;
-    border: 1px solid rgba(254, 250, 228, 0.2);
+    position: absolute;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    text-align: center;
+    padding: 3rem;
+    background: #f07e3c; /* Set to Kartika orange */
+    border-radius: 15px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.program-item:hover {
-    transform: translateY(-5px);
-    background: rgba(254, 250, 228, 0.15);
+.program-item.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .program-icon {
@@ -351,11 +363,11 @@ header:hover {
 
 .program-icon i {
     font-size: 24px;
-    color: #FEFAE4;
+    color: #d04a02; /* Set to accent orange */
 }
 
 .program-item h3 {
-    color: #FEFAE4;
+    color: #FEFAE4; /* Set to light cream/white */
     font-family: 'Gelasio', serif;
     font-style: italic;
     font-size: 1.8rem;
@@ -364,14 +376,14 @@ header:hover {
 }
 
 .program-item .subtitle {
-    color: rgba(254, 250, 228, 0.9);
+    color: #FEFAE4; /* Set to light cream/white */
     font-size: 1.2rem;
     margin-bottom: 15px;
     font-weight: 500;
 }
 
 .program-item p {
-    color: rgba(254, 250, 228, 0.8);
+    color: #FEFAE4; /* Set to light cream/white */
     line-height: 1.6;
     margin: 0;
     font-size: 1.1rem;
