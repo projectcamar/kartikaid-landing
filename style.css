@@ -1086,7 +1086,7 @@ footer::before {
 
 .footer-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Changed from space-between to center */
     padding: 40px 0;
     flex-wrap: wrap;
     gap: 30px;
@@ -1094,8 +1094,9 @@ footer::before {
 }
 
 .footer-section {
-    flex: 1;
+    flex: 0 1 auto; /* Changed from flex: 1 to flex: 0 1 auto */
     min-width: 200px;
+    max-width: 300px; /* Added max-width to control section width */
     position: relative;
     padding: 20px;
     background: rgba(254, 250, 228, 0.03);
@@ -1103,6 +1104,7 @@ footer::before {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(254, 250, 228, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center; /* Center the text content */
 }
 
 .footer-section:hover {
@@ -1117,13 +1119,15 @@ footer::before {
     font-family: 'Gelasio', serif;
     position: relative;
     padding-bottom: 10px;
+    text-align: center; /* Center the heading */
 }
 
 .footer-section h3::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 50%; /* Center the underline */
+    transform: translateX(-50%); /* Center the underline */
     width: 40px;
     height: 2px;
     background: #d04a02;
@@ -1137,6 +1141,7 @@ footer::before {
     transition: all 0.3s ease;
     font-size: 1.1em;
     padding: 5px 0;
+    text-align: center; /* Center the links */
 }
 
 .footer-section a:hover {
@@ -1148,6 +1153,7 @@ footer::before {
     margin-right: 12px;
     width: 20px;
     color: #d04a02;
+    display: inline-block; /* Ensure icon alignment */
 }
 
 @media (max-width: 768px) {
