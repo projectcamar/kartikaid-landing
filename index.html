@@ -446,5 +446,18 @@ Including mentorship, skill-building workshops, and career development sessions 
             setInterval(showNextProgram, 3000);
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const testimonialTexts = document.querySelectorAll('.testimonial-text');
+            
+            testimonialTexts.forEach(text => {
+                // Reduced threshold to 120 characters to catch more long testimonials
+                if (text.textContent.length > 120) {
+                    text.classList.add('long');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
