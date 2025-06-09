@@ -497,8 +497,9 @@ header:hover {
 .team-member img {
     width: 100%;
     height: auto;
-    display: block;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
 }
 
 .member-name {
@@ -530,30 +531,30 @@ header:hover {
 
 @media (max-width: 768px) {
     .team-nav {
-        flex-wrap: wrap;
+        flex-direction: column;
         gap: 10px;
     }
-
+    
     .team-btn {
-        padding: 8px 15px;
-        font-size: 1em;
+        width: 100%;
+        padding: 10px;
     }
-
+    
     .team-gallery {
-        grid-template-columns: 1fr;
-        gap: 15px;
+        width: 100%;
+        padding: 0;
     }
-
+    
+    .team-member {
+        width: 100%;
+        padding: 0;
+    }
+    
     .team-member img {
-        max-width: 150px;
-    }
-
-    .member-name {
-        font-size: 1.2em;
-    }
-
-    .member-title {
-        font-size: 0.8em;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        margin: 0;
     }
 }
 
