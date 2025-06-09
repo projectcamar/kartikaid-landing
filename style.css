@@ -192,18 +192,38 @@ header:hover {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .nav {
-        flex-direction: column;
+        flex-direction: row; /* Changed from column to row */
         padding: 10px;
+        flex-wrap: wrap; /* Allow wrapping if needed */
+        justify-content: space-between; /* Space between logo and nav links */
     }
 
     .nav-links {
-        margin-top: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
+        margin-top: 0; /* Remove top margin */
+        display: flex;
+        flex-wrap: nowrap; /* Prevent wrapping of nav links */
+        gap: 8px; /* Reduce gap between links */
+        justify-content: flex-end; /* Align links to the right */
     }
 
     .nav-links a {
-        margin: 5px;
+        margin: 0; /* Remove margin */
+        padding: 6px 12px; /* Reduce padding */
+        font-size: 0.9em; /* Slightly smaller font */
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    /* Adjust logo for mobile */
+    .logo {
+        flex: 0 0 auto; /* Prevent logo from growing/shrinking */
+    }
+
+    .logo img {
+        height: 40px; /* Smaller logo on mobile */
+    }
+
+    .logo p {
+        font-size: 1em; /* Smaller text for logo */
     }
 
     /* Ensure no padding-top on body for mobile */
@@ -230,6 +250,18 @@ header:hover {
 
     .hero-image {
         height: auto;
+    }
+}
+
+/* Add a breakpoint for very small screens */
+@media (max-width: 480px) {
+    .nav-links {
+        gap: 4px; /* Even smaller gap for very small screens */
+    }
+
+    .nav-links a {
+        padding: 4px 8px; /* Even smaller padding */
+        font-size: 0.8em; /* Even smaller font */
     }
 }
 
