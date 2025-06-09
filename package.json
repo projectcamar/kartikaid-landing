@@ -1,19 +1,14 @@
 {
-  "name": "kartika-landing",
+  "name": "porto-rio",
   "version": "1.0.0",
-  "description": "Kartika.id - Empowering Future Female Engineers",
-  "main": "kartika-content.js",
+  "description": "Personal portfolio website showcasing my professional experience, achievements, and projects.",
+  "main": "rio-content.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [
-    "kartika",
-    "engineering",
-    "women",
-    "empowerment"
-  ],
-  "author": "Kartika.id Team",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.7",
