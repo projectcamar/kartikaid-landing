@@ -209,15 +209,17 @@ header:hover {
 
     .nav-links a {
         margin: 0;
-        padding: 6px 12px;
-        font-size: 0.9em;
+        padding: 4px 8px; /* Reduced padding */
+        font-size: 0.7em; /* Reduced font size by 30% */
         white-space: nowrap;
+        border-width: 1px; /* Thinner border */
     }
 
     /* Fix team navigation buttons to stay in a row */
     .team-nav {
-        flex-direction: row; /* Keep buttons in a row */
-        flex-wrap: nowrap; /* Prevent wrapping */
+        display: flex;
+        flex-direction: row !important; /* Force row layout */
+        flex-wrap: nowrap;
         gap: 10px;
         margin: 30px 0;
         justify-content: center;
@@ -225,11 +227,12 @@ header:hover {
     }
 
     .team-btn {
-        flex: 1; /* Allow buttons to grow equally */
-        min-width: 0; /* Remove min-width constraint */
-        padding: 8px 12px; /* Adjust padding */
-        font-size: 0.9em; /* Slightly smaller font */
-        white-space: nowrap; /* Prevent text wrapping */
+    flex: 1;
+        min-width: 0;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    white-space: nowrap;
+        margin: 0; /* Remove any margin */
     }
 
     /* Adjust hero section to remove white gap */
@@ -246,17 +249,31 @@ header:hover {
     header {
         padding: 5px 0;
     }
+
+    /* Ensure the team section container doesn't force column layout */
+    #our-team .about-us-content-container {
+        flex-direction: column;
+    }
+
+    #our-team .about-us-content {
+        width: 100%;
+    }
 }
 
 /* Additional adjustments for very small screens */
 @media (max-width: 480px) {
+    .nav-links a {
+        padding: 3px 6px; /* Even smaller padding */
+        font-size: 0.65em; /* Even smaller font */
+    }
+
     .team-nav {
-        gap: 5px; /* Even smaller gap */
+        gap: 5px;
     }
 
     .team-btn {
-        padding: 6px 8px; /* Smaller padding */
-        font-size: 0.8em; /* Smaller font */
+        padding: 6px 8px;
+        font-size: 0.8em;
     }
 }
 
