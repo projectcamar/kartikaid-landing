@@ -558,6 +558,15 @@ header:hover {
     }
 }
 
+/* Specific adjustment for Our Team section on mobile */
+@media (max-width: 768px) {
+    #our-team .about-us-content-container {
+        padding: 0;
+        max-width: 100%; /* Ensure it expands fully */
+        margin: 0; /* Remove auto margins */
+    }
+}
+
 /* Add specific styling for testimonials heading */
 #testimonials .about-us-content {
     flex: 1;
