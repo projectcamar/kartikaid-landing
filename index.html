@@ -159,36 +159,107 @@
         </div>
     </section>
 
+    <section class="our-missions-section" id="our-missions">
+        <div class="container our-missions-content-container">
+            <div class="our-missions-header">
+                <h1>Our Missions</h1>
+            </div>
+            <div class="our-missions-main-content">
+                <div class="missions-nav">
+                    <button class="mission-btn active" onclick="showMission('women-empowerment')">Women Empowerment</button>
+                    <button class="mission-btn" onclick="showMission('networking')">Networking</button>
+                    <button class="mission-btn" onclick="showMission('development')">Development</button>
+                </div>
+                <div class="missions-content-display">
+                    <div id="women-empowerment" class="mission-text-content active">
+                        <p>Our mission is to empower future female engineers by providing them with the necessary tools, knowledge, and confidence to excel in the engineering field. We believe in fostering an environment where women can thrive and break barriers.</p>
+                    </div>
+                    <div id="networking" class="mission-text-content">
+                        <p>We aim to build a strong, supportive network for female engineering students and professionals. Through Kartinection, we connect members with industry leaders, alumni, and peers, creating valuable opportunities for collaboration and growth.</p>
+                    </div>
+                    <div id="development" class="mission-text-content">
+                        <p>We are dedicated to the personal and professional development of our members. Our programs, including Kartishare and Kartiship, are designed to enhance skills, expand knowledge, and guide individuals through their career journeys in engineering.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="about-us" id="our-programs">
         <div class="container about-us-content-container">
             <div class="about-us-content">
                 <h1>Our Programs</h1>
                 <div class="programs-grid">
-                    <div class="program-item">
+                    <div class="program-item" onclick="openModal('kartishare')">
                         <div class="program-icon">
                             <i class="fas fa-share-alt"></i>
                         </div>
                         <h3>Kartishare</h3>
-                        <p class="subtitle">Knowledge Sharing Sessions</p>
-                        <p>Knowledge sharing sessions with expert women speakers from various engineering fields. Gain valuable information and inspiration to understand your potential career paths.</p>
+                        <p class="subtitle">Career Sharing Sessions</p>
+                        <p>Click to learn more about our career sharing sessions with expert women speakers.</p>
                     </div>
-                    <div class="program-item">
+                    <div class="program-item" onclick="openModal('kartiship')">
                         <div class="program-icon">
                             <i class="fas fa-handshake"></i>
                         </div>
                         <h3>Kartiship</h3>
                         <p class="subtitle">Mentorship Program</p>
-                        <p>Mentorship program providing ongoing support and guidance. Get paired with mentors in your field of focus to navigate your career path and overcome challenges.</p>
+                        <p>Click to learn more about our mentorship program for aspiring engineers.</p>
                     </div>
-                    <div class="program-item">
+                    <div class="program-item" onclick="openModal('kartinection')">
                         <div class="program-icon">
                             <i class="fas fa-network-wired"></i>
                         </div>
                         <h3>Kartinection</h3>
                         <p class="subtitle">Networking Platform</p>
-                        <p>Networking for female engineering students. Connect with professionals, alumni, and peers to expand your professional network and gain industry insights.</p>
+                        <p>Click to learn more about our networking platform for female engineers.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="first-generation-section" id="first-generation">
+        <div class="container first-generation-content-container">
+            <h1 class="section-title">Kartika.id First Generation</h1>
+            <div class="impact-metrics-grid">
+                <div class="metric-item">
+                    <span class="metric-number">15+</span>
+                    <p class="metric-description">Events (Kartishare, Kartinection and Kartiship)</p>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-number">75+</span>
+                    <p class="metric-description">Female Engineering Students Involved</p>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-number">4.8/5</span>
+                    <p class="metric-description">Overall Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="our-partners-section" id="our-partners">
+        <div class="container our-partners-content-container">
+            <h1 class="section-title">Our Past Partner</h1>
+            <div class="partners-grid">
+                <div class="partner-item">
+                    <img src="assets/unilever-logo.png" alt="Unilever Logo" class="partner-logo">
+                    <p class="partner-description">Kartishare x Inspiring Unileader</p>
+                </div>
+                <div class="partner-item">
+                    <img src="assets/aapg-logo.png" alt="AAPG Logo" class="partner-logo">
+                    <p class="partner-description">Kartishare with AAPG Indonesia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="our-speakers-section" id="our-speakers">
+        <div class="container our-speakers-content-container">
+            <h1 class="section-title">Our Speakers<br>Kartika.id First Generation</h1>
+            <div class="speaker-image-wrapper">
+                <img src="assets/asset speaker first gen.png" alt="Kartika.id First Generation Speakers" class="speaker-image">
             </div>
         </div>
     </section>
@@ -204,147 +275,18 @@
                 </div>
                 <div class="team-gallery-container">
                     <div id="coreteam-gallery" class="team-gallery active">
-                        <!-- Core Team Members -->
                         <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+1" alt="Coreteam Member">
-                            <p class="member-name">Member Name 1</p>
-                            <p class="member-title">Coreteam Role</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+2" alt="Coreteam Member">
-                            <p class="member-name">Member Name 2</p>
-                            <p class="member-title">Coreteam Role</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+3" alt="Coreteam Member">
-                            <p class="member-name">Member Name 3</p>
-                            <p class="member-title">Coreteam Role</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+4" alt="Coreteam Member">
-                            <p class="member-name">Member Name 4</p>
-                            <p class="member-title">Coreteam Role</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+5" alt="Coreteam Member">
-                            <p class="member-name">Member Name 5</p>
-                            <p class="member-title">Coreteam Role</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+6" alt="Coreteam Member">
-                            <p class="member-name">Member Name 6</p>
-                            <p class="member-title">Coreteam Role</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+7" alt="Coreteam Member">
-                            <p class="member-name">Member Name 7</p>
-                            <p class="member-title">Coreteam Role</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+8" alt="Coreteam Member">
-                            <p class="member-name">Member Name 8</p>
-                            <p class="member-title">Coreteam Role</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Coreteam+9" alt="Coreteam Member">
-                            <p class="member-name">Member Name 9</p>
-                            <p class="member-title">Coreteam Role</p>
+                            <img src="assets/asset coreteam.png" alt="Kartika.id Core Team">
                         </div>
                     </div>
                     <div id="mentors-gallery" class="team-gallery">
-                        <!-- Mentors Gallery -->
                         <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+1" alt="Mentor">
-                            <p class="member-name">Mentor Name 1</p>
-                            <p class="member-title">Mentor Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+2" alt="Mentor">
-                            <p class="member-name">Mentor Name 2</p>
-                            <p class="member-title">Mentor Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+3" alt="Mentor">
-                            <p class="member-name">Mentor Name 3</p>
-                            <p class="member-title">Mentor Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+4" alt="Mentor">
-                            <p class="member-name">Mentor Name 4</p>
-                            <p class="member-title">Mentor Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+5" alt="Mentor">
-                            <p class="member-name">Mentor Name 5</p>
-                            <p class="member-title">Mentor Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+6" alt="Mentor">
-                            <p class="member-name">Mentor Name 6</p>
-                            <p class="member-title">Mentor Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+7" alt="Mentor">
-                            <p class="member-name">Mentor Name 7</p>
-                            <p class="member-title">Mentor Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+8" alt="Mentor">
-                            <p class="member-name">Mentor Name 8</p>
-                            <p class="member-title">Mentor Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Mentor+9" alt="Mentor">
-                            <p class="member-name">Mentor Name 9</p>
-                            <p class="member-title">Mentor Title</p>
+                            <img src="assets/asset mentor 2nd.png" alt="Kartika.id Mentors">
                         </div>
                     </div>
                     <div id="members-gallery" class="team-gallery">
-                        <!-- Members Gallery -->
                         <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Member+1" alt="Member">
-                            <p class="member-name">Member Name 1</p>
-                            <p class="member-title">Member Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Member+2" alt="Member">
-                            <p class="member-name">Member Name 2</p>
-                            <p class="member-title">Member Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Member+3" alt="Member">
-                            <p class="member-name">Member Name 3</p>
-                            <p class="member-title">Member Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Member+4" alt="Member">
-                            <p class="member-name">Member Name 4</p>
-                            <p class="member-title">Member Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Member+5" alt="Member">
-                            <p class="member-name">Member Name 5</p>
-                            <p class="member-title">Member Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Member+6" alt="Member">
-                            <p class="member-name">Member Name 6</p>
-                            <p class="member-title">Member Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Member+7" alt="Member">
-                            <p class="member-name">Member Name 7</p>
-                            <p class="member-title">Member Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Member+8" alt="Member">
-                            <p class="member-name">Member Name 8</p>
-                            <p class="member-title">Member Title</p>
-                        </div>
-                        <div class="team-member">
-                            <img src="https://via.placeholder.com/1080x1080?text=Member+9" alt="Member">
-                            <p class="member-name">Member Name 9</p>
-                            <p class="member-title">Member Title</p>
+                            <img src="assets/asset member first gen.png" alt="Kartika.id Members">
                         </div>
                     </div>
                 </div>
@@ -356,42 +298,65 @@
         <div class="container about-us-content-container">
             <div class="about-us-content">
                 <h1>What they say about us</h1>
-                <div class="carousel-gradient-wrapper">
-                    <div class="testimonials-carousel">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">"Selama menjadi member kartika aku ga pernah merasa kurang sama sekali terkait setiap kegiatan yang dilakuin oleh Kartika. Aku sangat berterima kasih kepada Kak Ugi udah ciptain Kartika dan nerima aku, yang buat aku bener-bener ngerasain manfaat dari segi wawasan, pengalaman, relasi yang sangat berharga dan berkualitas."</p>
-                            <p class="testimonial-author"><strong>A. Safinah</strong> | Mining Engineering | Universitas Hasanuddin</p>
-                        </div>
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">"Selama program Kartika.id berlangsung saya menyukai sesi sharing karena bersifat sangat terbuka dan saya bisa bertanya secara puas untuk berbagi pengalaman yang belum pernah saya rasakan"</p>
-                            <p class="testimonial-author"><strong>Dwi Friandini</strong> | Industrial Engineering | Institut Pertanian Bogor</p>
-                        </div>
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">"Kartika.id membantu saya untuk bisa bertemu dengan mentors, speakers, dan teman-teman yang memiliki visi yang sejalan dan mempunyai semangat yang sama besarnya dengan saya, walau saya sedang menempuh studi di negara lain tapi saya merasa tantangan yang dihadapi tetaplah sama."</p>
-                            <p class="testimonial-author"><strong>Salsabila Zulmi</strong> | Civil Engineering | Sungkyunkwan University</p>
-                        </div>
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">"The community at Kartika.id is truly inspiring. It's a great platform for female engineers to connect and grow. I've gained so much from the sharing sessions and mentorship."</p>
-                            <p class="testimonial-author"><strong>Placeholder Name 4</strong> | Engineering Field | University Name</p>
-                        </div>
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">"Kartika.id has opened doors to opportunities I never thought possible. The networking events are invaluable, and the support from mentors is exceptional. Highly recommend!"</p>
-                            <p class="testimonial-author"><strong>Placeholder Name 5</strong> | Engineering Field | University Name</p>
-                        </div>
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">"Being part of Kartika.id has boosted my confidence and provided me with practical skills and insights for my career. The shared experiences are truly relatable and empowering."</p>
-                            <p class="testimonial-author"><strong>Placeholder Name 6</strong> | Engineering Field | University Name</p>
-                        </div>
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">"I appreciate the diverse perspectives and the collaborative spirit within Kartika.id. It's a fantastic environment to learn, share, and get guidance from experienced professionals."</p>
-                            <p class="testimonial-author"><strong>Placeholder Name 7</strong> | Engineering Field | University Name</p>
-                        </div>
-                    </div>
+            </div>
+        </div>
+        <div class="testimonials-carousel-wrapper">
+            <div class="testimonials-carousel">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Program pada Kartika banyak memberi dampak positif untuk kami mahasiswa teknik, khususnya perempuan. Yang di mana wanita harus punya percaya diri untuk melanjutkan karir kedepannya walaupun di teknik kadang yang terkenal dengan banyaknya laki-laki yang mendominasi namun Kartika memberi gambaran bahwa perempuan teknik juga mampu menghadapi dan menggapai apa yang mereka inginkan. Hal ini menjadi sangat menarik karena mendukung perempuan untuk bisa berfikir positif lagi kedepannya mengenai karir mereka khusunya saya sendiri."</p>
+                    <p class="testimonial-author"><strong>Ira Irawan</strong> | Electrical Engineering | Universitas Hasanuddin</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Selama menjadi member kartika aku ga pernah merasa kurang sama sekali terkait setiap kegiatan yang dilakuin oleh Kartika. Aku sangat berterima kasih kepada Kak Ugi udah ciptain Kartika dan nerima aku, yang buat aku bener-bener ngerasain manfaat dari segi wawasan, pengalaman, relasi yang sangat berharga dan berkualitas."</p>
+                    <p class="testimonial-author"><strong>A. Safinah</strong> | Mining Engineering | Universitas Hasanuddin</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Selama program Kartika.id berlangsung saya menyukai sesi sharing karena bersifat sangat terbuka dan saya bisa bertanya secara puas untuk berbagi pengalaman yang belum pernah saya rasakan"</p>
+                    <p class="testimonial-author"><strong>Dwi Friandini</strong> | Industrial Engineering | Institut Pertanian Bogor</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Speakernya selalu keren ketceh badaii,, bagus polll⭐️⭐️⭐️⭐️⭐️"</p>
+                    <p class="testimonial-author"><strong>Nadifah Amalia</strong> | Industrial Engineering | Universitas Hasanuddin</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Glad to be part of Kartika.id! so far Kartika.id memberikan saya kesempatan (kartinection, kartishare, and kartiship) untuk bertemu orang-orang hebat, sharing, dan mengambil ilmu serta pembelajaran diluar bidang ilmu saya. Kesempatan luar biasa bisa memperluas koneksi sesama woman enginner. Thank you so much Kartika.id, semoga bisa terus berkembang menjadi satu komunitas yang mewadahi woman engineer in Indonesia."</p>
+                    <p class="testimonial-author"><strong>Loretha</strong> | Environmental Engineering | Universitas Hasanuddin</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Kartika.id membantu saya untuk bisa bertemu dengan mentors, speakers, dan teman-teman yang memiliki visi yang sejalan dan mempunyai semangat yang sama besarnya dengan saya, walau saya sedang menempuh studi di negara lain tapi saya merasa tantangan yang dihadapi tetaplah sama."</p>
+                    <p class="testimonial-author"><strong>Salsabila Zulmi</strong> | Civil Engineering | Sungkyunkwan University</p>
+                </div>
+                <!-- Duplicated cards for infinite scroll -->
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Program pada Kartika banyak memberi dampak positif untuk kami mahasiswa teknik, khususnya perempuan. Yang di mana wanita harus punya percaya diri untuk melanjutkan karir kedepannya walaupun di teknik kadang yang terkenal dengan banyaknya laki-laki yang mendominasi namun Kartika memberi gambaran bahwa perempuan teknik juga mampu menghadapi dan menggapai apa yang mereka inginkan. Hal ini menjadi sangat menarik karena mendukung perempuan untuk bisa berfikir positif lagi kedepannya mengenai karir mereka khusunya saya sendiri."</p>
+                    <p class="testimonial-author"><strong>Ira Irawan</strong> | Electrical Engineering | Universitas Hasanuddin</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Selama menjadi member kartika aku ga pernah merasa kurang sama sekali terkait setiap kegiatan yang dilakuin oleh Kartika. Aku sangat berterima kasih kepada Kak Ugi udah ciptain Kartika dan nerima aku, yang buat aku bener-bener ngerasain manfaat dari segi wawasan, pengalaman, relasi yang sangat berharga dan berkualitas."</p>
+                    <p class="testimonial-author"><strong>A. Safinah</strong> | Mining Engineering | Universitas Hasanuddin</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Selama program Kartika.id berlangsung saya menyukai sesi sharing karena bersifat sangat terbuka dan saya bisa bertanya secara puas untuk berbagi pengalaman yang belum pernah saya rasakan"</p>
+                    <p class="testimonial-author"><strong>Dwi Friandini</strong> | Industrial Engineering | Institut Pertanian Bogor</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Speakernya selalu keren ketceh badaii,, bagus polll⭐️⭐️⭐️⭐️⭐️"</p>
+                    <p class="testimonial-author"><strong>Nadifah Amalia</strong> | Industrial Engineering | Universitas Hasanuddin</p>
                 </div>
             </div>
         </div>
+        <div class="gradient-overlay left"></div>
+        <div class="gradient-overlay right"></div>
     </section>
-
+    
+    <section class="second-generation-timeline-section">
+        <div class="second-generation-timeline-content-container">
+            <h1 class="section-title">Kartika.id Second Generation Timeline</h1>
+            <div class="timeline-image-wrapper">
+                <img src="assets/asset timeline 2nd gen.png" alt="Kartika.id Second Generation Timeline">
+            </div>
+        </div>
+    </section>
     <section class="join-us-section" id="join-us" style="position: relative; z-index: 1000;">
         <div class="container join-us-content-container">
             <div class="join-us-image-wrapper">
@@ -496,6 +461,57 @@
                 }
             });
         });
+
+        function showMission(missionType) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.mission-btn').forEach(btn => btn.classList.remove('active'));
+            // Hide all mission content
+            document.querySelectorAll('.mission-text-content').forEach(content => content.classList.remove('active'));
+
+            // Add active class to the clicked button
+            document.querySelector(`.mission-btn[onclick="showMission('${missionType}')"]`).classList.add('active');
+            // Show the corresponding mission content
+            document.getElementById(`${missionType}`).classList.add('active');
+        }
+
+        // Set initial active mission when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            showMission('women-empowerment'); // Default to showing Women Empowerment
+        });
+    </script>
+
+    <script>
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = "flex";
+            // Add animation classes after a small delay
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+            document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('show');
+            // Wait for animation to complete before hiding
+            setTimeout(() => {
+                modal.style.display = "none";
+            }, 300);
+            document.body.style.overflow = "auto"; // Re-enable scrolling
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('show');
+                // Wait for animation to complete before hiding
+                setTimeout(() => {
+                    event.target.style.display = "none";
+                }, 300);
+                document.body.style.overflow = "auto";
+            }
+        }
     </script>
 </body>
 </html>
